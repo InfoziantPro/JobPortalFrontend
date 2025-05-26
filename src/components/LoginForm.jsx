@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(email, password);
       alert('Login successful!');
+      navigate('/jobs');
     } catch {
       setError('Login failed. Check your credentials.');
     }
