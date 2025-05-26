@@ -6,21 +6,20 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [role, setRole] = useState(null);
+  const [user, setUser] = useState(null); // store entire user object
 
   const login = async (email, password) => {
     const response = await apiClient.post('/login', { email, password });
-    setRole(response.data.role);
-    // Token stored in HttpOnly cookie, no manual token handling here
+    setUser({ role: response.data.role, name: response.data.name }); // update with name
   };
 
   const logout = async () => {
     await apiClient.post('/logout');
-    setRole(null);
+    setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ role, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
