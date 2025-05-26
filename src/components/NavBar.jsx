@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/login'); // Redirect to login page after logout
+    navigate('/login'); 
   };
 
   return (
