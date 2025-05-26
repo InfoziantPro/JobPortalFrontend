@@ -1,5 +1,6 @@
+// src/components/JobList.js
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 const JobsList = () => {
   const [jobs, setJobs] = useState([]);
@@ -8,9 +9,7 @@ const JobsList = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/jobs/all', {
-          withCredentials: true,
-        });
+        const res = await apiClient.get('/jobs/all');
         setJobs(res.data.jobs || []);
       } catch (err) {
         setError(err.response?.data?.error || 'Failed to fetch jobs');

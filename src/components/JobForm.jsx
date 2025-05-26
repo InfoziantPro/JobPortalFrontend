@@ -1,9 +1,11 @@
+// src/components/JobForm.js
 import React, { useState } from 'react';
 import apiClient from '../api/apiClient';
 import { useAuth } from '../context/AuthContext';
 
 export default function JobForm() {
-  const { role } = useAuth();
+  const { user } = useAuth();
+  const role = user?.role;
 
   const [jobData, setJobData] = useState({
     title: '',
@@ -16,8 +18,7 @@ export default function JobForm() {
 
   const [message, setMessage] = useState(null);
 
-  // ✅ FIXED: Only allow admins, deny others
-  if (role == 'admin') {
+  if (role !== 'admin') {
     return (
       <div className="text-red-600 p-4">
         ❌ Access denied. Only <strong>admins</strong> can post jobs.
@@ -33,7 +34,7 @@ export default function JobForm() {
     e.preventDefault();
     setMessage(null);
     try {
-      await apiClient.post('/jobs/postjob', jobData); // Token sent via cookie
+      await apiClient.post('/jobs/postjob', jobData);
       setMessage('✅ Job posted successfully!');
       setJobData({
         title: '',
@@ -44,7 +45,6 @@ export default function JobForm() {
         jobType: '',
       });
     } catch (error) {
-      console.error(error);
       setMessage('❌ Failed to post job. You might not be authorized.');
     }
   };

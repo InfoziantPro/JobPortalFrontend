@@ -1,3 +1,4 @@
+// src/components/Navbar.js
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -8,7 +9,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/login'); 
+    navigate('/login');
   };
 
   return (
@@ -20,7 +21,7 @@ const Navbar = () => {
       <div className="space-x-4 flex items-center">
         {user ? (
           <>
-            <span className="mr-4">Hi, {user.name}</span>
+            <span className="mr-4">Hi, {user.name || 'User'}</span>
             <button onClick={handleLogout} className="hover:underline">Logout</button>
             {user.role === 'admin' && (
               <Link to="/postjob" className="hover:underline">Post Job</Link>
