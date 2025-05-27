@@ -1,41 +1,45 @@
-// src/components/Navbar.js
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
-const Navbar = () => {
-  const { user, logout } = useAuth();
+export default function Navbar({ user, onLogout }) {
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    await logout();
+  const handleLogoutClick = () => {
+    onLogout();
     navigate('/login');
   };
 
   return (
-    <nav className="bg-gray-800 p-4 text-white flex justify-between items-center">
-      <div className="font-bold text-xl">
-        <Link to="/">Job Portal</Link>
+    <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
+      <div>
+        <Link to="/" className="font-bold text-xl">Job Portal</Link>
       </div>
 
-      <div className="space-x-4 flex items-center">
+      <div className="space-x-4">
+        <Link to="/">Home</Link>
+
         {user ? (
           <>
-            <span className="mr-4">Hi, {user.name || 'User'}</span>
-            <button onClick={handleLogout} className="hover:underline">Logout</button>
-            {user.role === 'admin' && (
-              <Link to="/postjob" className="hover:underline">Post Job</Link>
+            <Link to="/jobs/all">Job Listings</Link>
+
+            {(user.role === 'admin' || user.role === 'superadmin') && (
+              <Link to="/postjob">Post Job</Link>
             )}
+
+            <button
+              onClick={handleLogoutClick}
+              className="bg-red-600 px-3 py-1 rounded hover:bg-red-700"
+            >
+              Logout
+            </button>
           </>
         ) : (
           <>
-            <Link to="/login" className="hover:underline">Login</Link>
-            <Link to="/register" className="hover:underline">Register</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
           </>
         )}
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}

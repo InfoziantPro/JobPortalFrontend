@@ -1,34 +1,71 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
-import JobForm from './components/JobForm';
 import Navbar from './components/NavBar';
-import JobsList from './components/JobList'; 
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import JobDetails from './pages/JobDetails';
+import ProtectedRoute from './components/ProtectedRoute';
+import PostJob from './pages/PostJob';
+import JobList from './components/JobList';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  // user state to track logged in user info
+  const [user, setUser] = useState(null);
+
+  // on app mount, get user info from localStorage (if any)
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  // logout handler clears user state and localStorage
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    setUser(null);
+  };
+
+  // after login (in your Login page), you must call setUser with user data and save to localStorage!
+
   return (
-    <AuthProvider>
-      <Router>
-        <Navbar />
+    <Router>
+      <Navbar user={user} onLogout={handleLogout} />
+      <div className="min-h-screen p-4">
         <Routes>
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/postjob" element={<JobForm />} />
-          <Route path="/jobs" element={<JobsList />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/jobs/:id" element={<JobDetails />} />
+          <Route path="/jobs/all" element={<JobList />} />
           <Route
-            path="*"
+            path="/dashboard"
             element={
-              <div className="p-4">
-                Welcome! Please <a href="/login" className="text-blue-600 underline">Login</a> or{' '}
-                <a href="/register" className="text-blue-600 underline">Register</a>.
-              </div>
+              <ProtectedRoute user={user}>
+                <Dashboard />
+              </ProtectedRoute>
             }
           />
+          <Route
+            path="/postjob"
+            element={
+              <ProtectedRoute roles={['admin', 'superadmin']}>
+                <PostJob />
+              </ProtectedRoute>
+            }
+          />
+          {/* Add PostJob page route if you have one */}
         </Routes>
-      </Router>
-    </AuthProvider>
+      </div>
+      <Footer />
+      <ToastContainer />
+    </Router>
   );
 }
 
