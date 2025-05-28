@@ -121,7 +121,7 @@ const Home = () => {
 <div className="flex flex-col md:flex-row items-center justify-center gap-12 px-8 py-16  text-white">
   {/* Left Image or Graphic */}
   <div className="w-full md:w-1/2">
-    <img src="src\assets\HomePageImg\unbiased-services.gif" alt="Career Services" className="w-full h-auto" />
+    <img src={unbiasedGif} alt="Career Services" className="w-full h-auto" />
   </div>
 
   {/* Right Content */}
@@ -184,7 +184,7 @@ const Home = () => {
     {/* Left: Image */}
     <div className="flex-1">
       <img
-        src="src\assets\HomePageImg\Learning-path.gif"
+        src={learningPathGif}
         alt="Learning Path Illustration"
         className="w-full h-auto object-contain"
       />
@@ -249,7 +249,7 @@ const Home = () => {
      {/* Right: Image */}
     <div className="flex-1">
       <img
-        src="src\assets\HomePageImg\Project-support.gif"
+        src={projectSupportGif}
         alt="Project Support"
         className="w-full h-auto object-contain"
       />
@@ -267,7 +267,7 @@ const Home = () => {
     {/* Left: Image */}
     <div className="flex-1">
       <img
-        src="src\assets\HomePageImg\process.gif"
+        src={processGif}
         alt="Hiring Process"
         className="w-full h-auto object-contain"
       />
