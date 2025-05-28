@@ -36,7 +36,10 @@ export default function Navbar({ user, onLogout }) {
     <nav className="bg-white shadow p-4 flex justify-between items-center">
       {/* Logo */}
       <div>
-        <Link to="/" className="font-bold text-xl text-purple-700">Job Portal</Link>
+        <Link to="/" className="flex items-center space-x-2">
+          <img src="/public/logo.png" alt="Company Logo" className="h-10 w-auto object-contain" />
+          <span className="font-bold text-xl text-indigo-900">Job Portal</span>
+  </Link>
       </div>
 
       <div className="flex items-center space-x-4">
