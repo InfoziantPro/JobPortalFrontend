@@ -61,45 +61,63 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto mt-10">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        className="input"
-        required
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        className="input"
-        required
-      />
-      <button type="submit" className="btn w-full">Login</button>
+  <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl space-y-6"
+      >
+        <h2 className="text-2xl font-bold text-center text-gray-800">Login to Your Account</h2>
 
-      {resendLinkVisible && (
-  <div className="text-sm text-center mt-4 space-y-2">
-    {verificationLink && (
-      <p>
-        Click to verify:{" "}
-        <a
-          href={verificationLink}
-          className="text-blue-600 underline"
-          target="_blank"
-          rel="noopener noreferrer"
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
         >
-          Verify Email
-        </a>
-      </p>
-    )}
-  </div>
-)}
+          Login
+        </button>
 
-    </form>
+        {resendLinkVisible && (
+          <div className="text-sm text-center text-gray-600 mt-4 space-y-2">
+            <p className="text-red-500 font-medium">
+              Your email is not verified. Please verify to proceed.
+            </p>
+
+            {verificationLink && (
+              <p>
+                Click to verify:{" "}
+                <a
+                  href={verificationLink}
+                  className="text-blue-600 underline font-medium hover:text-blue-800"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Verify Email
+                </a>
+              </p>
+            )}
+          </div>
+        )}
+      </form>
+    </div>
   );
+
 };
 
 export default Login;

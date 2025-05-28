@@ -22,60 +22,73 @@ const Register = () => {
     }
   };
 
-  return (
-    <div className="max-w-md mx-auto mt-10 space-y-4">
+ return (
+  <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl space-y-6">
+      <h2 className="text-2xl font-bold text-center text-gray-800">Create an Account</h2>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-          className="input"
+          placeholder="Full Name"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
+
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          className="input"
+          placeholder="Email Address"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
+
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="input"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
 
-        {/* Dropdown for Role */}
-        <select value={role} onChange={(e) => setRole(e.target.value)} className="input">
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           <option value="candidate">Candidate</option>
           <option value="company">Company</option>
-          <option value="employee">Employee</option>
         </select>
 
-        <button type="submit" className="btn w-full">Register</button>
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+        >
+          Register
+        </button>
       </form>
 
-      {/* Show Verify Email button if verifyUrl is present */}
       {verifyUrl && (
-        <div className="mt-4 text-center">
-          <p>Click below to verify your email:</p>
+        <div className="text-sm text-center text-gray-600 mt-4 space-y-2">
+          <p className="text-green-600 font-medium">Registration successful. Please verify your email:</p>
           <a
             href={verifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary mt-2"
+            className="text-blue-600 underline font-medium hover:text-blue-800"
           >
             Verify Email
           </a>
         </div>
       )}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Register;
