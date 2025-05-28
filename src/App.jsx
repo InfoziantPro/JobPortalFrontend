@@ -8,8 +8,10 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import JobDetails from './pages/JobDetails';
 import ProtectedRoute from './components/ProtectedRoute';
+import VerifyEmail from './pages/VerifyEmail';
 import PostJob from './pages/PostJob';
 import JobList from './components/JobList';
+import ApproveRequests from './pages/ApproveRequests';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -44,6 +46,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/jobs/all" element={<JobList />} />
+          <Route path="/register/candidate" element={<Register role="candidate" />} />
+          <Route path="/register/company" element={<Register role="admin" />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+
           <Route
             path="/dashboard"
             element={
@@ -57,6 +63,15 @@ function App() {
             element={
               <ProtectedRoute roles={['admin', 'superadmin']}>
                 <PostJob />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/approvals"
+            element={
+              <ProtectedRoute user={user} roles={['superadmin']}>
+                <ApproveRequests />
               </ProtectedRoute>
             }
           />

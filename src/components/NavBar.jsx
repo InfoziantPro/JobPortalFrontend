@@ -59,6 +59,12 @@ export default function Navbar({ user, onLogout }) {
                   {(user.role === 'admin' || user.role === 'superadmin') && (
                     <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
                   )}
+
+                  {user.role === 'superadmin' && (
+                    <Link to="/approvals" className="hover:bg-gray-100 px-2 py-1 rounded">
+                      Approve Requests
+                    </Link>
+                  )}
                 </div>
               </div>
             )}

@@ -6,26 +6,57 @@ import { toast } from 'react-toastify';
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [resendLinkVisible, setResendLinkVisible] = useState(false);
   const navigate = useNavigate();
+  const [verificationLink, setVerificationLink] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('http://localhost:5000/api/login', { email, password });
+    const { token, user } = response.data;
+
+    // ✅ Email verification check (only for candidates)
+    if (user.role === 'user' && !user.emailVerified) {
+      toast.error('Please verify your email before logging in.');
+      setResendLinkVisible(true);
+      setVerificationLink(response.data.emailVerificationLink); // <--- GET THE LINK
+      return;
+    }
+
+    // ✅ Approval status check (only for admin)
+    if (user.role === 'admin' && user.status !== 'approved') {
+      toast.warn('Your account is pending approval by the Super Admin.');
+      return;
+    }
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    setUser(user);
+
+    toast.success('Login successful');
+    navigate('/');
+  } catch (error) {
+    const status = error.response?.status;
+    const data = error.response?.data;
+
+    if (status === 403 && data?.emailVerificationLink) {
+      setVerificationLink(data.emailVerificationLink);
+      setResendLinkVisible(true);
+    }
+
+    toast.error(data?.error || 'Login failed');
+  }
+};
+
+
+  const handleResendVerification = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/login', { email, password });
-      
-      const { token, user } = response.data;
-
-      // Save token and user info to localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-
-      // Update the global user state in App.jsx
-      setUser(user);
-
-      toast.success('Login successful');
-      navigate('/'); // or navigate('/dashboard') if you want
+      await axios.post('http://localhost:5000/api/resend-verification', { email });
+      toast.success('Verification email resent!');
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Login failed');
+      toast.error(error.response?.data?.error || 'Failed to resend email');
     }
   };
 
@@ -48,6 +79,25 @@ const Login = ({ setUser }) => {
         required
       />
       <button type="submit" className="btn w-full">Login</button>
+
+      {resendLinkVisible && (
+  <div className="text-sm text-center mt-4 space-y-2">
+    {verificationLink && (
+      <p>
+        Click to verify:{" "}
+        <a
+          href={verificationLink}
+          className="text-blue-600 underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Verify Email
+        </a>
+      </p>
+    )}
+  </div>
+)}
+
     </form>
   );
 };
