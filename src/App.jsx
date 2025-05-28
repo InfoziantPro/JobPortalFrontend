@@ -12,6 +12,8 @@ import VerifyEmail from './pages/VerifyEmail';
 import PostJob from './pages/PostJob';
 import JobList from './components/JobList';
 import ApproveRequests from './pages/ApproveRequests';
+import VerifySuccess from './pages/VerifySuccess';
+import VerifyFailed from './pages/VerifyFailed';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -46,6 +48,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/jobs/all" element={<JobList />} />
+          <Route path="/verify-success" element={<VerifySuccess />} />
+          <Route path="/verify-failed" element={<VerifyFailed />} />
           <Route path="/register/candidate" element={<Register role="candidate" />} />
           <Route path="/register/company" element={<Register role="admin" />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
