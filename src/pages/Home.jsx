@@ -3,26 +3,44 @@ import Typewriter from "typewriter-effect";
 import { motion } from "framer-motion";
 import { useState } from 'react';
 
-const Home = () => {
-  
-  return (
-  <div className="bg-gradient-to-b from-[#2a0052] to-[#450e8e] text-white min-h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-   {/* Title */}
-     <motion.h1
-  className="text-4xl md:text-5xl font-medium text-center leading-snug mb-4 mt-10"
-  initial={{ opacity: 0, y: -20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
->
-  Elevate Your Career with{' '}
-  <span className="bg-gradient-to-r from-teal-700 to-teal-500 bg-clip-text text-transparent ">
-    Infoziant
-  </span>{' '}
-  - All in one Career <br />
-  Catalyst
-</motion.h1>
+// Image Imports
+import bannerIcon from '../assets/HomePageImg/home-banner-icon.png';
+import unbiasedGif from '../assets/HomePageImg/unbiased-services.gif';
+import learningPathGif from '../assets/HomePageImg/Learning-path.gif';
+import projectSupportGif from '../assets/HomePageImg/Project-support.gif';
+import processGif from '../assets/HomePageImg/process.gif';
 
-      {/* Typewriter effect */}
+import client1 from '../assets/clients/1-1.png';
+import client2 from '../assets/clients/1-2.png';
+import client3 from '../assets/clients/1-3.png';
+import client4 from '../assets/clients/1-4.png';
+import client5 from '../assets/clients/1-5.png';
+import client6 from '../assets/clients/1-6.png';
+import client7 from '../assets/clients/1-7.png';
+import client8 from '../assets/clients/1-8.png';
+import client9 from '../assets/clients/1-9.png';
+import client10 from '../assets/clients/1-10.png';
+
+
+const Home = () => {
+  return (
+    <div className="bg-gradient-to-b from-[#2a0052] to-[#450e8e] text-white min-h-screen w-full overflow-hidden flex flex-col items-center justify-center">
+      {/* Title */}
+      <motion.h1
+        className="text-4xl md:text-5xl font-medium text-center leading-snug mb-4 mt-10"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        Elevate Your Career with{' '}
+        <span className="bg-gradient-to-r from-teal-700 to-teal-500 bg-clip-text text-transparent ">
+          Infoziant
+        </span>{' '}
+        - All in one Career <br />
+        Catalyst
+      </motion.h1>
+
+      {/* Typewriter */}
       <motion.div
         className="text-lg md:text-xl font-medium text-center mt-2 mb-10"
         initial={{ opacity: 0 }}
@@ -40,18 +58,10 @@ const Home = () => {
         />
       </motion.div>
 
-      {/* Search bar */}
+      {/* Search Bar */}
       <div className="bg-white text-black rounded-full shadow-lg flex flex-wrap justify-center items-center gap-2 p-4 px-6 w-full max-w-4xl">
-        <input
-          type="text"
-          placeholder="Job title, keywords, or company"
-          className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none"
-        />
-        <input
-          type="text"
-          placeholder="City or postcode"
-          className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none"
-        />
+        <input type="text" placeholder="Job title, keywords, or company" className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none" />
+        <input type="text" placeholder="City or postcode" className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none" />
         <select className="rounded-full px-4 py-2 border border-gray-300 min-w-[150px]">
           <option>All Categories</option>
         </select>
@@ -60,74 +70,52 @@ const Home = () => {
         </button>
       </div>
 
-      {/* Image section */}
+      {/* Banner Image */}
       <motion.div
         className="mt-10 max-w-5xl w-full flex justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 1 }}
       >
-        <img
-  src="src\assets\HomePageImg\home-banner-icon.png"
-  alt="Career illustration"
-  className="w-full h-[400px] object-cover rounded-xl shadow-lg mt-12"
-/>
-{/* Animated Circles Section */}
-<div className="relative mt-24 w-full max-w-6xl h-[300px]">
-  {[
-    { text: "Boost Your Skills", x: "-40%", y: "10%" },
-    { text: "Elevate Your Profile", x: "-20%", y: "-20%" },
-    { text: "AI - Powered Job Matching", x: "0%", y: "-30%" },
-    { text: "Mentor Connect", x: "20%", y: "-20%" },
-    { text: "Hiring Reimagined", x: "40%", y: "10%" },
-  ].map((item, index) => (
-    <motion.div
-      key={index}
-      className="absolute flex flex-col items-center justify-center w-[140px] h-[140px] rounded-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white text-center text-sm shadow-xl border-4 border-white"
-      style={{
-        left: `50%`,
-        top: `50%`,
-        transform: `translate(${item.x}, ${item.y})`,
-      }}
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
-    >
-      <p className="px-3">{item.text}</p>
-    </motion.div>
-  ))}
-</div>
+        <img src={bannerIcon} alt="Career illustration" className="w-full h-[400px] object-cover rounded-xl shadow-lg mt-12" />
+
+        {/* Animated Circles */}
+        <div className="relative mt-24 w-full max-w-6xl h-[300px]">
+          {[
+            { text: "Boost Your Skills", x: "-40%", y: "10%" },
+            { text: "Elevate Your Profile", x: "-20%", y: "-20%" },
+            { text: "AI - Powered Job Matching", x: "0%", y: "-30%" },
+            { text: "Mentor Connect", x: "20%", y: "-20%" },
+            { text: "Hiring Reimagined", x: "40%", y: "10%" },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className="absolute flex flex-col items-center justify-center w-[140px] h-[140px] rounded-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white text-center text-sm shadow-xl border-4 border-white"
+              style={{ left: `50%`, top: `50%`, transform: `translate(${item.x}, ${item.y})` }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
+            >
+              <p className="px-3">{item.text}</p>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
 
 
-{/* Company Logos */}
-<div className="w-full bg-white py-12 overflow-hidden">
-  <div className="flex gap-20 px-4 whitespace-nowrap animate-marquee">
-    {/* Repeat the logo list twice to make it loop seamlessly */}
-    {[...Array(2)].flatMap((_, repeatIdx) =>
-      [
-        { src: "src/assets/clients/1-1.png", alt: "Virtusa" },
-        { src: "src/assets/clients/1-2.png", alt: "Aspire" },
-        { src: "src/assets/clients/1-3.png", alt: "Keenan" },
-        { src: "src/assets/clients/1-4.png", alt: "Amazon" },
-        { src: "src/assets/clients/1-5.png", alt: "Swipelah" },
-        { src: "src/assets/clients/1-6.png", alt: "Pro7 Analytics" },
-        { src: "src/assets/clients/1-7.png", alt: "TechMango" },
-        { src: "src/assets/clients/1-8.png", alt: "Apptivo" },
-        { src: "src/assets/clients/1-9.png", alt: "Grootan" },
-        { src: "src/assets/clients/1-10.png", alt: "Dymax" },
-      ].map((logo, idx) => (
-        <img
-          key={`${repeatIdx}-${idx}`}
-          src={logo.src}
-          alt={logo.alt}
-          className="h-8 inline-block object-contain"
-        />
-      ))
-    )}
-  </div>
-</div>
-
+  {/* Client Logos */}
+      <div className="w-full bg-white py-12 overflow-hidden">
+        <div className="flex gap-20 px-4 whitespace-nowrap animate-marquee">
+          {[...Array(2)].flatMap((_, repeatIdx) =>
+            [
+              client1, client2, client3, client4, client5,
+              client6, client7, client8, client9, client10,
+            ].map((logo, idx) => (
+              <img key={`${repeatIdx}-${idx}`} src={logo} alt={`Client ${idx + 1}`} className="h-8 inline-block object-contain" />
+            ))
+          )}
+        </div>
+      </div>
 
 
 <div className="flex flex-col md:flex-row items-center justify-center gap-12 px-8 py-16  text-white">
