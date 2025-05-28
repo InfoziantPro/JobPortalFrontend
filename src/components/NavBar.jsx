@@ -37,7 +37,7 @@ export default function Navbar({ user, onLogout }) {
       {/* Logo */}
       <div>
         <Link to="/" className="flex items-center space-x-2">
-          <img src="public/logo.png" alt="Company Logo" className="h-10 w-auto object-contain" />
+          <img src="src/assets/logos/logo.png" alt="Company Logo" className="h-10 w-auto object-contain" />
           <span className="font-bold text-xl text-indigo-900">Job Portal</span>
   </Link>
       </div>
