@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaBars } from 'react-icons/fa';
+import logo from '/src/assets/logos/Logo.png'
 
 export default function Navbar({ user, onLogout }) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -37,7 +38,7 @@ export default function Navbar({ user, onLogout }) {
       {/* Logo */}
       <div>
         <Link to="/" className="flex items-center space-x-2">
-          <img src="src/assets/logos/logo.png" alt="Company Logo" className="h-10 w-auto object-contain" />
+          <img src={logo} alt="Company Logo" className="h-10 w-auto object-contain" />
           <span className="font-bold text-xl text-indigo-900">Job Portal</span>
   </Link>
       </div>
