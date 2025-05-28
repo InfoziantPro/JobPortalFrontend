@@ -106,16 +106,16 @@ const Home = () => {
     {/* Repeat the logo list twice to make it loop seamlessly */}
     {[...Array(2)].flatMap((_, repeatIdx) =>
       [
-        { src: "/src/assets/clients/1-1.png", alt: "Virtusa" },
-        { src: "/src/assets/clients/1-2.png", alt: "Aspire" },
-        { src: "/src/assets/clients/1-3.png", alt: "Keenan" },
-        { src: "/src/assets/clients/1-4.png", alt: "Amazon" },
-        { src: "/src/assets/clients/1-5.png", alt: "Swipelah" },
-        { src: "/src/assets/clients/1-6.png", alt: "Pro7 Analytics" },
-        { src: "/src/assets/clients/1-7.png", alt: "TechMango" },
-        { src: "/src/assets/clients/1-8.png", alt: "Apptivo" },
-        { src: "/src/assets/clients/1-9.png", alt: "Grootan" },
-        { src: "/src/assets/clients/1-10.png", alt: "Dymax" },
+        { src: "src/assets/clients/1-1.png", alt: "Virtusa" },
+        { src: "src/assets/clients/1-2.png", alt: "Aspire" },
+        { src: "src/assets/clients/1-3.png", alt: "Keenan" },
+        { src: "src/assets/clients/1-4.png", alt: "Amazon" },
+        { src: "src/assets/clients/1-5.png", alt: "Swipelah" },
+        { src: "src/assets/clients/1-6.png", alt: "Pro7 Analytics" },
+        { src: "src/assets/clients/1-7.png", alt: "TechMango" },
+        { src: "src/assets/clients/1-8.png", alt: "Apptivo" },
+        { src: "src/assets/clients/1-9.png", alt: "Grootan" },
+        { src: "src/assets/clients/1-10.png", alt: "Dymax" },
       ].map((logo, idx) => (
         <img
           key={`${repeatIdx}-${idx}`}
