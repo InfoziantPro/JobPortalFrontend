@@ -1,44 +1,99 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaUser, FaBars } from 'react-icons/fa';
 
 export default function Navbar({ user, onLogout }) {
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [mainMenuOpen, setMainMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const userMenuRef = useRef();
+  const mainMenuRef = useRef();
 
   const handleLogoutClick = () => {
     onLogout();
     navigate('/login');
   };
 
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        userMenuRef.current && !userMenuRef.current.contains(event.target)
+      ) {
+        setUserMenuOpen(false);
+      }
+      if (
+        mainMenuRef.current && !mainMenuRef.current.contains(event.target)
+      ) {
+        setMainMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
+    <nav className="bg-white shadow p-4 flex justify-between items-center">
+      {/* Logo */}
       <div>
-        <Link to="/" className="font-bold text-xl">Job Portal</Link>
+        <Link to="/" className="font-bold text-xl text-purple-700">Job Portal</Link>
       </div>
 
-      <div className="space-x-4">
-        <Link to="/">Home</Link>
-
-        {user ? (
-          <>
-            <Link to="/jobs/all">Job Listings</Link>
-
-            {(user.role === 'admin' || user.role === 'superadmin') && (
-              <Link to="/postjob">Post Job</Link>
-            )}
-
+      <div className="flex items-center space-x-4">
+        {/* Hamburger Menu - only shown if user is logged in */}
+        {user && (
+          <div className="relative" ref={mainMenuRef}>
             <button
-              onClick={handleLogoutClick}
-              className="bg-red-600 px-3 py-1 rounded hover:bg-red-700"
+              onClick={() => setMainMenuOpen((prev) => !prev)}
+              className="text-gray-800 text-2xl"
             >
-              Logout
+              <FaBars />
             </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </>
+
+            {mainMenuOpen && (
+              <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-44 z-10 border">
+                <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
+                  <Link to="/" className="hover:bg-gray-100 px-2 py-1 rounded">Home</Link>
+                  <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
+
+                  {(user.role === 'admin' || user.role === 'superadmin') && (
+                    <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         )}
+
+        {/* User Icon Menu */}
+        <div className="relative" ref={userMenuRef}>
+          <button
+            onClick={() => setUserMenuOpen((prev) => !prev)}
+            className="text-gray-800 text-2xl"
+          >
+            <FaUser />
+          </button>
+
+          {userMenuOpen && (
+            <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-36 z-10 border">
+              <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
+                {user ? (
+                  <button
+                    onClick={handleLogoutClick}
+                    className="text-red-600 hover:bg-red-100 px-2 py-1 rounded text-left"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <>
+                    <Link to="/login" className="hover:bg-gray-100 px-2 py-1 rounded">Login</Link>
+                    <Link to="/register" className="hover:bg-gray-100 px-2 py-1 rounded">Register</Link>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
