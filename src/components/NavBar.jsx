@@ -49,6 +49,12 @@ export default function Navbar({ user, onLogout }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Capitalize first letter of role
+  const formatRole = (role) => {
+    if (!role) return '';
+    return role.charAt(0).toUpperCase() + role.slice(1);
+  };
+
   return (
     <nav
       className={`bg-white shadow p-4 flex justify-between items-center fixed top-0 w-full z-50 transition-transform duration-300 ${
@@ -78,16 +84,27 @@ export default function Navbar({ user, onLogout }) {
               <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-44 z-10 border">
                 <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
                   <Link to="/" className="hover:bg-gray-100 px-2 py-1 rounded">Home</Link>
-                  <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
 
-                  {(user.role === 'admin' || user.role === 'superadmin') && (
+                  {user.role === 'superadmin' && (
+                    <>
+                      <Link to="/approvals" className="hover:bg-gray-100 px-2 py-1 rounded">Approve Companies</Link>
+                      <Link to="/view-companies" className="hover:bg-gray-100 px-2 py-1 rounded">All Companies</Link>
+                    </>
+                  )}
+
+                  {(user.role === "employee" || user.role === "candidate" || user.role === "admin") && (
+                    <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
+                  )}
+
+                  {(user.role === "employee") && (
                     <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
                   )}
 
-                  {user.role === 'superadmin' && (
-                    <Link to="/approvals" className="hover:bg-gray-100 px-2 py-1 rounded">
-                      Approve Requests
-                    </Link>
+                  {user.role === "admin" && (
+                    <>
+                      <Link to="/create-employee" className="hover:bg-gray-100 px-2 py-1 rounded">Create Employee</Link>
+                      <Link to="/view-employees" className="hover:bg-gray-100 px-2 py-1 rounded">All Employees</Link>
+                    </>
                   )}
                 </div>
               </div>
@@ -105,15 +122,22 @@ export default function Navbar({ user, onLogout }) {
           </button>
 
           {userMenuOpen && (
-            <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-36 z-10 border">
+            <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-48 z-10 border">
               <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
                 {user ? (
-                  <button
-                    onClick={handleLogoutClick}
-                    className="text-red-600 hover:bg-red-100 px-2 py-1 rounded text-left"
-                  >
-                    Logout
-                  </button>
+                  <>
+                    <div className="px-2 py-1">
+                      <p className="font-medium text-gray-800">{user.name}</p>
+                      <p className="text-xs text-gray-500">{formatRole(user.role)}</p>
+                    </div>
+                    <hr className="my-1" />
+                    <button
+                      onClick={handleLogoutClick}
+                      className="text-red-600 hover:bg-red-100 px-2 py-1 rounded text-left"
+                    >
+                      Logout
+                    </button>
+                  </>
                 ) : (
                   <>
                     <Link to="/login" className="hover:bg-gray-100 px-2 py-1 rounded">Login</Link>

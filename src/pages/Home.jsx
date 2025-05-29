@@ -72,6 +72,7 @@ const [activeCategory, setActiveCategory] = useState("All");
   const categories = ["All", "Trending", "Design", "Marketing", "Health"];
   
   return (
+
     <div className="bg-white">
       {/* Hero Section with background image */}
       {/* Full-screen Section with Background Image */}
@@ -84,11 +85,13 @@ const [activeCategory, setActiveCategory] = useState("All");
   {/* Title */}
   <motion.h1
     className="text-4xl md:text-5xl font-medium text-center leading-snug  mb-4"
+
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
   >
     Elevate Your Career with{" "}
+
     <span className="bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">
       Infoziant
     </span>{" "}
@@ -99,6 +102,7 @@ const [activeCategory, setActiveCategory] = useState("All");
   {/* Typewriter effect */}
   <motion.div
     className="text-lg md:text-xl font-medium text-center mt-2 mb-6"
+
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 1, duration: 1 }}
@@ -168,10 +172,12 @@ const [activeCategory, setActiveCategory] = useState("All");
   {/* Animated Circles */}
   <motion.div
     className="relative w-full max-w-6xl h-[300px]"
+
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 1.2, duration: 1 }}
   >
+
     {[
       { text: "Boost Your Skills", x: "-7%", y: "78%" },
       { text: "Elevate Your Profile", x: "19.5%", y: "41%" },
@@ -197,6 +203,35 @@ const [activeCategory, setActiveCategory] = useState("All");
   </motion.div>
 </div>
 
+
+{/*     Animated Circles */}
+    <div className="relative mt-24 w-full max-w-6xl h-[300px]">
+      {[
+        { text: "Boost Your Skills", x: "-40%", y: "10%" },
+        { text: "Elevate Your Profile", x: "-20%", y: "-20%" },
+        { text: "AI - Powered Job Matching", x: "0%", y: "-30%" },
+        { text: "Mentor Connect", x: "20%", y: "-20%" },
+        { text: "Hiring Reimagined", x: "40%", y: "10%" },
+      ].map((item, index) => (
+        <motion.div
+          key={index}
+          className="absolute flex flex-col items-center justify-center w-[140px] h-[140px] rounded-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white text-center text-sm shadow-xl border-4 border-white backdrop-blur-lg"
+          style={{
+            left: `50%`,
+            top: `50%`,
+            transform: `translate(${item.x}, ${item.y})`,
+          }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
+        >
+          <p className="px-3">{item.text}</p>
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
+
+   
 
       {/* 👇 Separate Scroll Section Starts Here — AFTER full background */}
       <div className="w-full bg-white py-12 overflow-hidden">
@@ -373,7 +408,6 @@ const [activeCategory, setActiveCategory] = useState("All");
   </div>
 </section>
 
-
  <div className="bg-white w-full text-black py-16 px-8">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-semibold">
@@ -508,6 +542,7 @@ const [activeCategory, setActiveCategory] = useState("All");
       ))}
     </div>
 
+
     {/* Optional bottom link */}
     <div className="text-center mt-10">
       <a href="#" className="text-sm underline hover:text-white transition">See all categories ↗</a>
@@ -524,6 +559,7 @@ const [activeCategory, setActiveCategory] = useState("All");
 
   <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 rounded-3xl text-center shadow-md">
     <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+
       <img
         src={avatar1}
         alt="User"
