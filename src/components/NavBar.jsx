@@ -72,7 +72,7 @@ export default function Navbar({ user, onLogout }) {
                     <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
                   )}
 
-                  {(user.role === "employee" || user.role === "admin") && (
+                  {(user.role === "employee") && (
                     <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
                   )}
 
