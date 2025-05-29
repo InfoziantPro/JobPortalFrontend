@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import apiClient from '../api/apiClient';
 
 const PostJob = () => {
   const [title, setTitle] = useState('');
@@ -21,8 +22,8 @@ const PostJob = () => {
     }
 
     try {
-      await axios.post(
-        'http://localhost:5000/api/jobs/postjob',
+      await apiClient.post(
+        '/jobs/postjob',
         {
           title,
           description,

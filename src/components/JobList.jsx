@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -23,7 +24,7 @@ const JobList = () => {
   const fetchJobs = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('/api/jobs/all', {
+      const res = await apiClient.get('/jobs/all', {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
