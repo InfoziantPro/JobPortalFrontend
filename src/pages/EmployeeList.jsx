@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import apiClient from '../api/apiClient';
 
 export default function EmployeesList() {
   const [employees, setEmployees] = useState([]);
@@ -15,7 +16,7 @@ export default function EmployeesList() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('/api/company/employees', {
+      const response = await apiClient.get('/company/employees', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmployees(response.data.employees);
@@ -35,7 +36,7 @@ export default function EmployeesList() {
 
   const handleEditSubmit = async () => {
     try {
-      await axios.put(`/api/update/employee/${editId}`, editForm, {
+      await apiClient.put(`/update/employee/${editId}`, editForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success('Employee updated');
@@ -49,7 +50,7 @@ export default function EmployeesList() {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this employee?')) return;
     try {
-      await axios.delete(`/api/delete/employee/${id}`, {
+      await apiClient.delete(`/delete/employee/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success('Employee deleted');

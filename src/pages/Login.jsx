@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import signUp from '../assets/SignUpPage.png';
+import apiClient from '../api/apiClient'; 
 
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ const Login = ({ setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/login', { email, password });
+      const response = await apiClient.post('/login', { email, password });
       const { token, user } = response.data;
 
       if (user.role === 'user' && !user.emailVerified) {
@@ -50,7 +51,7 @@ const Login = ({ setUser }) => {
 
   const handleResendVerification = async () => {
     try {
-      await axios.post('http://localhost:5000/api/resend-verification', { email });
+      await apiClient.post('/resend-verification', { email });
       toast.success('Verification email resent!');
     } catch (error) {
       toast.error(error.response?.data?.error || 'Failed to resend email');
