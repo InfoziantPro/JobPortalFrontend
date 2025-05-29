@@ -14,6 +14,8 @@ import JobList from './components/JobList';
 import ApproveRequests from './pages/ApproveRequests';
 import VerifySuccess from './pages/VerifySuccess';
 import VerifyFailed from './pages/VerifyFailed';
+import CreateEmployee from './pages/CreateEmployee';
+import EmployeeList from './pages/EmployeeList';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -65,8 +67,25 @@ function App() {
           <Route
             path="/postjob"
             element={
-              <ProtectedRoute roles={['admin', 'superadmin']}>
+              <ProtectedRoute roles={['superadmin', 'employee']}>
                 <PostJob />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/create-employee"
+            element={
+              <ProtectedRoute roles={['admin']}>
+                <CreateEmployee />
+              </ProtectedRoute>
+            }
+          />
+
+           <Route
+            path="/view-employees"
+            element={
+              <ProtectedRoute roles={['admin', 'superadmin']}>
+                <EmployeeList />
               </ProtectedRoute>
             }
           />

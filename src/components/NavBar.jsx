@@ -55,23 +55,32 @@ export default function Navbar({ user, onLogout }) {
             </button>
 
             {mainMenuOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-44 z-10 border">
-                <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
-                  <Link to="/" className="hover:bg-gray-100 px-2 py-1 rounded">Home</Link>
-                  <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
+          <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-44 z-10 border">
+            <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
+              <Link to="/" className="hover:bg-gray-100 px-2 py-1 rounded">Home</Link>
+              <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
 
-                  {(user.role === 'admin' || user.role === 'superadmin') && (
-                    <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
-                  )}
+              {(user.role === 'superadmin' || user.role==="employee") && (
+                <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
+              )}
 
-                  {user.role === 'superadmin' && (
-                    <Link to="/approvals" className="hover:bg-gray-100 px-2 py-1 rounded">
-                      Approve Requests
-                    </Link>
-                  )}
-                </div>
-              </div>
-            )}
+              {/* ✅ Admin-only: Create & View Employees */}
+              {user.role === 'admin' && (
+                <>
+                  <Link to="/create-employee" className="hover:bg-gray-100 px-2 py-1 rounded">Create Employee</Link>
+                  <Link to="/view-employees" className="hover:bg-gray-100 px-2 py-1 rounded">View Employees</Link>
+                </>
+              )}
+
+              {user.role === 'superadmin' && (
+                <Link to="/approvals" className="hover:bg-gray-100 px-2 py-1 rounded">
+                  Approve Requests
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
+
           </div>
         )}
 
