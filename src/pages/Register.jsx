@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import register from '../assets/Register.png';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -14,81 +15,125 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/register/${role}`, { name, email, password });
+      const response = await axios.post(`/api/register/${role}`, {
+        name,
+        email,
+        password,
+      });
       toast.success('Registration successful. Please verify your email.');
-      setVerifyUrl(response.data.emailVerificationLink);  // <-- use backend key here
+      setVerifyUrl(response.data.emailVerificationLink);
     } catch (error) {
       toast.error('Registration failed');
     }
   };
 
- return (
-  <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-    <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl space-y-6">
-      <h2 className="text-2xl font-bold text-center text-gray-800">Create an Account</h2>
-
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
+  return (
+    <div className="flex h-screen w-screen overflow-hidden">
+      {/* Left Side Visual */}
+      <div className="hidden md:flex w-1/2 h-full">
+        <img
+          src={register}
+          alt="Register Visual"
+          className="w-full h-full object-cover"
         />
+      </div>
 
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email Address"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
+      {/* Right Side Form */}
+      <div className="w-full md:w-1/2 h-full overflow-y-auto bg-white flex flex-col items-center justify-center px-6 py-10">
+        {/* Gradient Brand Title */}
+        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-purple-700 via-pink-400 to-orange-400 bg-clip-text text-transparent mb-4 text-center">
+          Infoziant
+        </h1>
 
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
+        <h2 className="text-2xl font-bold mb-10 text-gray-800 text-center">
+          Create a Free Account
+        </h2>
 
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="candidate">Candidate</option>
-          <option value="company">Company</option>
-        </select>
-
-        <button
-          type="submit"
-          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
-        >
-          Register
-        </button>
-      </form>
-
-      {verifyUrl && (
-        <div className="text-sm text-center text-gray-600 mt-4 space-y-2">
-          <p className="text-green-600 font-medium">Registration successful. Please verify your email:</p>
-          <a
-            href={verifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline font-medium hover:text-blue-800"
+        {/* Role toggle buttons */}
+        <div className="flex gap-6 mb-6">
+          <button
+            type="button"
+            onClick={() => setRole('candidate')}
+            className={`text-lg px-12 py-3 rounded-lg font-semibold transition ${
+              role === 'candidate'
+                ? 'bg-gradient-to-r from-purple-800 to-violet-500 text-white shadow-lg'
+                : 'bg-purple-100 text-purple-800'
+            }`}
           >
-            Verify Email
-          </a>
+            Candidate
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole('company')}
+            className={`text-lg px-12 py-3 rounded-lg font-semibold transition ${
+              role === 'company'
+                ? 'bg-gradient-to-r from-purple-800 to-violet-500 text-white shadow-lg'
+                : 'bg-purple-100 text-purple-800'
+            }`}
+          >
+            Employer
+          </button>
         </div>
-      )}
-    </div>
-  </div>
-);
 
+        {/* Registration Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="w-full  max-w-sm space-y-4"
+        >
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Full Name"
+            className="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            required
+          />
+
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email Address"
+            className="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            required
+          />
+
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            className="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            required
+          />
+
+          <button
+            type="submit"
+            className="w-full py-3 text-lg bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+          >
+            Register
+          </button>
+        </form>
+
+        {/* Verification Link */}
+        {verifyUrl && (
+          <div className="text-sm text-center text-gray-600 mt-4 space-y-2">
+            <p className="text-green-600 font-medium">
+              Registration successful. Please verify your email:
+            </p>
+            <a
+              href={verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline font-medium hover:text-blue-800"
+            >
+              Verify Email
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Register;
