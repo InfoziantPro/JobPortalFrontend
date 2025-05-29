@@ -3,7 +3,6 @@ import Typewriter from "typewriter-effect";
 import { motion } from "framer-motion";
 import { useState } from 'react';
 
-// Image Imports
 import bannerIcon from '../assets/HomePageImg/home-banner-icon.png';
 import unbiasedGif from '../assets/HomePageImg/unbiased-services.gif';
 import learningPathGif from '../assets/HomePageImg/Learning-path.gif';
