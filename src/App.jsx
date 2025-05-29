@@ -44,7 +44,7 @@ function App() {
   return (
     <Router>
       <Navbar user={user} onLogout={handleLogout} />
-      <div className="min-h-screen p-4">
+      <div className="min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login setUser={setUser} />} />

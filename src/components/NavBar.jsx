@@ -6,16 +6,18 @@ import logo from '/src/assets/logos/Logo.png';
 export default function Navbar({ user, onLogout }) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mainMenuOpen, setMainMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0);
   const userMenuRef = useRef();
   const mainMenuRef = useRef();
+  const navigate = useNavigate();
 
   const handleLogoutClick = () => {
     onLogout();
     navigate('/login');
   };
 
-  // Close dropdowns when clicking outside
+  // Handle click outside menus to close them
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
@@ -25,8 +27,26 @@ export default function Navbar({ user, onLogout }) {
         setMainMenuOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Scroll behavior: show/hide navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (Math.abs(currentScrollY - lastScrollY.current) > 5) {
+        if (currentScrollY > lastScrollY.current) {
+          setShowNavbar(false); // scrolling down
+        } else {
+          setShowNavbar(true); // scrolling up
+        }
+        lastScrollY.current = currentScrollY;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Capitalize first letter of role
@@ -36,7 +56,11 @@ export default function Navbar({ user, onLogout }) {
   };
 
   return (
-    <nav className="bg-white shadow p-4 flex justify-between items-center">
+    <nav
+      className={`bg-white shadow p-4 flex justify-between items-center fixed top-0 w-full z-50 transition-transform duration-300 ${
+        showNavbar ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       {/* Logo */}
       <div>
         <Link to="/" className="flex items-center space-x-2">
