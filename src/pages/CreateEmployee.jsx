@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import apiClient from '../api/apiClient';
 
 export default function CreateEmployee() {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ export default function CreateEmployee() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('/api/create/employee', formData, {
+      await apiClient.post('/create/employee', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success('Employee created successfully');
