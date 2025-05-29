@@ -90,8 +90,8 @@ const Home = () => {
       className="w-full h-[400px] object-cover rounded-xl shadow-2xl mt-12"
     />
 
-    {/* Animated Circles */}
-    {/* <div className="relative mt-24 w-full max-w-6xl h-[300px]">
+{/*     Animated Circles */}
+    <div className="relative mt-24 w-full max-w-6xl h-[300px]">
       {[
         { text: "Boost Your Skills", x: "-40%", y: "10%" },
         { text: "Elevate Your Profile", x: "-20%", y: "-20%" },
@@ -114,7 +114,7 @@ const Home = () => {
           <p className="px-3">{item.text}</p>
         </motion.div>
       ))}
-    </div> */}
+    </div>
   </motion.div>
 
    
