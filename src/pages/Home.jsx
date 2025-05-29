@@ -33,7 +33,7 @@ import avatar4 from "../assets/avatars/testi-img1.png";
 import avatar5 from "../assets/avatars/testi-img1.png";
 
 
-
+const Home = () => {
 const sections = [
   {
     title: "Unique Learning Path",
@@ -67,12 +67,18 @@ const sections = [
   },
 ];
 
+const [activeCategory, setActiveCategory] = useState("All");
 const categories = ["All", "Trending", "Design", "Marketing", "Health"];
-
-const Home = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  
   return (
-    <div className="bg-gradient-to-b from-[#2a0052] to-[#450e8e] text-white min-h-screen w-full overflow-hidden flex flex-col items-center justify-center px-4">
+  <div className="bg-white">
+
+  <div
+  className="bg-center bg-cover bg-no-repeat text-white min-h-screen w-full overflow-hidden flex flex-col items-center justify-between px-4 py-24"
+  style={{
+    backgroundImage: `url(${homeBanner})`,
+  }}>
+
   {/* Title */}
   <motion.h1
     className="text-4xl md:text-5xl font-semibold text-center leading-tight mb-4 mt-10 drop-shadow-lg"
@@ -81,11 +87,11 @@ const Home = () => {
     transition={{ duration: 0.8 }}
   >
     Elevate Your Career with{" "}
-    <span className="bg-gradient-to-r from-teal-400 via-teal-500 to-teal-300 bg-clip-text text-transparent">
-      Infoziant
-    </span>{" "}
-    - All in one Career <br />
-    Catalyst
+    <span className="bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">
+          Infoziant
+        </span>{" "}
+    - All in one <br />
+     Career Catalyst
   </motion.h1>
 
   {/* Typewriter */}
@@ -106,66 +112,89 @@ const Home = () => {
     />
   </motion.div>
 
-  {/* Search Bar */}
-  <div className="bg-white text-black rounded-full shadow-xl flex flex-wrap justify-center items-center gap-2 p-4 px-6 w-full max-w-5xl ring-2 ring-white/20 backdrop-blur-sm">
-    <input
-      type="text"
-      placeholder="Job title, keywords, or company"
-      className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none focus:ring-2 focus:ring-indigo-400 transition"
+     {/* Search bar */}
+      <div className="bg-white text-black rounded-full shadow-lg flex flex-wrap justify-center items-center gap-2 p-4 px-6 w-full max-w-4xl mb-6">
+        {/* Search Icon Input */}
+  <div className="relative flex-1 min-w-[180px]">
+    <img
+      src="/icons/search.svg" // Replace with your path or use inline SVG
+      alt="Search Icon"
+      className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 opacity-60"
     />
     <input
       type="text"
-      placeholder="City or postcode"
-      className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none focus:ring-2 focus:ring-indigo-400 transition"
-    />
-    <select className="rounded-full px-4 py-2 border border-gray-300 min-w-[150px] focus:ring-2 focus:ring-indigo-400 transition">
-      <option>All Categories</option>
-    </select>
-    <button className="rounded-full px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:scale-105 transition-transform hover:ring-2 hover:ring-white">
-      Find Jobs
-    </button>
+placeholder="Job title, keywords, or company"
+className="w-full pl-12 pr-4 py-4 rounded-full border border-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition"
+/>
+        </div>
+
+  {/* Location Input */}
+  <input
+type="text"
+placeholder="City or postcode"
+className="flex-1 min-w-[180px] px-4 py-4 rounded-full border border-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition"
+  />
+
+  {/* Custom-Styled Select Wrapper */}
+  <div className="relative">
+        <select
+className="appearance-none bg-white text-black border border-gray-300 rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
+>
+          <option>All Categories</option>
+<option>Accounting / Finance</option>
+      <option>Automotive Jobs</option>
+      <option>Customer</option>
+      <option>Design</option>
+      <option>Development</option>
+      <option>Health and Care</option>
+      <option>Marketing</option>
+      <option>Project Management</option>
+        </select>
+{/* Custom Arrow Icon */}
+    <div className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+      ▼
+    </div>
   </div>
 
-  {/* Banner Image */}
-  <motion.div
-    className="mt-10 max-w-6xl w-full flex justify-center"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 1.2, duration: 1 }}
-  >
-    <img
-      src={homeBanner}
-      alt="Career illustration"
-      className="w-full h-[400px] object-cover rounded-xl shadow-2xl mt-12"
-    />
+  {/* Submit Button */}
+        <button className="rounded-full px-6 py-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:scale-105 transition-transform">
+          Find Jobs
+        </button>
+      </div>
 
-{/*     Animated Circles */}
-    <div className="relative mt-24 w-full max-w-6xl h-[300px]">
-      {[
-        { text: "Boost Your Skills", x: "-40%", y: "10%" },
-        { text: "Elevate Your Profile", x: "-20%", y: "-20%" },
-        { text: "AI - Powered Job Matching", x: "0%", y: "-30%" },
-        { text: "Mentor Connect", x: "20%", y: "-20%" },
-        { text: "Hiring Reimagined", x: "40%", y: "10%" },
-      ].map((item, index) => (
-        <motion.div
-          key={index}
-          className="absolute flex flex-col items-center justify-center w-[140px] h-[140px] rounded-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white text-center text-sm shadow-xl border-4 border-white backdrop-blur-lg"
-          style={{
-            left: `50%`,
-            top: `50%`,
-            transform: `translate(${item.x}, ${item.y})`,
-          }}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
-        >
-          <p className="px-3">{item.text}</p>
-        </motion.div>
-      ))}
-    </div>
-  </motion.div>
-   
+
+      {/* Animated Circles */}
+      <motion.div
+        className="relative w-full max-w-6xl h-[300px]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
+      >
+        {[
+      { text: "Boost Your Skills", x: "-7%", y: "78%" },
+            { text: "Elevate Your Profile", x: "19.5%", y: "41%" },
+            { text: "AI - Powered Job Matching", x: "45.5%", y: "55%" },
+            { text: "Mentor Connect", x: "70.5%", y: "90%" },
+            { text: "Hiring Reimagined", x: "96%", y: "41%" },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className="absolute flex flex-col items-center justify-center w-[102px] h-[102px] rounded-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white text-center text-sm shadow-xl border-4 border-white"
+              style={{
+left: item.x,
+top: item.y,
+transform: "translate(-50%, -50%)",
+}}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
+            >
+              <p className="px-3">{item.text}</p>
+            </motion.div>
+          ))}
+              </motion.div>
+</div>
+
 
       {/* 👇 Separate Scroll Section Starts Here — AFTER full background */}
       <div className="w-full bg-white py-12 overflow-hidden">
@@ -539,7 +568,7 @@ const Home = () => {
 </section>
 
 
-    </div>
+</div>
     </div>
   );
 };
