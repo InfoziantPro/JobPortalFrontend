@@ -70,11 +70,11 @@ export default function Navbar({ user, onLogout }) {
                 </>
               )}
               
-              {(user.role==="employee" || user.role==="candidate") && (
+              {(user.role==="employee" || user.role==="candidate" || user.role==="admin") && (
                 <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
               )}
 
-              {(user.role==="employee") && (
+              {(user.role==="employee" || user.role==="admin") && (
                 <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
               )}
 

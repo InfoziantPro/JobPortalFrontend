@@ -35,9 +35,18 @@ const JobList = () => {
         {jobs.map((job) => (
           <li key={job._id} className="border p-4 rounded shadow">
             <h3 className="text-xl font-semibold">{job.title}</h3>
-            <p className="text-sm text-gray-600">{job.company} • {job.location}</p>
+            <p className="text-sm text-gray-600">
+              {job.company} • {job.location}
+            </p>
             <p className="mt-2">{job.description.substring(0, 100)}...</p>
             <p className="text-sm mt-1">Type: {job.jobType}</p>
+
+            {/* ✅ Show Posted By */}
+            {job.postedBy && (
+              <p className="text-xs text-gray-500 mt-2">
+                Posted by: <span className="font-medium">{job.postedBy.name}</span> ({job.postedBy.email})
+              </p>
+            )}
           </li>
         ))}
       </ul>

@@ -59,7 +59,7 @@ function App() {
           <Route
             path="/jobs/all"
             element={
-              <ProtectedRoute roles={['candidate', 'employee']}>
+              <ProtectedRoute roles={['candidate', 'employee', 'admin']}>
                 <JobList />
               </ProtectedRoute>
             }
@@ -76,7 +76,7 @@ function App() {
           <Route
             path="/postjob"
             element={
-              <ProtectedRoute roles={['superadmin', 'employee']}>
+              <ProtectedRoute roles={['admin', 'employee']}>
                 <PostJob />
               </ProtectedRoute>
             }
