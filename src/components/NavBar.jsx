@@ -63,6 +63,7 @@ export default function Navbar({ user, onLogout }) {
               {(user.role === 'superadmin' || user.role==="employee") && (
                 <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
               )}
+              
 
               {/* ✅ Admin-only: Create & View Employees */}
               {user.role === 'admin' && (
