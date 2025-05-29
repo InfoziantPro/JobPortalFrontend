@@ -16,6 +16,7 @@ import VerifySuccess from './pages/VerifySuccess';
 import VerifyFailed from './pages/VerifyFailed';
 import CreateEmployee from './pages/CreateEmployee';
 import EmployeeList from './pages/EmployeeList';
+import Companies from './pages/Companies';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -49,7 +50,6 @@ function App() {
           <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
-          {/* <Route path="/jobs/all" element={<JobList />} /> */}
           <Route path="/verify-success" element={<VerifySuccess />} />
           <Route path="/verify-failed" element={<VerifyFailed />} />
           <Route path="/register/candidate" element={<Register role="candidate" />} />
@@ -95,6 +95,15 @@ function App() {
             element={
               <ProtectedRoute roles={['admin', 'superadmin']}>
                 <EmployeeList />
+              </ProtectedRoute>
+            }
+          />
+
+           <Route
+            path="/view-companies"
+            element={
+              <ProtectedRoute roles={['superadmin']}>
+                <Companies />
               </ProtectedRoute>
             }
           />
