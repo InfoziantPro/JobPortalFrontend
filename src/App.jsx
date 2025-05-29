@@ -49,13 +49,22 @@ function App() {
           <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
-          <Route path="/jobs/all" element={<JobList />} />
+          {/* <Route path="/jobs/all" element={<JobList />} /> */}
           <Route path="/verify-success" element={<VerifySuccess />} />
           <Route path="/verify-failed" element={<VerifyFailed />} />
           <Route path="/register/candidate" element={<Register role="candidate" />} />
           <Route path="/register/company" element={<Register role="admin" />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
-
+          
+          <Route
+            path="/jobs/all"
+            element={
+              <ProtectedRoute roles={['candidate', 'employee']}>
+                <JobList />
+              </ProtectedRoute>
+            }
+          />
+          
           <Route
             path="/dashboard"
             element={

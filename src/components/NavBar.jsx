@@ -58,12 +58,15 @@ export default function Navbar({ user, onLogout }) {
           <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-44 z-10 border">
             <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
               <Link to="/" className="hover:bg-gray-100 px-2 py-1 rounded">Home</Link>
-              <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
+              
+              {(user.role==="employee" || user.role==="candidate") && (
+                <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
+              )}
 
-              {(user.role === 'superadmin' || user.role==="employee") && (
+              {(user.role==="employee") && (
                 <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
               )}
-              
+
 
               {/* ✅ Admin-only: Create & View Employees */}
               {user.role === 'admin' && (
