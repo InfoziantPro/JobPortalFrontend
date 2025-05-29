@@ -3,7 +3,6 @@ import Typewriter from "typewriter-effect";
 import { motion } from "framer-motion";
 import { useState } from 'react';
 
-// Image Imports
 import bannerIcon from '../assets/HomePageImg/home-banner-icon.png';
 import unbiasedGif from '../assets/HomePageImg/unbiased-services.gif';
 import learningPathGif from '../assets/HomePageImg/Learning-path.gif';
@@ -24,84 +23,101 @@ import client10 from '../assets/clients/1-10.png';
 
 const Home = () => {
   return (
-    <div className="bg-gradient-to-b from-[#2a0052] to-[#450e8e] text-white min-h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-      {/* Title */}
-      <motion.h1
-        className="text-4xl md:text-5xl font-medium text-center leading-snug mb-4 mt-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Elevate Your Career with{' '}
-        <span className="bg-gradient-to-r from-teal-700 to-teal-500 bg-clip-text text-transparent ">
-          Infoziant
-        </span>{' '}
-        - All in one Career <br />
-        Catalyst
-      </motion.h1>
+    <div className="bg-gradient-to-b from-[#2a0052] to-[#450e8e] text-white min-h-screen w-full overflow-hidden flex flex-col items-center justify-center px-4">
+  {/* Title */}
+  <motion.h1
+    className="text-4xl md:text-5xl font-semibold text-center leading-tight mb-4 mt-10 drop-shadow-lg"
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+  >
+    Elevate Your Career with{" "}
+    <span className="bg-gradient-to-r from-teal-400 via-teal-500 to-teal-300 bg-clip-text text-transparent">
+      Infoziant
+    </span>{" "}
+    - All in one Career <br />
+    Catalyst
+  </motion.h1>
 
-      {/* Typewriter */}
-      <motion.div
-        className="text-lg md:text-xl font-medium text-center mt-2 mb-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-      >
-        <Typewriter
-          options={{
-            strings: ["Empowering Individuals and Transforming Organizations"],
-            autoStart: true,
-            loop: true,
-            delay: 40,
-            deleteSpeed: 25,
+  {/* Typewriter */}
+  <motion.div
+    className="text-lg md:text-2xl font-medium text-center mt-2 mb-10 text-gray-100"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1, duration: 1 }}
+  >
+    <Typewriter
+      options={{
+        strings: ["Empowering Individuals and Transforming Organizations"],
+        autoStart: true,
+        loop: true,
+        delay: 40,
+        deleteSpeed: 25,
+      }}
+    />
+  </motion.div>
+
+  {/* Search Bar */}
+  <div className="bg-white text-black rounded-full shadow-xl flex flex-wrap justify-center items-center gap-2 p-4 px-6 w-full max-w-5xl ring-2 ring-white/20 backdrop-blur-sm">
+    <input
+      type="text"
+      placeholder="Job title, keywords, or company"
+      className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none focus:ring-2 focus:ring-indigo-400 transition"
+    />
+    <input
+      type="text"
+      placeholder="City or postcode"
+      className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none focus:ring-2 focus:ring-indigo-400 transition"
+    />
+    <select className="rounded-full px-4 py-2 border border-gray-300 min-w-[150px] focus:ring-2 focus:ring-indigo-400 transition">
+      <option>All Categories</option>
+    </select>
+    <button className="rounded-full px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:scale-105 transition-transform hover:ring-2 hover:ring-white">
+      Find Jobs
+    </button>
+  </div>
+
+  {/* Banner Image */}
+  <motion.div
+    className="mt-10 max-w-6xl w-full flex justify-center"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1.2, duration: 1 }}
+  >
+    <img
+      src={bannerIcon}
+      alt="Career illustration"
+      className="w-full h-[400px] object-cover rounded-xl shadow-2xl mt-12"
+    />
+
+{/*     Animated Circles */}
+    <div className="relative mt-24 w-full max-w-6xl h-[300px]">
+      {[
+        { text: "Boost Your Skills", x: "-40%", y: "10%" },
+        { text: "Elevate Your Profile", x: "-20%", y: "-20%" },
+        { text: "AI - Powered Job Matching", x: "0%", y: "-30%" },
+        { text: "Mentor Connect", x: "20%", y: "-20%" },
+        { text: "Hiring Reimagined", x: "40%", y: "10%" },
+      ].map((item, index) => (
+        <motion.div
+          key={index}
+          className="absolute flex flex-col items-center justify-center w-[140px] h-[140px] rounded-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white text-center text-sm shadow-xl border-4 border-white backdrop-blur-lg"
+          style={{
+            left: `50%`,
+            top: `50%`,
+            transform: `translate(${item.x}, ${item.y})`,
           }}
-        />
-      </motion.div>
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
+        >
+          <p className="px-3">{item.text}</p>
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
 
-      {/* Search Bar */}
-      <div className="bg-white text-black rounded-full shadow-lg flex flex-wrap justify-center items-center gap-2 p-4 px-6 w-full max-w-4xl">
-        <input type="text" placeholder="Job title, keywords, or company" className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none" />
-        <input type="text" placeholder="City or postcode" className="flex-1 min-w-[180px] px-4 py-2 rounded-full border border-gray-300 outline-none" />
-        <select className="rounded-full px-4 py-2 border border-gray-300 min-w-[150px]">
-          <option>All Categories</option>
-        </select>
-        <button className="rounded-full px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:scale-105 transition-transform">
-          Find Jobs
-        </button>
-      </div>
-
-      {/* Banner Image */}
-      <motion.div
-        className="mt-10 max-w-5xl w-full flex justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-      >
-        <img src={bannerIcon} alt="Career illustration" className="w-full h-[400px] object-cover rounded-xl shadow-lg mt-12" />
-
-        {/* Animated Circles */}
-        <div className="relative mt-24 w-full max-w-6xl h-[300px]">
-          {[
-            { text: "Boost Your Skills", x: "-40%", y: "10%" },
-            { text: "Elevate Your Profile", x: "-20%", y: "-20%" },
-            { text: "AI - Powered Job Matching", x: "0%", y: "-30%" },
-            { text: "Mentor Connect", x: "20%", y: "-20%" },
-            { text: "Hiring Reimagined", x: "40%", y: "10%" },
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              className="absolute flex flex-col items-center justify-center w-[140px] h-[140px] rounded-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white text-center text-sm shadow-xl border-4 border-white"
-              style={{ left: `50%`, top: `50%`, transform: `translate(${item.x}, ${item.y})` }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
-            >
-              <p className="px-3">{item.text}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-
+   
 
   {/* Client Logos */}
       <div className="w-full bg-white py-12 overflow-hidden">
@@ -216,8 +232,6 @@ const Home = () => {
   </div>
 </section>
 
-
-
 <section className="w-full bg-white">
   <div className="flex flex-col md:flex-row items-center justify-between py-16 px-6 md:px-20 gap-12 max-w-7xl mx-auto">
     
@@ -254,12 +268,8 @@ const Home = () => {
         className="w-full h-auto object-contain"
       />
     </div>
-
   </div>
 </section>
-
-
-
 
 <section className="w-full bg-white">
   <div className="flex flex-col md:flex-row items-center justify-between py-16 px-6 md:px-20 gap-12 max-w-7xl mx-auto">
