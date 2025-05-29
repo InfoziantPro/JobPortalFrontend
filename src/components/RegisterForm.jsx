@@ -20,7 +20,7 @@ const RegisterForm = () => {
     setMessage('');
 
     try {
-      const res = await axios.post('http://localhost:5000/api/register', formData, {
+      const res = await axios.post('https://job-portal-bacnd.vercel.app/api/register', formData, {
         withCredentials: true,
       });
       setMessage(res.data.message);
