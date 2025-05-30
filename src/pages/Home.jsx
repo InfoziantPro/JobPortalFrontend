@@ -231,7 +231,7 @@ const Home = () => {
   }}
 >
   {/* Responsive height using padding or min-height */}
-  <div className="min-h-[650px] md:min-h-[700px] lg:min-h-[890px] mb-32 flex flex-col items-center justify-center px-4">
+  <div className="min-h-[900px]  md:min-h-[700px] lg:min-h-[890px] mb-32 flex flex-col items-center justify-center px-4">
     
   </div>
 
@@ -255,7 +255,7 @@ const Home = () => {
 
           {/* Typewriter */}
           <motion.div
-            className="text-lg md:text-xl font-medium text-center mt-2 mb-10 text-gray-100"
+            className="text-base md:text-xl ml-4 font-medium text-center mt-2 mb-10 text-gray-100"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
@@ -272,104 +272,109 @@ const Home = () => {
               }}
             />
           </motion.div>
-          <div className="bg-white rounded-full text-gray-600 shadow-md flex items-center max-w-full px-4 py-4 space-x-10">
-            {/* Job Title Input */}
-            <div className="flex items-center space-x-2 flex-1 min-w-[250px]">
-              <img
-                src="https://www.svgrepo.com/show/521826/search.svg"
-                alt="Search"
-                className="w-5 h-5 opacity-60"
-              />
-              <input
-                type="text"
-                placeholder="Job title, keywords, or company"
-                className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
-              />
+
+<div className="w-full px-10">
+  <div className="bg-white shadow-md flex flex-col md:flex-row items-stretch md:items-center w-full max-w-6xl mx-auto py-4 md:rounded-full rounded-2xl space-y-4 md:space-y-0 md:space-x-6">
+    {/* Job Title Input */}
+    <div className="flex items-center space-x-2 flex-1 min-w-[200px] px-3">
+      <img
+        src="https://www.svgrepo.com/show/521826/search.svg"
+        alt="Search"
+        className="w-5 h-5 opacity-60"
+      />
+      <input
+        type="text"
+        placeholder="Job title, keywords, or company"
+        className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
+      />
+    </div>
+
+    {/* Divider */}
+    <div className="hidden md:block h-12 border-l border-gray-300"></div>
+
+    {/* Location Input */}
+    <div className="flex items-center space-x-2 flex-1 min-w-[150px] px-3">
+      <img
+        src="https://raw.githubusercontent.com/feathericons/feather/master/icons/map-pin.svg"
+        alt="Location"
+        className="w-5 h-5 opacity-60"
+      />
+      <input
+        type="text"
+        placeholder="City or postcode"
+        className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
+      />
+    </div>
+
+    {/* Divider */}
+    <div className="hidden md:block h-12 border-l border-gray-300"></div>
+
+    {/* Custom Dropdown */}
+    <div className="relative min-w-[160px] w-full max-w-[180px] px-3">
+      <div
+        onClick={() => setDropdownOpen(!dropdownOpen)}
+        className="flex items-center justify-between w-full space-x-2 cursor-pointer text-sm text-gray-500 hover:text-violet-500"
+      >
+        <img
+          src="https://raw.githubusercontent.com/feathericons/feather/master/icons/box.svg"
+          alt="Category"
+          className="w-5 h-5 opacity-60"
+        />
+        <span className="overflow-hidden whitespace-nowrap text-ellipsis block max-w-[100px]">
+          {selectedCategory}
+        </span>
+        <svg
+          className="w-4 h-4 text-gray-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </div>
+
+      {/* Dropdown Menu */}
+      {dropdownOpen && (
+        <div className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg">
+          {[
+            "All Categories",
+            "Accounting / Finance",
+            "Automotive Jobs",
+            "Customer",
+            "Design",
+            "Development",
+            "Health and Care",
+            "Marketing",
+            "Project Management",
+          ].map((category) => (
+            <div
+              key={category}
+              onClick={() => {
+                setSelectedCategory(category);
+                setDropdownOpen(false);
+              }}
+              className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-500 hover:bg-purple-300 cursor-pointer"
+            >
+              <span>{category}</span>
             </div>
+          ))}
+        </div>
+      )}
+    </div>
 
-            {/* Divider */}
-            <div className="h-12 border-l border-gray-300"></div>
-            {/* Location Input */}
-            <div className="flex items-center space-x-2 flex-1 min-w-[150px]">
-              <img
-                src="https://raw.githubusercontent.com/feathericons/feather/master/icons/map-pin.svg"
-                alt="Location"
-                className="w-5 h-5 opacity-60"
-              />
-              <input
-                type="text"
-                placeholder="City or postcode"
-                className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
-              />
-            </div>
-
-            {/* Divider */}
-            <div className="h-12 border-l border-gray-300"></div>
-
-            {/* Custom Dropdown */}
-            {/* Custom Dropdown */}
-            <div className="relative min-w-[160px] w-full max-w-[180px]">
-              <div
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center justify-between w-full space-x-2 cursor-pointer text-sm text-gray-500 hover:text-violet-500"
-              >
-                <img
-                  src="https://raw.githubusercontent.com/feathericons/feather/master/icons/box.svg"
-                  alt="Category"
-                  className="w-5 h-5 opacity-60"
-                />
-                <span className="overflow-hidden whitespace-nowrap text-ellipsis block max-w-[100px]">
-                  {selectedCategory}
-                </span>
-                <svg
-                  className="w-4 h-4 text-gray-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-
-              {/* Dropdown Menu */}
-              {dropdownOpen && (
-                <div className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg">
-                  {[
-                    "All Categories",
-                    "Accounting / Finance",
-                    "Automotive Jobs",
-                    "Customer",
-                    "Design",
-                    "Development",
-                    "Health and Care",
-                    "Marketing",
-                    "Project Management",
-                  ].map((category) => (
-                    <div
-                      key={category}
-                      onClick={() => {
-                        setSelectedCategory(category);
-                        setDropdownOpen(false);
-                      }}
-                      className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-500 hover:bg-purple-300 cursor-pointer"
-                    >
-                      <span>{category}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Button */}
-            <button className="ml-4 flex items-center space-x-2 rounded-full px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-medium hover:scale-105 transition-transform">
-              <span>Find Jobs</span>
-            </button>
-          </div>
+    {/* Button */}
+    <div className="px-3">
+      <button className="w-full md:w-auto flex items-center justify-center space-x-2 rounded-full px-6 py-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-medium hover:scale-105 transition-transform">
+        <span>Find Jobs</span>
+      </button>
+    </div>
+  </div>
+</div>
 
           {/* Floating Bubbles */}
           <motion.div
