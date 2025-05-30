@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -144,6 +145,12 @@ const Home = () => {
     },
   ];
 
+const navigate = useNavigate();
+
+const handleClick = () => {
+  navigate("/login"); // Replace with your route
+};
+
   const [activeCategory, setActiveCategory] = useState("All");
   const categories = ["All", "Trending", "Design", "Marketing", "Health"];
 
@@ -273,8 +280,9 @@ const Home = () => {
             />
           </motion.div>
 
-<div className="w-full px-10">
-  <div className="bg-white shadow-md flex flex-col md:flex-row items-stretch md:items-center w-full max-w-6xl mx-auto py-4 md:rounded-full rounded-2xl space-y-4 md:space-y-0 md:space-x-6">
+<div className="w-full px-4 md:px-10 text-gray-600">
+  <div className="bg-white shadow-md flex flex-col md:flex-row items-stretch md:items-center w-2/3 max-w-6xl mx-auto py-6 md:rounded-full rounded-2xl space-y-4 md:space-y-0 md:space-x-6 z-10 relative">
+    
     {/* Job Title Input */}
     <div className="flex items-center space-x-2 flex-1 min-w-[200px] px-3">
       <img
@@ -340,7 +348,7 @@ const Home = () => {
 
       {/* Dropdown Menu */}
       {dropdownOpen && (
-        <div className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg">
+        <div className="absolute z-20 mt-2 w-48 bg-white rounded-xl shadow-lg">
           {[
             "All Categories",
             "Accounting / Finance",
@@ -375,6 +383,7 @@ const Home = () => {
     </div>
   </div>
 </div>
+
 
           {/* Floating Bubbles */}
           <motion.div
@@ -583,9 +592,12 @@ const Home = () => {
                     </li>
                   ))}
                 </ul>
-                <button className="mt-8 px-6 py-3 bg-black text-white rounded-lg font-semibold">
-                  Discover More
-                </button>
+               <button
+  onClick={handleClick}
+  className="mt-8 px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 hover:scale-105 transition-transform duration-300"
+>
+  Discover More
+</button>
               </motion.div>
             </div>
           </section>
@@ -664,7 +676,10 @@ const Home = () => {
                   className="w-10 h-10 rounded-full"
                 />
                 <div>
-                  <h3 className="text-lg font-semibold">{job.title}</h3>
+                  <Link to="/login" className="text-lg font-semibold text-black hover:text-purple-700">
+  {job.title}
+</Link>
+
                   <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-1">
                     {/* Company */}
                     <div className="flex items-center gap-1">
