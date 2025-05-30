@@ -97,7 +97,7 @@ const Dashboard = ({ user, onLogout }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row h-screen bg-gray-50 font-jost">
       {/* Mobile Header */}
       <div className="md:hidden bg-white shadow border-b px-4 py-3 flex items-center justify-between z-50">
         <button
@@ -123,9 +123,9 @@ const Dashboard = ({ user, onLogout }) => {
         `}
       >
         {/* Sidebar Header */}
-        <div className="p-5 border-b bg-gradient-to-br from-indigo-600 to-blue-600 shadow-md">
+        <div className="p-5 border-b bg-gradient-to-br from-indigo-600 to-blue-600 shadow-md font-jost">
           <div className="flex items-center justify-between">
-            <h2 className="text-white font-bold text-lg">Your Dashboard</h2>
+            <h2 className="text-white text-lg font-bold">Your Dashboard</h2>
             <button
               onClick={() => setSidebarOpen(false)}
               className="md:hidden text-white hover:bg-white/20 p-1 rounded transition"
@@ -185,7 +185,7 @@ const Dashboard = ({ user, onLogout }) => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-0">
         {/* Desktop Header */}
-        <div className="hidden md:block bg-white shadow border-b px-6 py-5">
+        <div className="hidden md:block bg-white shadow border-b px-6 py-5 font-jost">
           <h1 className="text-2xl font-bold text-gray-900">Welcome, {user.name}</h1>
           <p className="text-sm text-gray-600 mt-1 capitalize">{role} Dashboard</p>
         </div>
