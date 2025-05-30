@@ -66,13 +66,14 @@ function App() {
           />
           
           <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute user={user}>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+              path="/dashboard"
+              element={
+                <ProtectedRoute user={user}>
+                  <Dashboard user={user} onLogout={handleLogout} />
+                </ProtectedRoute>
+              }
+            />
+
           <Route
             path="/postjob"
             element={
