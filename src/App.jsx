@@ -17,6 +17,7 @@ import VerifyFailed from './pages/VerifyFailed';
 import CreateEmployee from './pages/CreateEmployee';
 import EmployeeList from './pages/EmployeeList';
 import Companies from './pages/Companies';
+import About from './pages/About';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -55,6 +56,7 @@ function App() {
           <Route path="/register/candidate" element={<Register role="candidate" />} />
           <Route path="/register/company" element={<Register role="admin" />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/about" element={<About />} />
           
           <Route
             path="/jobs/all"
