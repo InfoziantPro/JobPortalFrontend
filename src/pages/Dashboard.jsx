@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   FiUser, FiBriefcase, FiBell, FiMessageCircle, FiHeart, FiFileText, FiUsers,
@@ -6,7 +6,12 @@ import {
 } from 'react-icons/fi';
 import apiClient from '../api/apiClient';
 
+// Components that render
 import JobList from '../components/JobList';
+import CreateEmployee from '../pages/CreateEmployee';
+import EmployeeList from '../pages/EmployeeList';
+import PostJob from '../pages/PostJob';
+import ApproveRequests from '../pages/ApproveRequests';
 
 
 const Dashboard = ({ user, onLogout }) => {
@@ -30,33 +35,33 @@ const Dashboard = ({ user, onLogout }) => {
       { key: 'profile', label: 'My Profile', icon: <FiUser />, content: 'My Profile Component' },
       { key: 'resume', label: 'My Resume', icon: <FiFileText />, content: 'Resume Component' },
       { key: 'applied', label: 'Applied Jobs', icon: <FiBriefcase />, content: 'Applied Jobs Component' },
-      { key: 'alerts', label: 'Job Listing', icon: <FiBell />, content: <JobList route="/jobs/all" /> },
+      { key: 'alerts', label: 'Job Listing', icon: <FiBell />, content: <JobList /> },
       { key: 'messages', label: 'Messages', icon: <FiMessageCircle />, content: 'Messages Component' },
       { key: 'shortlisted', label: 'Shortlisted Jobs', icon: <FiHeart />, content: 'Shortlisted Jobs Component' },
       { key: 'cv', label: 'CV Manager', icon: <FiFileText />, content: 'CV Manager Component' },
     ],
-    admin: [
-      { key: 'company', label: 'Company Profile', icon: <FiUser />, content: 'Company Profile Component' },
-      { key: 'add', label: 'Add Employees', icon: <FiUsers />, content: 'Add Employee Component' },
-      { key: 'manage', label: 'Manage Employees', icon: <FiUsers />, content: 'Manage Employees Component' },
-      { key: 'jobs', label: 'Manage Jobs', icon: <FiBriefcase />, content: <JobList route="/jobs/all" /> },
-      { key: 'applicants', label: 'All Applicants', icon: <FiUsers />, content: 'Applicants Component' },
-      { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: 'Shortlisted Resumes Component' },
-      { key: 'view', label: 'View Profile', icon: <FiUser />, content: 'View Profile Component' },
-    ],
-    superadmin: [
-      { key: 'company', label: 'Company Profile', icon: <FiUser />, content: 'Company Profile Component' },
-      { key: 'add', label: 'Add Employees', icon: <FiUsers />, content: 'Add Employee Component' },
+     superadmin: [
+      { key: 'company', label: 'SuperAdmin Profile', icon: <FiUser />, content: 'Company Profile Component' },
+      { key: 'add', label: 'Approve Companies', icon: <FiUsers />, content: <ApproveRequests /> },
       { key: 'manage', label: 'Manage Employees', icon: <FiUsers />, content: 'Manage Employees Component' },
       { key: 'jobs', label: 'Manage Jobs', icon: <FiBriefcase />, content: 'Manage Jobs Component' },
       { key: 'applicants', label: 'All Applicants', icon: <FiUsers />, content: 'Applicants Component' },
       { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: 'Shortlisted Resumes Component' },
       { key: 'view', label: 'View Profile', icon: <FiUser />, content: 'View Profile Component' },
     ],
+    admin: [
+      { key: 'company', label: 'Company Profile', icon: <FiUser />, content: 'Company Profile Component' },
+      { key: 'add', label: 'Add Employees', icon: <FiUsers />, content: <CreateEmployee /> },
+      { key: 'manage', label: 'Manage Employees', icon: <FiUsers />, content: <EmployeeList /> },
+      { key: 'jobs', label: 'Manage Jobs', icon: <FiBriefcase />, content: <JobList /> },
+      { key: 'applicants', label: 'All Applicants', icon: <FiUsers />, content: 'Aplicants Component' },
+      { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: 'Shortlisted Resumes Component' },
+      { key: 'view', label: 'View Profile', icon: <FiUser />, content: 'View Profile Component' },
+    ],
     employee: [
       { key: 'employee-profile', label: 'Employee Profile', icon: <FiUser />, content: 'Employee Profile Component' },
-      { key: 'post', label: 'Post a New Job', icon: <FiBriefcase />, content: 'Post Job Component' },
-      { key: 'manage-jobs', label: 'Manage Jobs', icon: <FiBriefcase />, content: 'Manage Jobs Component' },
+      { key: 'post', label: 'Post a New Job', icon: <FiBriefcase />, content: <PostJob /> },
+      { key: 'manage-jobs', label: 'Manage Jobs', icon: <FiBriefcase />,  content: <JobList /> },
       { key: 'applicants', label: 'All Applicants', icon: <FiUsers />, content: 'Applicants Component' },
       { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: 'Shortlisted Component' },
       { key: 'view', label: 'View Profile', icon: <FiUser />, content: 'View Profile Component' },
