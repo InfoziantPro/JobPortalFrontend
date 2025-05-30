@@ -12,7 +12,7 @@ import CreateEmployee from '../pages/CreateEmployee';
 import EmployeeList from '../pages/EmployeeList';
 import PostJob from '../pages/PostJob';
 import ApproveRequests from '../pages/ApproveRequests';
-import About from '../pages/About';
+import About from './AboutMe';
 
 
 const Dashboard = ({ user, onLogout }) => {
@@ -124,7 +124,7 @@ const Dashboard = ({ user, onLogout }) => {
         `}
       >
         {/* Sidebar Header */}
-        <div className="p-5 border-b bg-gradient-to-br from-indigo-600 to-blue-600 shadow-md font-jost">
+        <div className="p-5 border-b bg-gradient-to-r from-teal-500 to-indigo-600 shadow-md font-jost">
           <div className="flex items-center justify-between">
             <h2 className="text-white text-lg font-bold">Your Dashboard</h2>
             <button

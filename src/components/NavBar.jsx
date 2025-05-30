@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaUser, FaBars } from 'react-icons/fa';
 import logo from '/src/assets/logos/Logo.png';
 import apiClient from '../api/apiClient';
@@ -7,9 +7,10 @@ import apiClient from '../api/apiClient';
 export default function Navbar({ user, onLogout }) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mainMenuOpen, setMainMenuOpen] = useState(false);
-  const navigate = useNavigate();
   const userMenuRef = useRef();
   const mainMenuRef = useRef();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogoutClick = async () => {
     try {
@@ -21,7 +22,6 @@ export default function Navbar({ user, onLogout }) {
     }
   };
 
-  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
@@ -31,69 +31,59 @@ export default function Navbar({ user, onLogout }) {
         setMainMenuOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Capitalize first letter of role
   const formatRole = (role) => {
     if (!role) return '';
     return role.charAt(0).toUpperCase() + role.slice(1);
   };
 
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <nav className="bg-white p-4 flex justify-between items-center border-b-2 border-gray-200 shadow-lg">
+    <nav className="bg-white p-4 flex justify-between items-center border-b-2 border-gray-200 shadow-lg font-jost">
       {/* Logo */}
       <div>
         <Link to="/" className="flex items-center space-x-2">
-          <img src={logo} alt="Company Logo" className="h-10 w-auto object-contain" />        
+          <img src={logo} alt="Company Logo" className="h-10 w-auto object-contain" />
         </Link>
       </div>
 
+      {/* Center Navigation - Hidden on mobile */}
+      <div className="hidden md:flex space-x-6 text-gray-700 text-md font-normal">
+        <Link to="/" className={`hover:text-indigo-800 ${isActive('/') ? 'font-bold text-indigo-800' : ''}`}>Home</Link>
+        <Link to="/about" className={`hover:text-indigo-800 ${isActive('/about') ? 'font-bold text-indigo-800' : ''}`}>About</Link>
+        <Link to="/jobs/all" className={`hover:text-indigo-800 ${isActive('/jobs/all') ? 'font-bold text-indigo-800' : ''}`}>Jobs</Link>
+        <Link to="/companies" className={`hover:text-indigo-800 ${isActive('/companies') ? 'font-bold text-indigo-800' : ''}`}>Companies</Link>
+        <Link to="/courses" className={`hover:text-indigo-800 ${isActive('/courses') ? 'font-bold text-indigo-800' : ''}`}>Courses</Link>
+      </div>
+
+      {/* Right Side - User Icon & Hamburger */}
       <div className="flex items-center space-x-4">
-        {/* Hamburger Menu - only shown if user is logged in */}
-        {user && (
-          <div className="relative" ref={mainMenuRef}>
-            <button
-              onClick={() => setMainMenuOpen((prev) => !prev)}
-              className="text-gray-800 text-2xl"
-            >
-              <FaBars />
-            </button>
-
-            {mainMenuOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-44 z-10 border">
-                <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
-                  <Link to="/" className="hover:bg-gray-100 px-2 py-1 rounded">Home</Link>
-
-                  {user.role === 'superadmin' && (
-                    <>
-                      <Link to="/approvals" className="hover:bg-gray-100 px-2 py-1 rounded">Approve Companies</Link>
-                      <Link to="/view-companies" className="hover:bg-gray-100 px-2 py-1 rounded">All Companies</Link>
-                    </>
-                  )}
-
-                  {(user.role === "employee" || user.role === "candidate" || user.role === "admin") && (
-                    <Link to="/jobs/all" className="hover:bg-gray-100 px-2 py-1 rounded">Job Listings</Link>
-                  )}
-
-                  {(user.role === "employee") && (
-                    <Link to="/postjob" className="hover:bg-gray-100 px-2 py-1 rounded">Post Job</Link>
-                  )}
-
-                  {user.role === "admin" && (
-                    <>
-                      <Link to="/create-employee" className="hover:bg-gray-100 px-2 py-1 rounded">Create Employee</Link>
-                      <Link to="/view-employees" className="hover:bg-gray-100 px-2 py-1 rounded">All Employees</Link>
-                    </>
-                  )}
-                </div>
+        {/* Hamburger - Visible only on mobile */}
+        <div className="md:hidden relative" ref={mainMenuRef}>
+          <button
+            onClick={() => setMainMenuOpen((prev) => !prev)}
+            className="text-gray-800 text-2xl"
+          >
+            <FaBars />
+          </button>
+          {mainMenuOpen && (
+            <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-44 z-10 border font-jost">
+              <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1 font-jost">
+                <Link to="/" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/') ? 'font-bold text-indigo-800' : ''}`}>Home</Link>
+                <Link to="/about" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/about') ? 'font-bold text-indigo-800' : ''}`}>About</Link>
+                <Link to="/jobs/all" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/jobs/all') ? 'font-bold text-indigo-800' : ''}`}>Jobs</Link>
+                <Link to="/companies" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/companies') ? 'font-bold text-indigo-800' : ''}`}>Companies</Link>
+                <Link to="/courses" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/courses') ? 'font-bold text-indigo-800' : ''}`}>Courses</Link>
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
 
-        {/* User Icon Menu */}
+        {/* User Profile Icon */}
         <div className="relative" ref={userMenuRef}>
           <button
             onClick={() => setUserMenuOpen((prev) => !prev)}
@@ -111,29 +101,24 @@ export default function Navbar({ user, onLogout }) {
                       <p className="font-medium text-gray-800">{user.name}</p>
                       <p className="text-xs text-gray-500">{formatRole(user.role)}</p>
                     </div>
-                    
-                    {/* Dashboard Option */}
                     <Link
                       to="/dashboard"
-                      className="hover:bg-gray-100 px-2 py-1 rounded"
+                      className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/dashboard') ? 'font-bold text-indigo-800' : ''}`}
                     >
                       Dashboard
                     </Link>
-
                     <hr className="my-1" />
-
                     <button
                       onClick={handleLogoutClick}
-                      className="text-red-600 hover:bg-red-100 px-2 py-1 rounded text-left"
+                      className="text-red-800 hover:bg-red-100 px-2 py-1 rounded text-left"
                     >
                       Logout
                     </button>
                   </>
-
                 ) : (
                   <>
-                    <Link to="/login" className="hover:bg-gray-100 px-2 py-1 rounded">Login</Link>
-                    <Link to="/register" className="hover:bg-gray-100 px-2 py-1 rounded">Register</Link>
+                    <Link to="/login" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/login') ? 'font-bold text-indigo-800' : ''}`}>Login</Link>
+                    <Link to="/register" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/register') ? 'font-bold text-indigo-800' : ''}`}>Register</Link>
                   </>
                 )}
               </div>
