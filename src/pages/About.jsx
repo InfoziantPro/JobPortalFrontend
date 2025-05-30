@@ -1,4 +1,3 @@
-import React from 'react';
 import CountUp from 'react-countup';
 import client1 from "../assets/clients/1-1.png";
 import client2 from "../assets/clients/1-2.png";
