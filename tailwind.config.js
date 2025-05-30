@@ -5,6 +5,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Jost', 'sans-serif'], 
+        jost: ['Jost', 'sans-serif'], 
+      },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(100%)' },

@@ -17,6 +17,8 @@ import VerifyFailed from './pages/VerifyFailed';
 import CreateEmployee from './pages/CreateEmployee';
 import EmployeeList from './pages/EmployeeList';
 import Companies from './pages/Companies';
+import AboutMe from './pages/AboutMe';
+import About from './pages/About';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -39,7 +41,6 @@ function App() {
     setUser(null);
   };
 
-  // after login (in your Login page), you must call setUser with user data and save to localStorage!
 
   return (
     <Router>
@@ -55,6 +56,8 @@ function App() {
           <Route path="/register/candidate" element={<Register role="candidate" />} />
           <Route path="/register/company" element={<Register role="admin" />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/aboutMe" element={<AboutMe />} />
+          <Route path="/about" element={<About />} />
           
           <Route
             path="/jobs/all"
@@ -66,13 +69,14 @@ function App() {
           />
           
           <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute user={user}>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+              path="/dashboard"
+              element={
+                <ProtectedRoute user={user}>
+                  <Dashboard user={user} onLogout={handleLogout} />
+                </ProtectedRoute>
+              }
+            />
+
           <Route
             path="/postjob"
             element={
