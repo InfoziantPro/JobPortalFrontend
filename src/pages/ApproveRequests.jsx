@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import apiClient from '../api/apiClient';
 
 const ApproveRequests = () => {
   const [pendingCompanies, setPendingCompanies] = useState([]);
@@ -10,7 +11,7 @@ const ApproveRequests = () => {
     const fetchPendingCompanies = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('/api/pending/companies', {
+        const res = await apiClient.get('/pending/companies', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPendingCompanies(res.data.pendingCompanies);

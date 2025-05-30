@@ -1,3 +1,5 @@
+import logo from '/src/assets/logos/Logo.png';
+
 const Footer = () => {
   return (
     <footer className="bg-[#18181B] text-white py-16 px-6 md:px-20">
@@ -6,7 +8,7 @@ const Footer = () => {
 
         {/* Left: Branding + Contact */}
         <div className="w-full md:w-1/3 max-w-sm">
-          <img src="/images/logo.png" alt="Infoziant Logo" className="mb-6 w-24" />
+          <img src={logo} alt="Infoziant Logo" className="mb-6 w-56" />
           <p className="text-lg font-semibold mb-2">Contact Us</p>
           <p className="text-sm leading-relaxed text-gray-300">
             1 (314) 732 0300<br />
