@@ -231,7 +231,7 @@ const Home = () => {
   }}
 >
   {/* Responsive height using padding or min-height */}
-  <div className="min-h-[900px]  md:min-h-[700px] lg:min-h-[890px] mb-32 flex flex-col items-center justify-center px-4">
+  <div className="min-h-[850px]  md:min-h-[700px] lg:min-h-[890px] mb-32 flex flex-col items-center justify-center px-4">
     
   </div>
 
@@ -378,34 +378,65 @@ const Home = () => {
 
           {/* Floating Bubbles */}
           <motion.div
-            className="relative w-full max-w-6xl h-[320px]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 1 }}
-          >
-            {[
-              { text: "Boost Your Skills", x: "-7.5%", y: "80%" },
-              { text: "Elevate Your Profile", x: "19%", y: "45%" },
-              { text: "AI - Powered Job Matching", x: "45.5%", y: "58%" },
-              { text: "Mentor Connect", x: "70%", y: "92%" },
-              { text: "Hiring Reimagined", x: "95.5%", y: "46%" },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                className="absolute flex flex-col items-center justify-center w-[110px] h-[110px] rounded-full bg-gray-200 text-black text-center text-xs shadow-xl border-4 border-white hover:bg-purple-600 hover:text-white transition duration-500"
-                style={{
-                  left: item.x,
-                  top: item.y,
-                  transform: "translate(-50%, -50%)",
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
-              >
-                <p className="px-3 font-semibold">{item.text}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+    className="absolute inset-0"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1.2, duration: 1 }}
+  >
+    {[
+      {
+        text: "Boost Your Skills",
+        positions: {
+          base: ["7%", "74%"],
+          md: ["90%", "90%"],
+        },
+      },
+      {
+        text: "Elevate Your Profile",
+        positions: {
+          base: ["27%", "60.8%"],
+          md: ["35%", "40%"],
+        },
+      },
+      {
+        text: "AI - Powered Job Matching",
+        positions: {
+          base: ["46.7%", "65.5%"],
+          md: ["50%", "50%"],
+        },
+      },
+      {
+        text: "Mentor Connect",
+        positions: {
+          base: ["65.5%", "78.5%"],
+          md: ["65%", "85%"],
+        },
+      },
+      {
+        text: "Hiring Reimagined",
+        positions: {
+          base: ["84.7%", "60.8%"],
+          md: ["83%", "40%"],
+        },
+      },
+    ].map((item, index) => (
+     <motion.div
+  key={index}
+  className="absolute hidden md:flex flex-col items-center justify-center w-[100px] h-[100px] rounded-full bg-gray-200 text-black text-center text-xs shadow-xl border-4 border-white hover:bg-purple-600 hover:text-white transition duration-500"
+  style={{
+    left: item.positions.base[0],
+    top: item.positions.base[1],
+    transform: "translate(-50%, -50%)",
+  }}
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
+>
+  <p className="px-3 font-semibold">{item.text}</p>
+</motion.div>
+
+    ))}
+  </motion.div>
         </div>
       </div>
 
@@ -842,7 +873,7 @@ const Home = () => {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-28 px-4 bg-white text-black relative">
+        <section className="py-28 px-10 bg-white text-black relative">
           {" "}
           {/* Increased top padding */}
           <div className="text-center mb-12">
@@ -850,8 +881,8 @@ const Home = () => {
               Testimonials From Our Users
             </h2>
           </div>
-          <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 pt-16 rounded-3xl text-center shadow-md overflow-hidden min-h-[350px]">
-            {/* Add pt-16 to push content down; min-h to stabilize height */}
+         <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 pt-16 rounded-3xl text-center shadow-md overflow-visible min-h-[350px]">
+  {/* Add pt-16 to push content down; min-h to stabilize height */}
 
             {/* Floating Avatar */}
             <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 z-10">
