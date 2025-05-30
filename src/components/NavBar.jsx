@@ -105,7 +105,17 @@ export default function Navbar({ user, onLogout }) {
                       <p className="font-medium text-gray-800">{user.name}</p>
                       <p className="text-xs text-gray-500">{formatRole(user.role)}</p>
                     </div>
+                    
+                    {/* Dashboard Option */}
+                    <Link
+                      to="/dashboard"
+                      className="hover:bg-gray-100 px-2 py-1 rounded"
+                    >
+                      Dashboard
+                    </Link>
+
                     <hr className="my-1" />
+
                     <button
                       onClick={handleLogoutClick}
                       className="text-red-600 hover:bg-red-100 px-2 py-1 rounded text-left"
@@ -113,6 +123,7 @@ export default function Navbar({ user, onLogout }) {
                       Logout
                     </button>
                   </>
+
                 ) : (
                   <>
                     <Link to="/login" className="hover:bg-gray-100 px-2 py-1 rounded">Login</Link>
