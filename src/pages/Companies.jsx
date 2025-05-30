@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import apiClient from '../api/apiClient';
 
 export default function ApprovedAdmins() {
   const [admins, setAdmins] = useState([]);
@@ -16,7 +17,7 @@ export default function ApprovedAdmins() {
 
   const fetchAdmins = async () => {
     try {
-      const res = await axios.get('/api/admins', {
+      const res = await apiClient.get('/admins', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAdmins(res.data.admins);
