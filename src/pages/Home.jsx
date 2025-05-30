@@ -37,10 +37,47 @@ const Home = () => {
 
   const [visible, setVisible] = useState(false);
 
+const testimonials = [
+    {
+      avatar: avatar1,
+      name: "Arun Pandi",
+      role: "Lead Web Developer",
+      title: "Great quality!",
+      message:
+        "VTA has been a game-changer for my career. The AI-powered job recommendations helped me land my dream job, and the skill assessment guided me in upskilling effectively.",
+    },
+    {
+      avatar: avatar2,
+      name: "Shruthi Raj",
+      role: "UI/UX Designer",
+      title: "User-friendly & helpful!",
+      message:
+        "The VTA platform makes job searching so simple and efficient. I was able to get instant feedback on my portfolio through the mentorship system.",
+    },
+    {
+      avatar: avatar3,
+      name: "Praveen Kumar",
+      role: "Data Analyst",
+      title: "Insightful features!",
+      message:
+        "I loved how VTA tailored learning paths for me. The analytics were especially helpful in knowing what skills I should improve on.",
+    },
+  ];
+
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 10); // Slight delay
     return () => clearTimeout(timer);
   }, []);
+
+    const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
 
   const sectionVariants = [
     {
@@ -740,60 +777,64 @@ const Home = () => {
 
 
         {/* Testimonials Section */}
-        <section className="py-20 px-4 bg-white text-black relative">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-semibold">
-              Testimonials From Our Users
-            </h2>
-          </div>
+       <section className="py-28 px-4 bg-white text-black relative"> {/* Increased top padding */}
+  <div className="text-center mb-12">
+    <h2 className="text-2xl font-semibold">Testimonials From Our Users</h2>
+  </div>
 
-          <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 rounded-3xl text-center shadow-md">
-            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
-              <img
-                src={avatar1}
-                alt="User"
-                className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-              />
-            </div>
-            <div className="mt-16">
-              <h3 className="font-semibold text-lg mb-2">Great quality!</h3>
-              <p className="text-gray-700 text-sm">
-                VTA has been a game-changer for my career. The AI-powered job
-                recommendations helped me land my dream job, and the skill
-                assessment guided me in upskilling effectively. I love how VTA
-                brings together job searching, learning, and mentorship on one
-                platform. It’s my go-to career resource.
-              </p>
-              <div className="mt-4 text-sm text-gray-600">
-                <p className="font-medium">Arun Pandi</p>
-                <p>Lead Web Developer</p>
-              </div>
-            </div>
-            {/* Pagination dots */}
-            <div className="mt-6 flex justify-center gap-2">
-              <span className="w-3 h-3 bg-black rounded-full inline-block"></span>
-              <span className="w-3 h-3 bg-gray-300 rounded-full inline-block"></span>
-              <span className="w-3 h-3 bg-gray-300 rounded-full inline-block"></span>
-            </div>
-          </div>
+  <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 pt-16 rounded-3xl text-center shadow-md overflow-hidden min-h-[350px]"> 
+    {/* Add pt-16 to push content down; min-h to stabilize height */}
+    
+    {/* Floating Avatar */}
+    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 z-10">
+      <img
+        src={testimonials[index].avatar}
+        alt="User"
+        className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+      />
+    </div>
 
-          {/* Floating avatars */}
-          <div className="absolute inset-0 pointer-events-none">
-            {[
-              { src: avatar2, className: "top-1/4 left-10" },
-              { src: avatar3, className: "top-2/3 left-20" },
-              { src: avatar4, className: "top-1/2 right-10" },
-              { src: avatar5, className: "bottom-20 right-20" },
-            ].map((avt, idx) => (
-              <img
-                key={idx}
-                src={avt.src}
-                alt={`Avatar ${idx}`}
-                className={`w-10 h-10 rounded-full shadow-lg absolute ${avt.className}`}
-              />
-            ))}
-          </div>
-        </section>
+    {/* Testimonial Content */}
+    <div className="transition-all duration-700 ease-in-out">
+      <h3 className="font-semibold text-lg mb-2">Great quality!</h3>
+      <p className="text-gray-700 text-sm">{testimonials[index].message}</p>
+      <div className="mt-4 text-sm text-gray-600">
+        <p className="font-medium">{testimonials[index].name}</p>
+        <p>{testimonials[index].title}</p>
+      </div>
+    </div>
+
+    {/* Pagination dots */}
+    <div className="mt-6 flex justify-center gap-2">
+      {testimonials.map((_, i) => (
+        <span
+          key={i}
+          className={`w-3 h-3 rounded-full inline-block ${
+            i === index ? "bg-black" : "bg-gray-300"
+          }`}
+        ></span>
+      ))}
+    </div>
+  </div>
+
+  {/* Floating avatars around the card */}
+  <div className="absolute inset-0 pointer-events-none">
+    {[
+      { src: avatar2, className: "top-1/4 left-10" },
+      { src: avatar3, className: "top-2/3 left-20" },
+      { src: avatar4, className: "top-1/2 right-10" },
+      { src: avatar5, className: "bottom-20 right-20" },
+    ].map((avt, idx) => (
+      <img
+        key={idx}
+        src={avt.src}
+        alt={`Avatar ${idx}`}
+        className={`w-10 h-10 rounded-full shadow-lg absolute ${avt.className}`}
+      />
+    ))}
+  </div>
+</section>
+
       </div>
     </div>
   );
