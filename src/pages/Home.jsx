@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -34,8 +33,47 @@ import avatar5 from "../assets/avatars/testi-img1.png";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
-const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), 10); // Slight delay
+    return () => clearTimeout(timer);
+  }, []);
+
+  const sectionVariants = [
+    {
+      image: {
+        initial: { opacity: 0, x: -100 },
+        animate: { opacity: 1, x: 0 },
+      },
+      text: {
+        initial: { opacity: 0, y: 50 },
+        animate: { opacity: 1, y: 0 },
+      },
+    },
+    {
+      image: {
+        initial: { opacity: 0, scale: 0.8 },
+        animate: { opacity: 1, scale: 1 },
+      },
+      text: {
+        initial: { opacity: 0, x: 100 },
+        animate: { opacity: 1, x: 0 },
+      },
+    },
+    {
+      image: {
+        initial: { opacity: 0, y: 50 },
+        animate: { opacity: 1, y: 0 },
+      },
+      text: {
+        initial: { opacity: 0, scale: 0.8 },
+        animate: { opacity: 1, scale: 1 },
+      },
+    },
+  ];
 
   const sections = [
     {
@@ -72,6 +110,81 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [activeCategory, setActiveCategory] = useState("All");
   const categories = ["All", "Trending", "Design", "Marketing", "Health"];
+
+  const jobs = [
+    {
+      id: 1,
+      title: "Software Engineer (Android), Libraries",
+      company: "Segment",
+      location: "London, UK",
+      time: "11 hours ago",
+      salary: "$35k - $45k",
+      type: "Full Time",
+      level: "Private",
+      urgency: "Urgent",
+      logo: "src/assets/company-logo/1-1.png",
+    },
+    {
+      id: 2,
+      title: "UI/UX Designer",
+      company: "Dribble",
+      location: "Remote",
+      time: "1 day ago",
+      salary: "$25k - $35k",
+      type: "Part Time",
+      level: "Startup",
+      urgency: "Hiring Fast",
+      logo: "src/assets/company-logo/1-6.png",
+    },
+    {
+      id: 3,
+      title: "Product Manager",
+      company: "Airbnb",
+      location: "San Francisco, CA",
+      time: "3 days ago",
+      salary: "$60k - $75k",
+      type: "Full Time",
+      level: "Public",
+      urgency: "Urgent",
+      logo: "src/assets/company-logo/1-2.png",
+    },
+    {
+      id: 4,
+      title: "Data Scientist",
+      company: "Spotify",
+      location: "Berlin, Germany",
+      time: "5 hours ago",
+      salary: "$50k - $65k",
+      type: "Remote",
+      level: "Private",
+      urgency: "Actively Hiring",
+      logo: "src/assets/company-logo/1-3.png",
+    },
+    {
+      id: 5,
+      title: "Frontend Developer",
+      company: "Google",
+      location: "New York, NY",
+      time: "10 hours ago",
+      salary: "$45k - $55k",
+      type: "Contract",
+      level: "Public",
+      urgency: "New",
+      logo: "src/assets/company-logo/1-4.png",
+    },
+   {
+      id: 6,
+      title: "CyberSecurity Analyst",
+      company: "Airbnb",
+      location: "San Francisco, CA",
+      time: "3 days ago",
+      salary: "$60k - $75k",
+      type: "Full Time",
+      level: "Public",
+      urgency: "Urgent",
+      logo: "src/assets/company-logo/1-7.png",
+    },
+  ];
 
   return (
     <div className="bg-white">
@@ -140,7 +253,7 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
             </div>
 
             {/* Divider */}
-            <div className="h-6 border-l border-gray-300"></div>
+            <div className="h-12 border-l border-gray-300"></div>
             {/* Location Input */}
             <div className="flex items-center space-x-2 flex-1 min-w-[150px]">
               <img
@@ -155,60 +268,67 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
               />
             </div>
 
-           {/* Divider */}
-<div className="h-6 border-l border-gray-300"></div>
+            {/* Divider */}
+            <div className="h-12 border-l border-gray-300"></div>
 
-{/* Custom Dropdown */}
-<div className="relative min-w-[160px]">
-  <div
-    onClick={() => setDropdownOpen(!dropdownOpen)}
-    className="flex items-center space-x-2 cursor-pointer text-sm text-gray-500 hover:text-violet-500"
-  >
-    <img
-      src="https://raw.githubusercontent.com/feathericons/feather/master/icons/box.svg"
-      alt="Category"
-      className="w-5 h-5 opacity-60"
-    />
-    <span>{selectedCategory}</span>
-    <svg
-      className="w-4 h-4 text-gray-500"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
+            {/* Custom Dropdown */}
+            {/* Custom Dropdown */}
+            <div className="relative min-w-[160px] w-full max-w-[180px]">
+              <div
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center justify-between w-full space-x-2 cursor-pointer text-sm text-gray-500 hover:text-violet-500"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/feathericons/feather/master/icons/box.svg"
+                  alt="Category"
+                  className="w-5 h-5 opacity-60"
+                />
+                <span className="overflow-hidden whitespace-nowrap text-ellipsis block max-w-[100px]">
+                  {selectedCategory}
+                </span>
+                <svg
+                  className="w-4 h-4 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
 
-  {/* Dropdown Menu */}
-  {dropdownOpen && (
-    <div className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg">
-      {[
-        "All Categories",
-        "Accounting / Finance",
-        "Automotive Jobs",
-        "Customer",
-        "Design",
-        "Development",
-        "Health and Care",
-        "Marketing",
-        "Project Management",
-      ].map((category) => (
-        <div
-          key={category}
-          onClick={() => {
-            setSelectedCategory(category);
-            setDropdownOpen(false);
-          }}
-          className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-500 hover:bg-purple-300 cursor-pointer"
-        >
-       
-          <span>{category}</span>
-        </div>
-      ))}
-    </div>
-  )}
-</div>
+              {/* Dropdown Menu */}
+              {dropdownOpen && (
+                <div className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg">
+                  {[
+                    "All Categories",
+                    "Accounting / Finance",
+                    "Automotive Jobs",
+                    "Customer",
+                    "Design",
+                    "Development",
+                    "Health and Care",
+                    "Marketing",
+                    "Project Management",
+                  ].map((category) => (
+                    <div
+                      key={category}
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setDropdownOpen(false);
+                      }}
+                      className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-500 hover:bg-purple-300 cursor-pointer"
+                    >
+                      <span>{category}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* Button */}
             <button className="ml-4 flex items-center space-x-2 rounded-full px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-medium hover:scale-105 transition-transform">
@@ -249,7 +369,6 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
         </div>
       </div>
 
-
       {/* 👇 Separate Scroll Section Starts Here — AFTER full background */}
       <div className="w-full mb-10 -mt-24 bg-white  overflow-hidden">
         <div className="flex gap-20 px-4 whitespace-nowrap animate-marquee">
@@ -277,9 +396,13 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-center gap-12 px-8 py-16 bg-violet-950 text-white transition-all duration-700 ease-in-out">
-        {/* Left Image or Graphic */}
-        <div className="w-full md:w-1/2">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-12 px-8 py-16 bg-violet-950 text-white">
+        {/* Left Image */}
+        <div
+          className={`w-full md:w-1/2 transform transition-all duration-1000 ease-in-out ${
+            visible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
+          }`}
+        >
           <img
             src={unbiasedGif}
             alt="Career Services"
@@ -288,7 +411,11 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
         </div>
 
         {/* Right Content */}
-        <div className="w-full md:w-1/2">
+        <div
+          className={`w-full md:w-1/2 transform transition-all duration-1000 ease-in-out ${
+            visible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+          }`}
+        >
           <h2 className="text-4xl font-semibold mb-8 transition-opacity duration-700 ease-in-out hover:text-purple-300">
             Unbiased Services to Unlock Your Career Potential
           </h2>
@@ -354,9 +481,9 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
               {/* Image */}
               <motion.div
                 className="flex-1"
-                initial={{ opacity: 0, x: sec.reverse ? 100 : -100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                initial={sectionVariants[idx].image.initial}
+                whileInView={sectionVariants[idx].image.animate}
+                transition={{ duration: 0.7, delay: 0.2 }}
                 viewport={{ once: true }}
               >
                 <img
@@ -369,9 +496,9 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
               {/* Text Content */}
               <motion.div
                 className="flex-1"
-                initial={{ opacity: 0, x: sec.reverse ? -100 : 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                initial={sectionVariants[idx].text.initial}
+                whileInView={sectionVariants[idx].text.animate}
+                transition={{ duration: 0.7, delay: 0.4 }}
                 viewport={{ once: true }}
               >
                 <h2 className="text-3xl md:text-4xl font-bold text-[#2a0052] mb-6">
@@ -429,9 +556,7 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
 
       <div className="bg-white w-full text-black py-16 px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold">
-            Most Popular Jobs
-          </h2>
+          <h2 className="text-lg md:text-4xl font-sans">Most Popular Jobs</h2>
           <p className="text-sm text-gray-500 mt-2">
             Know your worth and find the job that qualify your life
           </p>
@@ -442,9 +567,9 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
               <button
                 key={idx}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full transition font-medium ${
+                className={`px-4 py-2 rounded-lg transition font-medium ${
                   activeCategory === cat
-                    ? "bg-purple-600 text-white"
+                    ? "bg-purple-800 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -456,125 +581,163 @@ const [dropdownOpen, setDropdownOpen] = useState(false);
 
         {/* Job Listings Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-          {[1, 2, 3, 4, 5].map((_, i) => (
+          {jobs.map((job) => (
             <div
-              key={i}
+              key={job.id}
               className="border border-gray-200 rounded-lg p-6 flex flex-col gap-3 shadow-sm hover:shadow-md transition"
             >
               <div className="flex items-center gap-4">
                 <img
-                  src="/logo-placeholder.png"
-                  alt="Logo"
+                  src={job.logo}
+                  alt={`${job.company} logo`}
                   className="w-10 h-10 rounded-full"
                 />
                 <div>
-                  <h3 className="text-lg font-semibold">
-                    Software Engineer (Android), Libraries
-                  </h3>
-                  <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
-                    <span>Segment</span>
-                    <span>•</span>
-                    <span>London, UK</span>
-                    <span>•</span>
-                    <span>11 hours ago</span>
-                    <span>•</span>
-                    <span>$35k - $45k</span>
-                  </div>
+                  <h3 className="text-lg font-semibold">{job.title}</h3>
+                 <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-1">
+  {/* Company */}
+  <div className="flex items-center gap-1">
+    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M4 4H20V20H4V4Z" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 9H20" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9 20V9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15 20V14" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+    <span>{job.company}</span>
+  </div>
+
+  {/* Location */}
+  <div className="flex items-center gap-1">
+    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M12 12V21" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+    <span>{job.location}</span>
+  </div>
+
+  {/* Time */}
+  <div className="flex items-center gap-1">
+    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 6V12L16 14" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+    <span>{job.time}</span>
+  </div>
+
+  {/* Salary */}
+  <div className="flex items-center gap-1">
+    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 1V23" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M17 5H9.5C7.015 5 5 7.015 5 9.5C5 11.985 7.015 14 9.5 14H14.5C16.985 14 19 16.015 19 18.5C19 20.985 16.985 23 14.5 23H7" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+    <span>{job.salary}</span>
+  </div>
+</div>
+
                 </div>
               </div>
 
               {/* Tags */}
               <div className="flex gap-2 flex-wrap mt-2">
                 <span className="px-3 py-1 rounded-full text-sm bg-purple-100 text-purple-700">
-                  Full Time
+                  {job.type}
                 </span>
                 <span className="px-3 py-1 rounded-full text-sm bg-green-100 text-green-700">
-                  Private
+                  {job.level}
                 </span>
                 <span className="px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-700">
-                  Urgent
+                  {job.urgency}
                 </span>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+
+
       <div className="animate-fade-in-up">
-        {/* Browse by Category */}
         <section className="bg-gradient-to-b from-purple-900 to-purple-950 text-white py-16 px-6">
-          <div className="max-w-7xl mx-auto">
-            {/* Centered title at the top */}
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold">Browse by Category</h2>
-              <p className="text-sm text-purple-200 mt-2">
-                2020 jobs live • 293 added today
-              </p>
-            </div>
+  <div className="max-w-7xl mx-auto">
+    {/* Centered title at the top */}
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold">Browse by Category</h2>
+      <p className="text-sm text-purple-200 mt-2">
+        2020 jobs live • 293 added today
+      </p>
+    </div>
 
-            {/* Grid of category cards */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {[
-                {
-                  title: "Marketing",
-                  count: 86,
-                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/marketing.png",
-                },
-                {
-                  title: "Design",
-                  count: 43,
-                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/design.png",
-                },
-                {
-                  title: "Development",
-                  count: 12,
-                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/source-code.png",
-                },
-                {
-                  title: "Customer Service",
-                  count: 72,
-                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/customer-support.png",
-                },
-                {
-                  title: "Health and Care",
-                  count: 25,
-                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/heart-health.png",
-                },
-                {
-                  title: "Automotive Jobs",
-                  count: 92,
-                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/car.png",
-                },
-              ].map((cat, idx) => (
-                <div
-                  key={idx}
-                  className="bg-gradient-to-tr from-white to-purple-100 text-black rounded-2xl p-6 h-48 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer"
-                >
-                  <div className="mb-4 w-14 h-14 rounded-full bg-purple-200 flex items-center justify-center">
-                    <img
-                      src={cat.img}
-                      alt={`${cat.title} icon`}
-                      className="w-7 h-7 filter grayscale"
-                    />
-                  </div>
-                  <h3 className="font-semibold text-base">{cat.title}</h3>
-                  <p className="text-xs text-gray-600 mt-1">
-                    ({cat.count} open positions)
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Optional bottom link */}
-            <div className="text-center mt-10">
-              <a
-                href="#"
-                className="text-sm underline hover:text-white transition"
-              >
-                See all categories ↗
-              </a>
-            </div>
+    {/* Grid of category cards */}
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      {[
+        {
+          title: "Marketing",
+          count: 86,
+          img: "https://img.icons8.com/fluency-systems-regular/48/000000/marketing.png",
+        },
+        {
+          title: "Design",
+          count: 43,
+          img: "https://img.icons8.com/fluency-systems-regular/48/000000/design.png",
+        },
+        {
+          title: "Development",
+          count: 12,
+          img: "https://img.icons8.com/fluency-systems-regular/48/000000/source-code.png",
+        },
+        {
+          title: "Customer Service",
+          count: 72,
+          img: "https://img.icons8.com/fluency-systems-regular/48/000000/customer-support.png",
+        },
+        {
+          title: "Health and Care",
+          count: 25,
+          img: "https://img.icons8.com/fluency-systems-regular/48/000000/heart-health.png",
+        },
+        {
+          title: "Automotive Jobs",
+          count: 92,
+          img: "https://img.icons8.com/fluency-systems-regular/48/000000/car.png",
+        },
+      ].map((cat, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: idx * 0.1 }}
+          className="bg-gradient-to-tr from-white to-purple-100 text-black rounded-2xl p-6 h-48 flex flex-col items-center justify-center shadow-lg transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group cursor-pointer"
+        >
+          <div className="mb-4 w-14 h-14 rounded-full bg-purple-200 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+            <img
+              src={cat.img}
+              alt={`${cat.title} icon`}
+              className="w-7 h-7 filter grayscale group-hover:grayscale-0 transition duration-300"
+            />
           </div>
-        </section>
+          <h3 className="font-semibold text-base group-hover:text-purple-700 transition duration-300">
+            {cat.title}
+          </h3>
+          <p className="text-xs text-gray-600 mt-1 group-hover:text-gray-800 transition duration-300">
+            ({cat.count} open positions)
+          </p>
+        </motion.div>
+      ))}
+    </div>
+
+    {/* Optional bottom link */}
+    <div className="text-center mt-10">
+      <a
+        href="#"
+        className="text-sm underline hover:text-white transition"
+      >
+        See all categories ↗
+      </a>
+    </div>
+  </div>
+</section>
+
 
         {/* Testimonials Section */}
         <section className="py-20 px-4 bg-white text-black relative">
