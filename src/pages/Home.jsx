@@ -37,7 +37,7 @@ const Home = () => {
 
   const [visible, setVisible] = useState(false);
 
-const testimonials = [
+  const testimonials = [
     {
       avatar: avatar1,
       name: "Arun Pandi",
@@ -69,7 +69,7 @@ const testimonials = [
     return () => clearTimeout(timer);
   }, []);
 
-    const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -77,7 +77,6 @@ const testimonials = [
     }, 4000);
     return () => clearInterval(interval);
   }, []);
-
 
   const sectionVariants = [
     {
@@ -209,7 +208,7 @@ const testimonials = [
       urgency: "New",
       logo: "src/assets/company-logo/1-4.png",
     },
-   {
+    {
       id: 6,
       title: "CyberSecurity Analyst",
       company: "Airbnb",
@@ -225,17 +224,16 @@ const testimonials = [
 
   return (
     <div className="bg-white">
-      <div className="relative w-full overflow-hidden">
-        {/* Shifted image */}
-        <img
-          src={homeBanner}
-          alt="Banner"
-          className="w-full object-cover"
-          style={{
-            position: "relative",
-            top: "-150px", // Adjust this value to "crop" more or less of the top
-          }}
-        />
+      <div
+  className="relative w-full bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: `url(${homeBanner})`,
+  }}
+>
+  {/* Responsive height using padding or min-height */}
+  <div className="min-h-[650px] md:min-h-[700px] lg:min-h-[890px] mb-32 flex flex-col items-center justify-center px-4">
+    
+  </div>
 
         {/* Content on top of image */}
         <div className="absolute inset-0 flex flex-col items-center mt-14 text-white">
@@ -631,46 +629,111 @@ const testimonials = [
                 />
                 <div>
                   <h3 className="text-lg font-semibold">{job.title}</h3>
-                 <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-1">
-  {/* Company */}
-  <div className="flex items-center gap-1">
-    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M4 4H20V20H4V4Z" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M4 9H20" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M9 20V9" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15 20V14" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-    <span>{job.company}</span>
-  </div>
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-1">
+                    {/* Company */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="w-4 h-4 opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path
+                          d="M4 4H20V20H4V4Z"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M4 9H20"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M9 20V9"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M15 20V14"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>{job.company}</span>
+                    </div>
 
-  {/* Location */}
-  <div className="flex items-center gap-1">
-    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12 12V21" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-    <span>{job.location}</span>
-  </div>
+                    {/* Location */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="w-4 h-4 opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path
+                          d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M12 12V21"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>{job.location}</span>
+                    </div>
 
-  {/* Time */}
-  <div className="flex items-center gap-1">
-    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M12 6V12L16 14" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-    <span>{job.time}</span>
-  </div>
+                    {/* Time */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="w-4 h-4 opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M12 6V12L16 14"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>{job.time}</span>
+                    </div>
 
-  {/* Salary */}
-  <div className="flex items-center gap-1">
-    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 1V23" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M17 5H9.5C7.015 5 5 7.015 5 9.5C5 11.985 7.015 14 9.5 14H14.5C16.985 14 19 16.015 19 18.5C19 20.985 16.985 23 14.5 23H7" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-    <span>{job.salary}</span>
-  </div>
-</div>
-
+                    {/* Salary */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="w-4 h-4 opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path
+                          d="M12 1V23"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M17 5H9.5C7.015 5 5 7.015 5 9.5C5 11.985 7.015 14 9.5 14H14.5C16.985 14 19 16.015 19 18.5C19 20.985 16.985 23 14.5 23H7"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>{job.salary}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -691,150 +754,150 @@ const testimonials = [
         </div>
       </div>
 
-
-
       <div className="animate-fade-in-up">
         <section className="bg-gradient-to-b from-purple-900 to-purple-950 text-white py-16 px-6">
-  <div className="max-w-7xl mx-auto">
-    {/* Centered title at the top */}
-    <div className="text-center mb-12">
-      <h2 className="text-3xl font-bold">Browse by Category</h2>
-      <p className="text-sm text-purple-200 mt-2">
-        2020 jobs live • 293 added today
-      </p>
-    </div>
+          <div className="max-w-7xl mx-auto">
+            {/* Centered title at the top */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold">Browse by Category</h2>
+              <p className="text-sm text-purple-200 mt-2">
+                2020 jobs live • 293 added today
+              </p>
+            </div>
 
-    {/* Grid of category cards */}
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-      {[
-        {
-          title: "Marketing",
-          count: 86,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/marketing.png",
-        },
-        {
-          title: "Design",
-          count: 43,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/design.png",
-        },
-        {
-          title: "Development",
-          count: 12,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/source-code.png",
-        },
-        {
-          title: "Customer Service",
-          count: 72,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/customer-support.png",
-        },
-        {
-          title: "Health and Care",
-          count: 25,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/heart-health.png",
-        },
-        {
-          title: "Automotive Jobs",
-          count: 92,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/car.png",
-        },
-      ].map((cat, idx) => (
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: idx * 0.1 }}
-          className="bg-gradient-to-tr from-white to-purple-100 text-black rounded-2xl p-6 h-48 flex flex-col items-center justify-center shadow-lg transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group cursor-pointer"
-        >
-          <div className="mb-4 w-14 h-14 rounded-full bg-purple-200 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-            <img
-              src={cat.img}
-              alt={`${cat.title} icon`}
-              className="w-7 h-7 filter grayscale group-hover:grayscale-0 transition duration-300"
-            />
+            {/* Grid of category cards */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              {[
+                {
+                  title: "Marketing",
+                  count: 86,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/marketing.png",
+                },
+                {
+                  title: "Design",
+                  count: 43,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/design.png",
+                },
+                {
+                  title: "Development",
+                  count: 12,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/source-code.png",
+                },
+                {
+                  title: "Customer Service",
+                  count: 72,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/customer-support.png",
+                },
+                {
+                  title: "Health and Care",
+                  count: 25,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/heart-health.png",
+                },
+                {
+                  title: "Automotive Jobs",
+                  count: 92,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/car.png",
+                },
+              ].map((cat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                  className="bg-gradient-to-tr from-white to-purple-100 text-black rounded-2xl p-6 h-48 flex flex-col items-center justify-center shadow-lg transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group cursor-pointer"
+                >
+                  <div className="mb-4 w-14 h-14 rounded-full bg-purple-200 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+                    <img
+                      src={cat.img}
+                      alt={`${cat.title} icon`}
+                      className="w-7 h-7 filter grayscale group-hover:grayscale-0 transition duration-300"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-base group-hover:text-purple-700 transition duration-300">
+                    {cat.title}
+                  </h3>
+                  <p className="text-xs text-gray-600 mt-1 group-hover:text-gray-800 transition duration-300">
+                    ({cat.count} open positions)
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Optional bottom link */}
+            <div className="text-center mt-10">
+              <a
+                href="#"
+                className="text-sm underline hover:text-white transition"
+              >
+                See all categories ↗
+              </a>
+            </div>
           </div>
-          <h3 className="font-semibold text-base group-hover:text-purple-700 transition duration-300">
-            {cat.title}
-          </h3>
-          <p className="text-xs text-gray-600 mt-1 group-hover:text-gray-800 transition duration-300">
-            ({cat.count} open positions)
-          </p>
-        </motion.div>
-      ))}
-    </div>
-
-    {/* Optional bottom link */}
-    <div className="text-center mt-10">
-      <a
-        href="#"
-        className="text-sm underline hover:text-white transition"
-      >
-        See all categories ↗
-      </a>
-    </div>
-  </div>
-</section>
-
+        </section>
 
         {/* Testimonials Section */}
-       <section className="py-28 px-4 bg-white text-black relative"> {/* Increased top padding */}
-  <div className="text-center mb-12">
-    <h2 className="text-2xl font-semibold">Testimonials From Our Users</h2>
-  </div>
+        <section className="py-28 px-4 bg-white text-black relative">
+          {" "}
+          {/* Increased top padding */}
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-semibold">
+              Testimonials From Our Users
+            </h2>
+          </div>
+          <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 pt-16 rounded-3xl text-center shadow-md overflow-hidden min-h-[350px]">
+            {/* Add pt-16 to push content down; min-h to stabilize height */}
 
-  <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 pt-16 rounded-3xl text-center shadow-md overflow-hidden min-h-[350px]"> 
-    {/* Add pt-16 to push content down; min-h to stabilize height */}
-    
-    {/* Floating Avatar */}
-    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 z-10">
-      <img
-        src={testimonials[index].avatar}
-        alt="User"
-        className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-      />
-    </div>
+            {/* Floating Avatar */}
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 z-10">
+              <img
+                src={testimonials[index].avatar}
+                alt="User"
+                className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+              />
+            </div>
 
-    {/* Testimonial Content */}
-    <div className="transition-all duration-700 ease-in-out">
-      <h3 className="font-semibold text-lg mb-2">Great quality!</h3>
-      <p className="text-gray-700 text-sm">{testimonials[index].message}</p>
-      <div className="mt-4 text-sm text-gray-600">
-        <p className="font-medium">{testimonials[index].name}</p>
-        <p>{testimonials[index].title}</p>
-      </div>
-    </div>
+            {/* Testimonial Content */}
+            <div className="transition-all duration-700 ease-in-out">
+              <h3 className="font-semibold text-lg mb-2">Great quality!</h3>
+              <p className="text-gray-700 text-sm">
+                {testimonials[index].message}
+              </p>
+              <div className="mt-4 text-sm text-gray-600">
+                <p className="font-medium">{testimonials[index].name}</p>
+                <p>{testimonials[index].title}</p>
+              </div>
+            </div>
 
-    {/* Pagination dots */}
-    <div className="mt-6 flex justify-center gap-2">
-      {testimonials.map((_, i) => (
-        <span
-          key={i}
-          className={`w-3 h-3 rounded-full inline-block ${
-            i === index ? "bg-black" : "bg-gray-300"
-          }`}
-        ></span>
-      ))}
-    </div>
-  </div>
-
-  {/* Floating avatars around the card */}
-  <div className="absolute inset-0 pointer-events-none">
-    {[
-      { src: avatar2, className: "top-1/4 left-10" },
-      { src: avatar3, className: "top-2/3 left-20" },
-      { src: avatar4, className: "top-1/2 right-10" },
-      { src: avatar5, className: "bottom-20 right-20" },
-    ].map((avt, idx) => (
-      <img
-        key={idx}
-        src={avt.src}
-        alt={`Avatar ${idx}`}
-        className={`w-10 h-10 rounded-full shadow-lg absolute ${avt.className}`}
-      />
-    ))}
-  </div>
-</section>
-
+            {/* Pagination dots */}
+            <div className="mt-6 flex justify-center gap-2">
+              {testimonials.map((_, i) => (
+                <span
+                  key={i}
+                  className={`w-3 h-3 rounded-full inline-block ${
+                    i === index ? "bg-black" : "bg-gray-300"
+                  }`}
+                ></span>
+              ))}
+            </div>
+          </div>
+          {/* Floating avatars around the card */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[
+              { src: avatar2, className: "top-1/4 left-10" },
+              { src: avatar3, className: "top-2/3 left-20" },
+              { src: avatar4, className: "top-1/2 right-10" },
+              { src: avatar5, className: "bottom-20 right-20" },
+            ].map((avt, idx) => (
+              <img
+                key={idx}
+                src={avt.src}
+                alt={`Avatar ${idx}`}
+                className={`w-10 h-10 rounded-full shadow-lg absolute ${avt.className}`}
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
