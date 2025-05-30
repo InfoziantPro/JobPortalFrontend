@@ -71,7 +71,7 @@ const Register = () => {
                 : 'bg-purple-100 text-purple-800'
             }`}
           >
-            Employer
+            Organisation
           </button>
         </div>
 
