@@ -37,7 +37,7 @@ const Home = () => {
 
   const [visible, setVisible] = useState(false);
 
-const testimonials = [
+  const testimonials = [
     {
       avatar: avatar1,
       name: "Arun Pandi",
@@ -69,7 +69,7 @@ const testimonials = [
     return () => clearTimeout(timer);
   }, []);
 
-    const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -77,7 +77,6 @@ const testimonials = [
     }, 4000);
     return () => clearInterval(interval);
   }, []);
-
 
   const sectionVariants = [
     {
@@ -209,7 +208,7 @@ const testimonials = [
       urgency: "New",
       logo: "src/assets/company-logo/1-4.png",
     },
-   {
+    {
       id: 6,
       title: "CyberSecurity Analyst",
       company: "Airbnb",
@@ -225,17 +224,16 @@ const testimonials = [
 
   return (
     <div className="bg-white">
-      <div className="relative w-full overflow-hidden">
-        {/* Shifted image */}
-        <img
-          src={homeBanner}
-          alt="Banner"
-          className="w-full object-cover"
-          style={{
-            position: "relative",
-            top: "-150px", // Adjust this value to "crop" more or less of the top
-          }}
-        />
+      <div
+  className="relative w-full bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: `url(${homeBanner})`,
+  }}
+>
+  {/* Responsive height using padding or min-height */}
+  <div className="min-h-[850px]  md:min-h-[700px] lg:min-h-[890px] mb-32 flex flex-col items-center justify-center px-4">
+    
+  </div>
 
         {/* Content on top of image */}
         <div className="absolute inset-0 flex flex-col items-center mt-14 text-white">
@@ -257,7 +255,7 @@ const testimonials = [
 
           {/* Typewriter */}
           <motion.div
-            className="text-lg md:text-xl font-medium text-center mt-2 mb-10 text-gray-100"
+            className="text-base md:text-xl ml-4 font-medium text-center mt-2 mb-10 text-gray-100"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
@@ -274,135 +272,171 @@ const testimonials = [
               }}
             />
           </motion.div>
-          <div className="bg-white rounded-full text-gray-600 shadow-md flex items-center max-w-full px-4 py-4 space-x-10">
-            {/* Job Title Input */}
-            <div className="flex items-center space-x-2 flex-1 min-w-[250px]">
-              <img
-                src="https://www.svgrepo.com/show/521826/search.svg"
-                alt="Search"
-                className="w-5 h-5 opacity-60"
-              />
-              <input
-                type="text"
-                placeholder="Job title, keywords, or company"
-                className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
-              />
+
+<div className="w-full px-10">
+  <div className="bg-white shadow-md flex flex-col md:flex-row items-stretch md:items-center w-full max-w-6xl mx-auto py-4 md:rounded-full rounded-2xl space-y-4 md:space-y-0 md:space-x-6">
+    {/* Job Title Input */}
+    <div className="flex items-center space-x-2 flex-1 min-w-[200px] px-3">
+      <img
+        src="https://www.svgrepo.com/show/521826/search.svg"
+        alt="Search"
+        className="w-5 h-5 opacity-60"
+      />
+      <input
+        type="text"
+        placeholder="Job title, keywords, or company"
+        className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
+      />
+    </div>
+
+    {/* Divider */}
+    <div className="hidden md:block h-12 border-l border-gray-300"></div>
+
+    {/* Location Input */}
+    <div className="flex items-center space-x-2 flex-1 min-w-[150px] px-3">
+      <img
+        src="https://raw.githubusercontent.com/feathericons/feather/master/icons/map-pin.svg"
+        alt="Location"
+        className="w-5 h-5 opacity-60"
+      />
+      <input
+        type="text"
+        placeholder="City or postcode"
+        className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
+      />
+    </div>
+
+    {/* Divider */}
+    <div className="hidden md:block h-12 border-l border-gray-300"></div>
+
+    {/* Custom Dropdown */}
+    <div className="relative min-w-[160px] w-full max-w-[180px] px-3">
+      <div
+        onClick={() => setDropdownOpen(!dropdownOpen)}
+        className="flex items-center justify-between w-full space-x-2 cursor-pointer text-sm text-gray-500 hover:text-violet-500"
+      >
+        <img
+          src="https://raw.githubusercontent.com/feathericons/feather/master/icons/box.svg"
+          alt="Category"
+          className="w-5 h-5 opacity-60"
+        />
+        <span className="overflow-hidden whitespace-nowrap text-ellipsis block max-w-[100px]">
+          {selectedCategory}
+        </span>
+        <svg
+          className="w-4 h-4 text-gray-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </div>
+
+      {/* Dropdown Menu */}
+      {dropdownOpen && (
+        <div className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg">
+          {[
+            "All Categories",
+            "Accounting / Finance",
+            "Automotive Jobs",
+            "Customer",
+            "Design",
+            "Development",
+            "Health and Care",
+            "Marketing",
+            "Project Management",
+          ].map((category) => (
+            <div
+              key={category}
+              onClick={() => {
+                setSelectedCategory(category);
+                setDropdownOpen(false);
+              }}
+              className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-500 hover:bg-purple-300 cursor-pointer"
+            >
+              <span>{category}</span>
             </div>
+          ))}
+        </div>
+      )}
+    </div>
 
-            {/* Divider */}
-            <div className="h-12 border-l border-gray-300"></div>
-            {/* Location Input */}
-            <div className="flex items-center space-x-2 flex-1 min-w-[150px]">
-              <img
-                src="https://raw.githubusercontent.com/feathericons/feather/master/icons/map-pin.svg"
-                alt="Location"
-                className="w-5 h-5 opacity-60"
-              />
-              <input
-                type="text"
-                placeholder="City or postcode"
-                className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
-              />
-            </div>
-
-            {/* Divider */}
-            <div className="h-12 border-l border-gray-300"></div>
-
-            {/* Custom Dropdown */}
-            {/* Custom Dropdown */}
-            <div className="relative min-w-[160px] w-full max-w-[180px]">
-              <div
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center justify-between w-full space-x-2 cursor-pointer text-sm text-gray-500 hover:text-violet-500"
-              >
-                <img
-                  src="https://raw.githubusercontent.com/feathericons/feather/master/icons/box.svg"
-                  alt="Category"
-                  className="w-5 h-5 opacity-60"
-                />
-                <span className="overflow-hidden whitespace-nowrap text-ellipsis block max-w-[100px]">
-                  {selectedCategory}
-                </span>
-                <svg
-                  className="w-4 h-4 text-gray-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-
-              {/* Dropdown Menu */}
-              {dropdownOpen && (
-                <div className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg">
-                  {[
-                    "All Categories",
-                    "Accounting / Finance",
-                    "Automotive Jobs",
-                    "Customer",
-                    "Design",
-                    "Development",
-                    "Health and Care",
-                    "Marketing",
-                    "Project Management",
-                  ].map((category) => (
-                    <div
-                      key={category}
-                      onClick={() => {
-                        setSelectedCategory(category);
-                        setDropdownOpen(false);
-                      }}
-                      className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-500 hover:bg-purple-300 cursor-pointer"
-                    >
-                      <span>{category}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Button */}
-            <button className="ml-4 flex items-center space-x-2 rounded-full px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-medium hover:scale-105 transition-transform">
-              <span>Find Jobs</span>
-            </button>
-          </div>
+    {/* Button */}
+    <div className="px-3">
+      <button className="w-full md:w-auto flex items-center justify-center space-x-2 rounded-full px-6 py-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-medium hover:scale-105 transition-transform">
+        <span>Find Jobs</span>
+      </button>
+    </div>
+  </div>
+</div>
 
           {/* Floating Bubbles */}
           <motion.div
-            className="relative w-full max-w-6xl h-[320px]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 1 }}
-          >
-            {[
-              { text: "Boost Your Skills", x: "-7.5%", y: "80%" },
-              { text: "Elevate Your Profile", x: "19%", y: "45%" },
-              { text: "AI - Powered Job Matching", x: "45.5%", y: "58%" },
-              { text: "Mentor Connect", x: "70%", y: "92%" },
-              { text: "Hiring Reimagined", x: "95.5%", y: "46%" },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                className="absolute flex flex-col items-center justify-center w-[110px] h-[110px] rounded-full bg-gray-200 text-black text-center text-xs shadow-xl border-4 border-white hover:bg-purple-600 hover:text-white transition duration-500"
-                style={{
-                  left: item.x,
-                  top: item.y,
-                  transform: "translate(-50%, -50%)",
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
-              >
-                <p className="px-3 font-semibold">{item.text}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+    className="absolute inset-0"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1.2, duration: 1 }}
+  >
+    {[
+      {
+        text: "Boost Your Skills",
+        positions: {
+          base: ["7%", "74%"],
+          md: ["90%", "90%"],
+        },
+      },
+      {
+        text: "Elevate Your Profile",
+        positions: {
+          base: ["27%", "60.8%"],
+          md: ["35%", "40%"],
+        },
+      },
+      {
+        text: "AI - Powered Job Matching",
+        positions: {
+          base: ["46.7%", "65.5%"],
+          md: ["50%", "50%"],
+        },
+      },
+      {
+        text: "Mentor Connect",
+        positions: {
+          base: ["65.5%", "78.5%"],
+          md: ["65%", "85%"],
+        },
+      },
+      {
+        text: "Hiring Reimagined",
+        positions: {
+          base: ["84.7%", "60.8%"],
+          md: ["83%", "40%"],
+        },
+      },
+    ].map((item, index) => (
+     <motion.div
+  key={index}
+  className="absolute hidden md:flex flex-col items-center justify-center w-[100px] h-[100px] rounded-full bg-gray-200 text-black text-center text-xs shadow-xl border-4 border-white hover:bg-purple-600 hover:text-white transition duration-500"
+  style={{
+    left: item.positions.base[0],
+    top: item.positions.base[1],
+    transform: "translate(-50%, -50%)",
+  }}
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
+>
+  <p className="px-3 font-semibold">{item.text}</p>
+</motion.div>
+
+    ))}
+  </motion.div>
         </div>
       </div>
 
@@ -631,46 +665,111 @@ const testimonials = [
                 />
                 <div>
                   <h3 className="text-lg font-semibold">{job.title}</h3>
-                 <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-1">
-  {/* Company */}
-  <div className="flex items-center gap-1">
-    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M4 4H20V20H4V4Z" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M4 9H20" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M9 20V9" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15 20V14" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-    <span>{job.company}</span>
-  </div>
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-1">
+                    {/* Company */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="w-4 h-4 opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path
+                          d="M4 4H20V20H4V4Z"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M4 9H20"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M9 20V9"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M15 20V14"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>{job.company}</span>
+                    </div>
 
-  {/* Location */}
-  <div className="flex items-center gap-1">
-    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12 12V21" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-    <span>{job.location}</span>
-  </div>
+                    {/* Location */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="w-4 h-4 opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path
+                          d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M12 12V21"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>{job.location}</span>
+                    </div>
 
-  {/* Time */}
-  <div className="flex items-center gap-1">
-    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M12 6V12L16 14" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-    <span>{job.time}</span>
-  </div>
+                    {/* Time */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="w-4 h-4 opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M12 6V12L16 14"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>{job.time}</span>
+                    </div>
 
-  {/* Salary */}
-  <div className="flex items-center gap-1">
-    <svg className="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 1V23" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M17 5H9.5C7.015 5 5 7.015 5 9.5C5 11.985 7.015 14 9.5 14H14.5C16.985 14 19 16.015 19 18.5C19 20.985 16.985 23 14.5 23H7" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-    <span>{job.salary}</span>
-  </div>
-</div>
-
+                    {/* Salary */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="w-4 h-4 opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path
+                          d="M12 1V23"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M17 5H9.5C7.015 5 5 7.015 5 9.5C5 11.985 7.015 14 9.5 14H14.5C16.985 14 19 16.015 19 18.5C19 20.985 16.985 23 14.5 23H7"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>{job.salary}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -691,150 +790,150 @@ const testimonials = [
         </div>
       </div>
 
-
-
       <div className="animate-fade-in-up">
         <section className="bg-gradient-to-b from-purple-900 to-purple-950 text-white py-16 px-6">
-  <div className="max-w-7xl mx-auto">
-    {/* Centered title at the top */}
-    <div className="text-center mb-12">
-      <h2 className="text-3xl font-bold">Browse by Category</h2>
-      <p className="text-sm text-purple-200 mt-2">
-        2020 jobs live • 293 added today
-      </p>
-    </div>
+          <div className="max-w-7xl mx-auto">
+            {/* Centered title at the top */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold">Browse by Category</h2>
+              <p className="text-sm text-purple-200 mt-2">
+                2020 jobs live • 293 added today
+              </p>
+            </div>
 
-    {/* Grid of category cards */}
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-      {[
-        {
-          title: "Marketing",
-          count: 86,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/marketing.png",
-        },
-        {
-          title: "Design",
-          count: 43,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/design.png",
-        },
-        {
-          title: "Development",
-          count: 12,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/source-code.png",
-        },
-        {
-          title: "Customer Service",
-          count: 72,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/customer-support.png",
-        },
-        {
-          title: "Health and Care",
-          count: 25,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/heart-health.png",
-        },
-        {
-          title: "Automotive Jobs",
-          count: 92,
-          img: "https://img.icons8.com/fluency-systems-regular/48/000000/car.png",
-        },
-      ].map((cat, idx) => (
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: idx * 0.1 }}
-          className="bg-gradient-to-tr from-white to-purple-100 text-black rounded-2xl p-6 h-48 flex flex-col items-center justify-center shadow-lg transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group cursor-pointer"
-        >
-          <div className="mb-4 w-14 h-14 rounded-full bg-purple-200 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-            <img
-              src={cat.img}
-              alt={`${cat.title} icon`}
-              className="w-7 h-7 filter grayscale group-hover:grayscale-0 transition duration-300"
-            />
+            {/* Grid of category cards */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              {[
+                {
+                  title: "Marketing",
+                  count: 86,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/marketing.png",
+                },
+                {
+                  title: "Design",
+                  count: 43,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/design.png",
+                },
+                {
+                  title: "Development",
+                  count: 12,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/source-code.png",
+                },
+                {
+                  title: "Customer Service",
+                  count: 72,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/customer-support.png",
+                },
+                {
+                  title: "Health and Care",
+                  count: 25,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/heart-health.png",
+                },
+                {
+                  title: "Automotive Jobs",
+                  count: 92,
+                  img: "https://img.icons8.com/fluency-systems-regular/48/000000/car.png",
+                },
+              ].map((cat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                  className="bg-gradient-to-tr from-white to-purple-100 text-black rounded-2xl p-6 h-48 flex flex-col items-center justify-center shadow-lg transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group cursor-pointer"
+                >
+                  <div className="mb-4 w-14 h-14 rounded-full bg-purple-200 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+                    <img
+                      src={cat.img}
+                      alt={`${cat.title} icon`}
+                      className="w-7 h-7 filter grayscale group-hover:grayscale-0 transition duration-300"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-base group-hover:text-purple-700 transition duration-300">
+                    {cat.title}
+                  </h3>
+                  <p className="text-xs text-gray-600 mt-1 group-hover:text-gray-800 transition duration-300">
+                    ({cat.count} open positions)
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Optional bottom link */}
+            <div className="text-center mt-10">
+              <a
+                href="#"
+                className="text-sm underline hover:text-white transition"
+              >
+                See all categories ↗
+              </a>
+            </div>
           </div>
-          <h3 className="font-semibold text-base group-hover:text-purple-700 transition duration-300">
-            {cat.title}
-          </h3>
-          <p className="text-xs text-gray-600 mt-1 group-hover:text-gray-800 transition duration-300">
-            ({cat.count} open positions)
-          </p>
-        </motion.div>
-      ))}
-    </div>
-
-    {/* Optional bottom link */}
-    <div className="text-center mt-10">
-      <a
-        href="#"
-        className="text-sm underline hover:text-white transition"
-      >
-        See all categories ↗
-      </a>
-    </div>
-  </div>
-</section>
-
+        </section>
 
         {/* Testimonials Section */}
-       <section className="py-28 px-4 bg-white text-black relative"> {/* Increased top padding */}
-  <div className="text-center mb-12">
-    <h2 className="text-2xl font-semibold">Testimonials From Our Users</h2>
-  </div>
+        <section className="py-28 px-10 bg-white text-black relative">
+          {" "}
+          {/* Increased top padding */}
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-semibold">
+              Testimonials From Our Users
+            </h2>
+          </div>
+         <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 pt-16 rounded-3xl text-center shadow-md overflow-visible min-h-[350px]">
+  {/* Add pt-16 to push content down; min-h to stabilize height */}
 
-  <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 pt-16 rounded-3xl text-center shadow-md overflow-hidden min-h-[350px]"> 
-    {/* Add pt-16 to push content down; min-h to stabilize height */}
-    
-    {/* Floating Avatar */}
-    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 z-10">
-      <img
-        src={testimonials[index].avatar}
-        alt="User"
-        className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-      />
-    </div>
+            {/* Floating Avatar */}
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 z-10">
+              <img
+                src={testimonials[index].avatar}
+                alt="User"
+                className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+              />
+            </div>
 
-    {/* Testimonial Content */}
-    <div className="transition-all duration-700 ease-in-out">
-      <h3 className="font-semibold text-lg mb-2">Great quality!</h3>
-      <p className="text-gray-700 text-sm">{testimonials[index].message}</p>
-      <div className="mt-4 text-sm text-gray-600">
-        <p className="font-medium">{testimonials[index].name}</p>
-        <p>{testimonials[index].title}</p>
-      </div>
-    </div>
+            {/* Testimonial Content */}
+            <div className="transition-all duration-700 ease-in-out">
+              <h3 className="font-semibold text-lg mb-2">Great quality!</h3>
+              <p className="text-gray-700 text-sm">
+                {testimonials[index].message}
+              </p>
+              <div className="mt-4 text-sm text-gray-600">
+                <p className="font-medium">{testimonials[index].name}</p>
+                <p>{testimonials[index].title}</p>
+              </div>
+            </div>
 
-    {/* Pagination dots */}
-    <div className="mt-6 flex justify-center gap-2">
-      {testimonials.map((_, i) => (
-        <span
-          key={i}
-          className={`w-3 h-3 rounded-full inline-block ${
-            i === index ? "bg-black" : "bg-gray-300"
-          }`}
-        ></span>
-      ))}
-    </div>
-  </div>
-
-  {/* Floating avatars around the card */}
-  <div className="absolute inset-0 pointer-events-none">
-    {[
-      { src: avatar2, className: "top-1/4 left-10" },
-      { src: avatar3, className: "top-2/3 left-20" },
-      { src: avatar4, className: "top-1/2 right-10" },
-      { src: avatar5, className: "bottom-20 right-20" },
-    ].map((avt, idx) => (
-      <img
-        key={idx}
-        src={avt.src}
-        alt={`Avatar ${idx}`}
-        className={`w-10 h-10 rounded-full shadow-lg absolute ${avt.className}`}
-      />
-    ))}
-  </div>
-</section>
-
+            {/* Pagination dots */}
+            <div className="mt-6 flex justify-center gap-2">
+              {testimonials.map((_, i) => (
+                <span
+                  key={i}
+                  className={`w-3 h-3 rounded-full inline-block ${
+                    i === index ? "bg-black" : "bg-gray-300"
+                  }`}
+                ></span>
+              ))}
+            </div>
+          </div>
+          {/* Floating avatars around the card */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[
+              { src: avatar2, className: "top-1/4 left-10" },
+              { src: avatar3, className: "top-2/3 left-20" },
+              { src: avatar4, className: "top-1/2 right-10" },
+              { src: avatar5, className: "bottom-20 right-20" },
+            ].map((avt, idx) => (
+              <img
+                key={idx}
+                src={avt.src}
+                alt={`Avatar ${idx}`}
+                className={`w-10 h-10 rounded-full shadow-lg absolute ${avt.className}`}
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
