@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaBars } from 'react-icons/fa';
 import logo from '/src/assets/logos/Logo.png';
+import apiClient from '../api/apiClient';
 
 export default function Navbar({ user, onLogout }) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -10,9 +11,14 @@ export default function Navbar({ user, onLogout }) {
   const userMenuRef = useRef();
   const mainMenuRef = useRef();
 
-  const handleLogoutClick = () => {
-    onLogout();
-    navigate('/login');
+  const handleLogoutClick = async () => {
+    try {
+      await apiClient.post('/logout');
+      if (onLogout) onLogout();
+      navigate('/login');
+    } catch (err) {
+      console.error('Logout error:', err);
+    }
   };
 
   // Close dropdowns when clicking outside
