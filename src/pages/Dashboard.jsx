@@ -13,6 +13,7 @@ import EmployeeList from '../pages/EmployeeList';
 import PostJob from '../pages/PostJob';
 import ApproveRequests from '../pages/ApproveRequests';
 import About from './AboutMe';
+import Companies from '../pages/Companies';
 
 
 const Dashboard = ({ user, onLogout }) => {
@@ -45,7 +46,7 @@ const Dashboard = ({ user, onLogout }) => {
      superadmin: [
       { key: 'company', label: 'SuperAdmin Profile', icon: <FiUser />, content: 'Company Profile Component' },
       { key: 'add', label: 'Approve Companies', icon: <FiUsers />, content: <ApproveRequests /> },
-      { key: 'manage', label: 'Manage Employees', icon: <FiUsers />, content: 'Manage Employees Component' },
+      { key: 'manage', label: 'Manage Companies', icon: <FiUsers />, content: <Companies /> },
       { key: 'jobs', label: 'Manage Jobs', icon: <FiBriefcase />, content: 'Manage Jobs Component' },
       { key: 'applicants', label: 'All Applicants', icon: <FiUsers />, content: 'Applicants Component' },
       { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: 'Shortlisted Resumes Component' },
