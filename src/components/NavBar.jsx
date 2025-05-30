@@ -42,7 +42,7 @@ export default function Navbar({ user, onLogout }) {
   };
 
   return (
-    <nav className="bg-white shadow p-4 flex justify-between items-center">
+    <nav className="bg-white p-4 flex justify-between items-center border-b-2 border-gray-200 shadow-lg">
       {/* Logo */}
       <div>
         <Link to="/" className="flex items-center space-x-2">

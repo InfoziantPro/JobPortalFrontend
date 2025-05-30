@@ -40,10 +40,6 @@ const Register = () => {
 
       {/* Right Side Form */}
       <div className="w-full md:w-1/2 h-full overflow-y-auto bg-white flex flex-col items-center justify-center px-6 py-10">
-        {/* Gradient Brand Title */}
-        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-purple-700 via-pink-400 to-orange-400 bg-clip-text text-transparent mb-4 text-center">
-          Infoziant
-        </h1>
 
         <h2 className="text-2xl font-bold mb-10 text-gray-800 text-center">
           Create a Free Account
