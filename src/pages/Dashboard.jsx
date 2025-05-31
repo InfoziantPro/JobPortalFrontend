@@ -91,7 +91,7 @@ const Dashboard = ({ user, onLogout }) => {
     const current = menu.find(item => item.key === activeTab);
     return (
       <div className="p-4 sm:p-6">
-        <div className="bg-gray-50 rounded-lg p-6 min-h-[200px] text-gray-800 shadow-inner">
+        <div className=" min-h-[200px] text-gray-800 shadow-inner">
           {current?.content || 'Welcome to the Dashboard'}
         </div>
       </div>
@@ -187,19 +187,18 @@ const Dashboard = ({ user, onLogout }) => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-0">
         {/* Desktop Header */}
-        <div className="hidden md:block bg-white shadow border-b px-6 py-5 font-jost">
+        <div className="hidden md:block bg-white shadow border-b  px-6 py-5 font-jost">
           <h1 className="text-2xl font-bold text-gray-900">Welcome, {user.name}</h1>
           <p className="text-sm text-gray-600 mt-1 capitalize">{role} Dashboard</p>
         </div>
 
-        {/* Content Area */}
-        <div className="flex-1 bg-white md:bg-gray-50 overflow-y-auto">
-          <div className="w-full max-w-7xl mx-auto p-4 md:p-6">
-            <div className="bg-white rounded-lg shadow-sm">
-              {renderContent()}
-            </div>
-          </div>
-        </div>
+      {/* Content Area */}
+<div className="flex-initial overflow-y-auto bg-white md:bg-gray-50">
+  <div className="h-full">
+    {renderContent()}
+  </div>
+</div>
+
       </div>
     </div>
   );

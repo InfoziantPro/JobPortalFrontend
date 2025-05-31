@@ -254,7 +254,7 @@ const handleClick = () => {
             transition={{ duration: 0.8 }}
           >
             Elevate Your Career with{" "}
-            <span className="bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-300 to-purple-500 bg-clip-text text-transparent">
               Infoziant
             </span>{" "}
             - All in one <br /> Career Catalyst
