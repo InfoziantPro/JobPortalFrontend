@@ -65,7 +65,7 @@ const [showType, setShowType] = useState(false);
         className="w-full max-w-4xl space-y-8"
       >
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold    bg-gradient-to-r from-cyan-300 to-cyan-600 bg-clip-text text-transparent">Post a New Job</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold   bg-gradient-to-r from-blue-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">Post a New Job</h2>
           <p className="text-sm text-gray-600 mt-2">Publish your job opening and reach the right talent</p>
         </div>
 
