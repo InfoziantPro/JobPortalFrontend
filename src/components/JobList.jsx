@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import apiClient from '../api/apiClient';
 
-const JobList = () => {
+const JobList = ({ user }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -15,7 +15,7 @@ const JobList = () => {
     isActive: true,
   });
 
-  const token = localStorage.getItem('token');
+  const role = user?.role?.toLowerCase(); 
 
   useEffect(() => {
     fetchJobs();
@@ -25,7 +25,6 @@ const JobList = () => {
     setLoading(true);
     try {
       const res = await apiClient.get('/jobs/all', {
-        headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
       setJobs(res.data.jobs || []);
@@ -48,9 +47,7 @@ const JobList = () => {
     });
   };
 
-  const closeEdit = () => {
-    setSelectedJob(null);
-  };
+  const closeEdit = () => setSelectedJob(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -63,7 +60,7 @@ const JobList = () => {
   const handleUpdate = async () => {
     try {
       await axios.put(`/api/jobs/${selectedJob._id}`, editForm, {
-        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       alert('Job updated successfully');
       closeEdit();
@@ -78,7 +75,7 @@ const JobList = () => {
 
     try {
       await axios.delete(`/api/jobs/${selectedJob._id}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       alert('Job deleted successfully');
       closeEdit();
@@ -89,7 +86,6 @@ const JobList = () => {
   };
 
   if (loading) return <p>Loading jobs...</p>;
-
   if (!jobs.length) return <p>No jobs available.</p>;
 
   return (
@@ -122,6 +118,7 @@ const JobList = () => {
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-full max-w-lg max-h-[90vh] overflow-auto">
             <h3 className="text-xl font-bold mb-4">Edit Job</h3>
+            <p className="text-sm text-gray-500">Current Role: {role}</p>
 
             <label className="block mb-2 font-semibold">Title</label>
             <input
@@ -189,29 +186,50 @@ const JobList = () => {
             </label>
 
             <div className="flex justify-end gap-3 mt-6">
-              <button
-                onClick={handleUpdate}
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-              >
-                Update
-              </button>
-              <button
-                onClick={handleDelete}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-              >
-                Delete
-              </button>
-              <button
-                onClick={closeEdit}
-                className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
-              >
-                Cancel
-              </button>
+              {role === 'candidate' ? (
+                <>
+                  <button
+                    onClick={() => {
+                      alert('Application submitted successfully!');
+                      closeEdit();
+                    }}
+                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                  >
+                    Apply for Job
+                  </button>
+                  <button
+                    onClick={closeEdit}
+                    className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                  >
+                    Cancel
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={handleUpdate}
+                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={closeEdit}
+                    className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                  >
+                    Cancel
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
       )}
-
     </div>
   );
 };
