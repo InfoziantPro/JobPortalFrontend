@@ -77,7 +77,7 @@ const JobList = ({ user }) => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`/api/jobs/${selectedJob._id}`, editForm, {
+      await apiClient.put(`/jobs/${selectedJob._id}`, editForm, {
         withCredentials: true,
       });
       alert('Job updated successfully');
@@ -92,7 +92,7 @@ const JobList = ({ user }) => {
     if (!window.confirm('Are you sure you want to delete this job?')) return;
 
     try {
-      await axios.delete(`/api/jobs/${selectedJob._id}`, {
+      await apiClient.delete(`/jobs/${selectedJob._id}`, {
         withCredentials: true,
       });
       alert('Job deleted successfully');
