@@ -16,6 +16,7 @@ const JobList = ({ user }) => {
   });
 
   const role = user?.role?.toLowerCase(); 
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     fetchJobs();
@@ -25,6 +26,7 @@ const JobList = ({ user }) => {
     setLoading(true);
     try {
       const res = await apiClient.get('/jobs/all', {
+        headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
       setJobs(res.data.jobs || []);
