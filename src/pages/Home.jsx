@@ -243,7 +243,7 @@ const testimonials = [
 
           {/* Header Title */}
           <motion.h1
-            className="text-4xl md:text-5xl font-semibold text-center leading-tight mb-4 mt-10 drop-shadow-lg"
+            className="text-4xl md:text-5xl font-jost text-center leading-tight mb-4 mt-10 drop-shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -257,7 +257,7 @@ const testimonials = [
 
           {/* Typewriter */}
           <motion.div
-            className="text-lg md:text-xl font-medium text-center mt-2 mb-10 text-gray-100"
+            className="text-lg md:text-xl font-jost text-center mt-2 mb-10 text-gray-100"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
@@ -368,7 +368,7 @@ const testimonials = [
             </div>
 
             {/* Button */}
-            <button className="ml-4 flex items-center space-x-2 rounded-full px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-medium hover:scale-105 transition-transform">
+            <button className="ml-4 flex items-center space-x-2 rounded-full px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-jost hover:scale-105 transition-transform">
               <span>Find Jobs</span>
             </button>
           </div>
@@ -399,7 +399,7 @@ const testimonials = [
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.5 + index * 0.2, duration: 0.8 }}
               >
-                <p className="px-3 font-semibold">{item.text}</p>
+                <p className="px-3 font-jost">{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -453,7 +453,7 @@ const testimonials = [
             visible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
           }`}
         >
-          <h2 className="text-4xl font-semibold mb-8 transition-opacity duration-700 ease-in-out hover:text-purple-300">
+          <h2 className="text-4xl font-jost mb-8 transition-opacity duration-700 ease-in-out hover:text-purple-300">
             Unbiased Services to Unlock Your Career Potential
           </h2>
 
@@ -481,7 +481,7 @@ const testimonials = [
                 className="flex items-start group transition-all duration-700 ease-in-out hover:scale-[1.03]"
               >
                 <div className="flex flex-col items-center mr-4">
-                  <div className="w-8 h-8 bg-white text-black font-bold rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-purple-500 group-hover:text-white group-hover:shadow-lg cursor-pointer">
+                  <div className="w-8 h-8 bg-white text-black font-jost rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-purple-500 group-hover:text-white group-hover:shadow-lg cursor-pointer">
                     {step.number}
                   </div>
                   {index < 2 && (
@@ -489,7 +489,7 @@ const testimonials = [
                   )}
                 </div>
                 <div className="transition-all duration-500 group-hover:text-purple-300">
-                  <h3 className="text-xl font-semibold transition-colors duration-300">
+                  <h3 className="text-xl font-jost transition-colors duration-300">
                     {step.title}
                   </h3>
                   <p className="text-sm opacity-80 mt-1 transition-opacity duration-300 group-hover:opacity-100">
@@ -501,7 +501,7 @@ const testimonials = [
           </div>
 
           {/* CTA Button */}
-          <button className="mt-10 px-6 py-3 rounded-lg bg-white text-black font-semibold transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-400 hover:to-purple-700 hover:text-white shadow-md hover:shadow-xl">
+          <button className="mt-10 px-6 py-3 rounded-lg bg-white text-black font-jost transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-400 hover:to-purple-700 hover:text-white shadow-md hover:shadow-xl">
             Get Started Now →
           </button>
         </div>
@@ -526,7 +526,7 @@ const testimonials = [
                 <img
                   src={sec.gif}
                   alt={sec.title}
-                  className="w-full h-auto object-contain rounded-md shadow-md"
+                  className="w-full h-auto object-contain"
                 />
               </motion.div>
 
@@ -538,7 +538,7 @@ const testimonials = [
                 transition={{ duration: 0.7, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-3xl md:text-4xl font-bold text-[#2a0052] mb-6">
+                <h2 className="text-3xl md:text-4xl font-jost text-[#2a0052] mb-6">
                   {sec.title}
                 </h2>
                 <ul className="space-y-4 text-gray-700">
@@ -549,7 +549,7 @@ const testimonials = [
                     </li>
                   ))}
                 </ul>
-                <button className="mt-8 px-6 py-3 bg-black text-white rounded-lg font-semibold">
+                <button className="mt-8 px-6 py-3 bg-black text-white rounded-lg font-jost">
                   Discover More
                 </button>
               </motion.div>
@@ -560,7 +560,7 @@ const testimonials = [
 
       <section className="w-full bg-violet-950 text-white py-16 px-6 md:px-20 transition-all duration-500">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 transition-opacity duration-700">
+          <h2 className="text-3xl md:text-4xl font-jost mb-12 transition-opacity duration-700">
             Unlock Your Career Potential with Our Comprehensive Features
           </h2>
 
@@ -583,7 +583,7 @@ const testimonials = [
                 key={idx}
                 className="border border-white rounded-lg p-6 transition-transform duration-300 hover:scale-105 hover:bg-violet-900 shadow-md"
               >
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <h3 className="text-xl font-jost mb-2">{feature.title}</h3>
                 <p className="text-sm text-gray-300">{feature.desc}</p>
               </div>
             ))}
@@ -604,7 +604,7 @@ const testimonials = [
               <button
                 key={idx}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-lg transition font-medium ${
+                className={`px-4 py-2 rounded-lg transition font-jost ${
                   activeCategory === cat
                     ? "bg-purple-800 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -630,7 +630,7 @@ const testimonials = [
                   className="w-10 h-10 rounded-full"
                 />
                 <div>
-                  <h3 className="text-lg font-semibold">{job.title}</h3>
+                  <h3 className="text-lg font-jost">{job.title}</h3>
                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-1">
   {/* Company */}
   <div className="flex items-center gap-1">
@@ -698,7 +698,7 @@ const testimonials = [
   <div className="max-w-7xl mx-auto">
     {/* Centered title at the top */}
     <div className="text-center mb-12">
-      <h2 className="text-3xl font-bold">Browse by Category</h2>
+      <h2 className="text-3xl font-jost">Browse by Category</h2>
       <p className="text-sm text-purple-200 mt-2">
         2020 jobs live • 293 added today
       </p>
@@ -753,7 +753,7 @@ const testimonials = [
               className="w-7 h-7 filter grayscale group-hover:grayscale-0 transition duration-300"
             />
           </div>
-          <h3 className="font-semibold text-base group-hover:text-purple-700 transition duration-300">
+          <h3 className="font-jost text-base group-hover:text-purple-700 transition duration-300">
             {cat.title}
           </h3>
           <p className="text-xs text-gray-600 mt-1 group-hover:text-gray-800 transition duration-300">
@@ -779,7 +779,7 @@ const testimonials = [
         {/* Testimonials Section */}
        <section className="py-28 px-4 bg-white text-black relative"> {/* Increased top padding */}
   <div className="text-center mb-12">
-    <h2 className="text-2xl font-semibold">Testimonials From Our Users</h2>
+    <h2 className="text-2xl font-jost">Testimonials From Our Users</h2>
   </div>
 
   <div className="relative max-w-4xl mx-auto bg-purple-100 p-10 pt-16 rounded-3xl text-center shadow-md overflow-hidden min-h-[350px]"> 
@@ -796,10 +796,10 @@ const testimonials = [
 
     {/* Testimonial Content */}
     <div className="transition-all duration-700 ease-in-out">
-      <h3 className="font-semibold text-lg mb-2">Great quality!</h3>
+      <h3 className="font-jost text-lg mb-2">Great quality!</h3>
       <p className="text-gray-700 text-sm">{testimonials[index].message}</p>
       <div className="mt-4 text-sm text-gray-600">
-        <p className="font-medium">{testimonials[index].name}</p>
+        <p className="font-jost">{testimonials[index].name}</p>
         <p>{testimonials[index].title}</p>
       </div>
     </div>
