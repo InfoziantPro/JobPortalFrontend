@@ -14,6 +14,7 @@ import PostJob from '../pages/PostJob';
 import ApproveRequests from '../pages/ApproveRequests';
 import About from './AboutMe';
 import Companies from '../pages/Companies';
+import AppliedJobs from './AppliedJobs';
 
 
 const Dashboard = ({ user, onLogout }) => {
@@ -36,7 +37,7 @@ const Dashboard = ({ user, onLogout }) => {
     candidate: [
       { key: 'profile', label: 'My Profile', icon: <FiUser />, content: 'My Profile Component' },
       { key: 'resume', label: 'My Resume', icon: <FiFileText />, content: 'Resume Component' },
-      { key: 'applied', label: 'Applied Jobs', icon: <FiBriefcase />, content: 'Applied Jobs Component' },
+      { key: 'applied', label: 'Applied Jobs', icon: <FiBriefcase />, content: <AppliedJobs /> },
       { key: 'alerts', label: 'Job Listing', icon: <FiBell />, content: <JobList user={user} /> },
       { key: 'messages', label: 'Messages', icon: <FiMessageCircle />, content: 'Messages Component' },
       { key: 'shortlisted', label: 'Shortlisted Jobs', icon: <FiHeart />, content: 'Shortlisted Jobs Component' },

@@ -49,6 +49,24 @@ const JobList = ({ user }) => {
 
   const closeEdit = () => setSelectedJob(null);
 
+  const applyJob = async () => {
+    if (!selectedJob?._id) return alert('No job selected.');
+
+    try {
+      const res = await apiClient.post(`/jobs/${selectedJob._id}/apply`, null, {
+        withCredentials: true,
+      });
+
+      alert(res.data.message || 'Applied successfully!');
+      closeEdit();
+    } catch (error) {
+      console.error('Apply Job Error:', error);
+      const errMsg = error?.response?.data?.error || 'Failed to apply for the job.';
+      alert(errMsg);
+    }
+  };
+
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setEditForm((prev) => ({
@@ -189,10 +207,7 @@ const JobList = ({ user }) => {
               {role === 'candidate' ? (
                 <>
                   <button
-                    onClick={() => {
-                      alert('Application submitted successfully!');
-                      closeEdit();
-                    }}
+                    onClick={applyJob}
                     className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
                   >
                     Apply for Job
