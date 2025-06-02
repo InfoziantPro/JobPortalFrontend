@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 const AppliedJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -10,7 +11,7 @@ const AppliedJobs = () => {
     const fetchAppliedJobs = async () => {
       try {
         setLoading(true);
-        const res = await axios.get('/api/jobs/applied', { withCredentials: true });
+        const res = await apiClient.get('/jobs/applied', { withCredentials: true });
         setJobs(res.data.jobs || []);
       } catch (err) {
         setError(err.response?.data?.error || 'Failed to load applied jobs.');

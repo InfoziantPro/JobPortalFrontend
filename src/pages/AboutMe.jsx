@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import apiClient from '../api/apiClient';
 import { Mail, User, ShieldCheck } from 'lucide-react';
+
 
 const About = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -10,7 +12,7 @@ const About = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/jobs/me', {
+        const res = await apiClient.get('/jobs/me', {
           withCredentials: true,
         });
         setUserInfo(res.data.user);
