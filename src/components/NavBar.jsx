@@ -75,7 +75,7 @@ export default function Navbar({ user, onLogout }) {
               <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1 font-jost">
                 <Link to="/" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/') ? 'font-bold text-indigo-800' : ''}`}>Home</Link>
                 <Link to="/about" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/about') ? 'font-bold text-indigo-800' : ''}`}>About</Link>
-                <Link to="/jobs/all" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/jobs/all') ? 'font-bold text-indigo-800' : ''}`}>Jobs</Link>
+                <Link to="/all-jobs" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/all-jobs') ? 'font-bold text-indigo-800' : ''}`}>Jobs</Link>
                 <Link to="/companies" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/companies') ? 'font-bold text-indigo-800' : ''}`}>Companies</Link>
                 <Link to="/courses" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/courses') ? 'font-bold text-indigo-800' : ''}`}>Courses</Link>
               </div>
