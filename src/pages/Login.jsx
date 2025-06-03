@@ -72,10 +72,10 @@ const Login = ({ setUser }) => {
       {/* Right Form Side */}
       <div className="flex w-full md:w-1/2 justify-center items-center bg-white px-4 md:px-16">
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800 text-center">Login to Infoziant</h2>
+          <h2 className="text-2xl font-jost text-gray-800 text-center">Login to Infoziant</h2>
 
           <div>
-            <label className="block mb-1 text-sm font-medium text-gray-700">Username</label>
+            <label className="block mb-1 text-sm font-jost text-gray-700">Username</label>
             <input
               type="email"
               value={email}
@@ -87,7 +87,7 @@ const Login = ({ setUser }) => {
           </div>
 
           <div>
-            <label className="block mb-1 text-sm font-medium text-gray-700">Password</label>
+            <label className="block mb-1 text-sm font-jost text-gray-700">Password</label>
             <input
               type="password"
               value={password}
@@ -115,7 +115,7 @@ const Login = ({ setUser }) => {
 
           {resendLinkVisible && (
             <div className="text-sm text-center text-gray-600 mt-2 space-y-2">
-              <p className="text-red-500 font-medium">
+              <p className="text-red-500 font-jost">
                 Your email is not verified. Please verify to proceed.
               </p>
               {verificationLink && (
@@ -123,7 +123,7 @@ const Login = ({ setUser }) => {
                   Click to verify:{' '}
                   <a
                     href={verificationLink}
-                    className="text-blue-600 underline font-medium"
+                    className="text-blue-600 underline font-jost"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -136,7 +136,7 @@ const Login = ({ setUser }) => {
 
           <p className="text-sm text-center text-gray-500">
             Don’t have an account?{' '}
-            <a href="/signup" className="text-violet-600 font-medium hover:underline">Signup</a>
+            <a href="/signup" className="text-violet-600 font-jost hover:underline">Signup</a>
           </p>
 
           <div className="flex items-center justify-between my-4">
@@ -148,7 +148,7 @@ const Login = ({ setUser }) => {
           <div className="flex flex-col md:flex-row gap-4">
             <button
               type="button"
-              className="w-full border border-blue-600 text-blue-600 rounded-lg py-2 font-semibold flex items-center justify-center gap-2 hover:bg-blue-50"
+              className="w-full border border-blue-600 text-blue-600 rounded-lg py-2 font-jost flex items-center justify-center gap-2 hover:bg-blue-50"
             >
               <i className="fab fa-facebook"></i>
               Log In via Facebook
@@ -156,7 +156,7 @@ const Login = ({ setUser }) => {
 
             <button
               type="button"
-              className="w-full border border-red-500 text-red-600 rounded-lg py-2 font-semibold flex items-center justify-center gap-2 hover:bg-red-50"
+              className="w-full border border-red-500 text-red-600 rounded-lg py-2 font-jost flex items-center justify-center gap-2 hover:bg-red-50"
             >
               <i className="fab fa-google"></i>
               Log In via Gmail

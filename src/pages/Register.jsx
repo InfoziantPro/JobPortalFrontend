@@ -41,7 +41,7 @@ const Register = () => {
       {/* Right Side Form */}
       <div className="w-full md:w-1/2 h-full overflow-y-auto bg-white flex flex-col items-center justify-center px-6 py-10">
 
-        <h2 className="text-2xl font-bold mb-10 text-gray-800 text-center">
+        <h2 className="text-2xl font-jost mb-10 text-gray-800 text-center">
           Create a Free Account
         </h2>
 
@@ -50,7 +50,7 @@ const Register = () => {
           <button
             type="button"
             onClick={() => setRole('candidate')}
-            className={`text-lg px-12 py-3 rounded-lg font-semibold transition ${
+            className={`text-lg px-12 py-3 rounded-lg font-jost transition ${
               role === 'candidate'
                 ? 'bg-gradient-to-r from-purple-800 to-violet-500 text-white shadow-lg'
                 : 'bg-purple-100 text-purple-800'
@@ -61,7 +61,7 @@ const Register = () => {
           <button
             type="button"
             onClick={() => setRole('company')}
-            className={`text-lg px-12 py-3 rounded-lg font-semibold transition ${
+            className={`text-lg px-12 py-3 rounded-lg font-jost transition ${
               role === 'company'
                 ? 'bg-gradient-to-r from-purple-800 to-violet-500 text-white shadow-lg'
                 : 'bg-purple-100 text-purple-800'
@@ -105,7 +105,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full py-3 text-lg bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full py-3 text-lg bg-blue-600 text-white font-jost rounded-lg hover:bg-blue-700 transition duration-300"
           >
             Register
           </button>
@@ -114,14 +114,14 @@ const Register = () => {
         {/* Verification Link */}
         {verifyUrl && (
           <div className="text-sm text-center text-gray-600 mt-4 space-y-2">
-            <p className="text-green-600 font-medium">
+            <p className="text-green-600 font-jost">
               Registration successful. Please verify your email:
             </p>
             <a
               href={verifyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 underline font-medium hover:text-blue-800"
+              className="text-blue-600 underline font-jost hover:text-blue-800"
             >
               Verify Email
             </a>
