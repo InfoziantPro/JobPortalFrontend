@@ -8,8 +8,6 @@ const PostJob = () => {
     description: '',
     company: '',
     location: 'Remote',
-    salaryFrom: '',
-    salaryTo: '',
     jobType: 'Full-time',
     emailAddress: '',
     username: '',
@@ -45,10 +43,6 @@ const PostJob = () => {
           description: form.description,
           company: form.company,
           location: form.location,
-          salaryRange: {
-            from: form.salaryFrom ? Number(form.salaryFrom) : undefined,
-            to: form.salaryTo ? Number(form.salaryTo) : undefined,
-          },
           jobType: form.jobType,
           emailAddress: form.emailAddress,
           username: form.username,
@@ -75,8 +69,6 @@ const PostJob = () => {
         description: '',
         company: '',
         location: 'Remote',
-        salaryFrom: '',
-        salaryTo: '',
         jobType: 'Full-time',
         emailAddress: '',
         username: '',
@@ -127,10 +119,6 @@ const PostJob = () => {
       {/* Salary & Career */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-gray-700">Salary & Experience</h3>
-        <div className="flex gap-4">
-          <input name="salaryFrom" type="number" value={form.salaryFrom} onChange={handleChange} placeholder="Salary From" className="input w-1/2" />
-          <input name="salaryTo" type="number" value={form.salaryTo} onChange={handleChange} placeholder="Salary To" className="input w-1/2" />
-        </div>
         <input name="offeredSalary" value={form.offeredSalary} onChange={handleChange} placeholder="Offered Salary (e.g., 50k-60k)" className="input" />
         <input name="careerLevel" value={form.careerLevel} onChange={handleChange} placeholder="Career Level" className="input" />
         <input name="experience" value={form.experience} onChange={handleChange} placeholder="Experience Required" className="input" />
