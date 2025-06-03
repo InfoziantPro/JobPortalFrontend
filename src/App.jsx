@@ -22,6 +22,8 @@ import About from './pages/About';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import "./App.css";
+
 function App() {
   // user state to track logged in user info
   const [user, setUser] = useState(null);

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Typewriter from "typewriter-effect";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -31,11 +31,15 @@ import avatar3 from "../assets/avatars/testi-img3.png";
 import avatar4 from "../assets/avatars/testi-img1.png";
 import avatar5 from "../assets/avatars/testi-img1.png";
 
+import BlurText from "../components/ui/BlurText";
+import SearchBar from "../components/MainPageSearchBar";
+
 const Home = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All Categories");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [visible, setVisible] = useState(false);
+
+  const careerPotentialRef = useRef();
+  const isInView = useInView(careerPotentialRef, { once: true, margin: '0px 0px -10% 0px' });
 
 const testimonials = [
     {
@@ -242,7 +246,7 @@ const testimonials = [
           {/* Your content here */}
 
           {/* Header Title */}
-          <motion.h1
+          {/* <motion.h1
             className="text-4xl md:text-5xl font-jost text-center leading-tight mb-4 mt-10 drop-shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -253,14 +257,24 @@ const testimonials = [
               Infoziant
             </span>{" "}
             - All in one <br /> Career Catalyst
-          </motion.h1>
+          </motion.h1> */}
+
+          <BlurText 
+              elements={[
+                "Elevate Your Career with",
+                '<span class="bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent text-black italic">VTA</span>',
+                "- All in one",
+                "Career Catalyst"
+              ]}
+              className="font-bold text-3xl sm:text-6xl text-center mt-2 mb-4 justify-center align-middle"
+          />
 
           {/* Typewriter */}
           <motion.div
-            className="text-lg md:text-xl font-jost text-center mt-2 mb-10 text-gray-100"
+            className="text-lg md:text-xl font-jost font-semibold text-center mt-2 mb-10 text-gray-300"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
+            transition={{ delay: 3.5, duration: .5 }}
           >
             <Typewriter
               options={{
@@ -274,9 +288,15 @@ const testimonials = [
               }}
             />
           </motion.div>
-          <div className="bg-white rounded-full text-gray-600 shadow-md flex items-center max-w-full px-4 py-4 space-x-10">
+
+          {/* Search Bar */}
+
+            <SearchBar />
+
+          
+          {/* <div className="bg-white rounded-full text-gray-600 shadow-md flex items-center max-w-full px-4 py-4 space-x-10"> */}
             {/* Job Title Input */}
-            <div className="flex items-center space-x-2 flex-1 min-w-[250px]">
+            {/* <div className="flex items-center space-x-2 flex-1 min-w-[250px]">
               <img
                 src="https://www.svgrepo.com/show/521826/search.svg"
                 alt="Search"
@@ -287,12 +307,12 @@ const testimonials = [
                 placeholder="Job title, keywords, or company"
                 className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
               />
-            </div>
+            </div> */}
 
             {/* Divider */}
-            <div className="h-12 border-l border-gray-300"></div>
+            {/* <div className="h-12 border-l border-gray-300"></div> */}
             {/* Location Input */}
-            <div className="flex items-center space-x-2 flex-1 min-w-[150px]">
+            {/* <div className="flex items-center space-x-2 flex-1 min-w-[150px]">
               <img
                 src="https://raw.githubusercontent.com/feathericons/feather/master/icons/map-pin.svg"
                 alt="Location"
@@ -303,14 +323,13 @@ const testimonials = [
                 placeholder="City or postcode"
                 className="bg-transparent outline-none text-sm placeholder-gray-500 w-full"
               />
-            </div>
+            </div> */}
 
             {/* Divider */}
-            <div className="h-12 border-l border-gray-300"></div>
+            {/* <div className="h-12 border-l border-gray-300"></div> */}
 
             {/* Custom Dropdown */}
-            {/* Custom Dropdown */}
-            <div className="relative min-w-[160px] w-full max-w-[180px]">
+            {/* <div className="relative min-w-[160px] w-full max-w-[180px]">
               <div
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="flex items-center justify-between w-full space-x-2 cursor-pointer text-sm text-gray-500 hover:text-violet-500"
@@ -336,10 +355,10 @@ const testimonials = [
                     d="M19 9l-7 7-7-7"
                   />
                 </svg>
-              </div>
+              </div> */}
 
               {/* Dropdown Menu */}
-              {dropdownOpen && (
+              {/* {dropdownOpen && (
                 <div className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg">
                   {[
                     "All Categories",
@@ -365,16 +384,16 @@ const testimonials = [
                   ))}
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* Button */}
-            <button className="ml-4 flex items-center space-x-2 rounded-full px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-jost hover:scale-105 transition-transform">
+            {/* <button className="ml-4 flex items-center space-x-2 rounded-full px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-jost hover:scale-105 transition-transform">
               <span>Find Jobs</span>
             </button>
-          </div>
+          </div> */}
 
           {/* Floating Bubbles */}
-          <motion.div
+          {/* <motion.div
             className="relative w-full max-w-6xl h-[320px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -402,12 +421,15 @@ const testimonials = [
                 <p className="px-3 font-jost">{item.text}</p>
               </motion.div>
             ))}
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
 
       {/* 👇 Separate Scroll Section Starts Here — AFTER full background */}
       <div className="w-full mb-10 -mt-24 bg-white  overflow-hidden">
+        <h3 className="text-2xl md:text-4xl text-center font-extrabold text-purple-900 py-4 mb-12">
+          Trusted By Leading Companies
+        </h3>
         <div className="flex gap-20 px-4 whitespace-nowrap animate-marquee">
           {[...Array(2)].flatMap((_, repeatIdx) =>
             [
@@ -426,7 +448,7 @@ const testimonials = [
                 key={`${repeatIdx}-${idx}`}
                 src={logo}
                 alt={`Client ${idx + 1}`}
-                className="h-8 inline-block object-contain"
+                className="h-8 inline-block object-contain filter grayscale hover:grayscale-0 transition duration-300 mx-2"
               />
             ))
           )}
@@ -453,12 +475,12 @@ const testimonials = [
             visible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
           }`}
         >
-          <h2 className="text-4xl font-jost mb-8 transition-opacity duration-700 ease-in-out hover:text-purple-300">
+          <h2 className="text-4xl font-bold text-purple-300 font-jost mb-8 transition-opacity duration-700 ease-in-out hover:text-white">
             Unbiased Services to Unlock Your Career Potential
           </h2>
 
           {/* Steps */}
-          <div className="space-y-8 relative">
+          <div className="relative" ref={careerPotentialRef}>
             {[
               {
                 number: 1,
@@ -478,16 +500,24 @@ const testimonials = [
             ].map((step, index) => (
               <div
                 key={index}
-                className="flex items-start group transition-all duration-700 ease-in-out hover:scale-[1.03]"
+                className="container flex items-start group transition-all duration-700 ease-in-out"
               >
-                <div className="flex flex-col items-center mr-4">
-                  <div className="w-8 h-8 bg-white text-black font-jost rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-purple-500 group-hover:text-white group-hover:shadow-lg cursor-pointer">
+                {/* left side, progress line. */}
+                <motion.div 
+                  className="flex flex-col items-center mr-4"
+                >
+                  <div className="w-8 h-8 bg-white text-black font-jost rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-purple-500 group-hover:text-white group-hover:shadow-lg cursor-pointer group-hover:scale-125">
                     {step.number}
                   </div>
                   {index < 2 && (
-                    <div className="w-px h-16 bg-white mt-1 transition-all duration-300 group-hover:bg-purple-400"></div>
+                    <div 
+                      className={`w-px h-16 bg-white mt-1 transition-all duration-300 group-hover:bg-purple-400 relative mask-reveal ${
+                      (isInView) ? 'animate-reveal' : ''}`}
+                      style={{ animationDelay: `${(index + 1) * 2}s` }}
+                    ></div>
                   )}
-                </div>
+                </motion.div>
+                {/* right side, text. */}
                 <div className="transition-all duration-500 group-hover:text-purple-300">
                   <h3 className="text-xl font-jost transition-colors duration-300">
                     {step.title}
@@ -501,7 +531,7 @@ const testimonials = [
           </div>
 
           {/* CTA Button */}
-          <button className="mt-10 px-6 py-3 rounded-lg bg-white text-black font-jost transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-400 hover:to-purple-700 hover:text-white shadow-md hover:shadow-xl">
+          <button className="mt-10 px-6 py-3 rounded-lg bg-white text-black font-jost font-bold transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-400 hover:to-purple-700 hover:text-white shadow-md hover:shadow-xl">
             Get Started Now →
           </button>
         </div>
@@ -560,30 +590,38 @@ const testimonials = [
 
       <section className="w-full bg-violet-950 text-white py-16 px-6 md:px-20 transition-all duration-500">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-jost mb-12 transition-opacity duration-700">
+          <h2 className="font-bold text-3xl md:text-4xl font-jost mb-12 transition-opacity duration-700">
             Unlock Your Career Potential with Our Comprehensive Features
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="w-full sm:w-75% grid grid-cols-1 md:grid-cols-3 gap-y-6 justify-items-center">
             {[
               {
                 title: "Internship and Placements",
-                desc: "Gain experience and enhance your skills with top companies.",
+                desc: "Gain valuable real-world experience and sharpen your professional skills by working with top-tier companies across diverse industries.",
+                icon: "🎓",
               },
               {
                 title: "AI-Driven Career Insights",
-                desc: "Leverage AI for trends, market data, and tailored career advice.",
+                desc: "Harness the power of AI to stay ahead with real-time trends, in-depth market intelligence, and personalized career guidance.",
+                icon: "🧠",
               },
               {
                 title: "Empowering Institutions",
-                desc: "Provide institutions with tools for student achievement.",
+                desc: "Equip institutions with advanced tools to monitor progress, identify learning gaps, and enhance student outcomes.",
+                icon: "✨",
               },
             ].map((feature, idx) => (
               <div
                 key={idx}
-                className="border border-white rounded-lg p-6 transition-transform duration-300 hover:scale-105 hover:bg-violet-900 shadow-md"
+                className="min-h-120 w-[80%] sm:w-[300px] border border-white/30 border-yellow-50 rounded-lg p-6 transition-transform duration-300 hover:scale-105 hover:bg-violet-900 shadow-md flex flex-col items-center justify-center gap-6"
               >
-                <h3 className="text-xl font-jost mb-2">{feature.title}</h3>
+                <span
+                  className="text-6xl"
+                >
+                  {feature.icon}
+                </span>
+                <h3 className="text-3xl font-extrabold font-jost mb-2">{feature.title}</h3>
                 <p className="text-sm text-gray-300">{feature.desc}</p>
               </div>
             ))}
@@ -697,12 +735,25 @@ const testimonials = [
         <section className="bg-gradient-to-b from-purple-900 to-purple-950 text-white py-16 px-6">
   <div className="max-w-7xl mx-auto">
     {/* Centered title at the top */}
-    <div className="text-center mb-12">
-      <h2 className="text-3xl font-jost">Browse by Category</h2>
-      <p className="text-sm text-purple-200 mt-2">
-        2020 jobs live • 293 added today
-      </p>
+    <div className="titletop flex space-x-4 items-start justify-between">
+    <div className="text-left mb-12">
+        <h2 className="text-3xl font-jost font-bold">Browse by Category</h2>
+        <p className="text-sm text-purple-200 mt-2">
+          2020 jobs live • 293 added today
+        </p>
+      </div>
+      <div className="text-right mb-12 pr-6">
+        <div className="text-center mt-10">
+          <a
+            href="#"
+            className="text-sm underline hover:text-white transition"
+          >
+            See all categories ↗
+          </a>
+        </div>
+      </div>
     </div>
+   
 
     {/* Grid of category cards */}
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -761,16 +812,6 @@ const testimonials = [
           </p>
         </motion.div>
       ))}
-    </div>
-
-    {/* Optional bottom link */}
-    <div className="text-center mt-10">
-      <a
-        href="#"
-        className="text-sm underline hover:text-white transition"
-      >
-        See all categories ↗
-      </a>
     </div>
   </div>
 </section>
