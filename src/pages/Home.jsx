@@ -32,6 +32,7 @@ import avatar4 from "../assets/avatars/testi-img1.png";
 import avatar5 from "../assets/avatars/testi-img1.png";
 
 import BlurText from "../components/ui/BlurText";
+import ScrollingText from "../components/ui/ScrollingText";
 import SearchBar from "../components/MainPageSearchBar";
 
 const Home = () => {
@@ -455,136 +456,156 @@ const testimonials = [
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-center gap-12 px-8 py-16 bg-violet-950 text-white">
-        {/* Left Image */}
-        <div
-          className={`w-full md:w-1/2 transform transition-all duration-1000 ease-in-out ${
-            visible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
-          }`}
-        >
-          <img
-            src={unbiasedGif}
-            alt="Career Services"
-            className="w-full h-auto transition-transform duration-500 ease-in-out hover:scale-105"
-          />
-        </div>
+      <div className="flex flex-col items-center justify-center gap-12 px-8 py-16 bg-violet-950 text-white h-2/4">
 
-        {/* Right Content */}
-        <div
-          className={`w-full md:w-1/2 transform transition-all duration-1000 ease-in-out ${
-            visible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-          }`}
-        >
-          <h2 className="text-4xl font-bold text-purple-300 font-jost mb-8 transition-opacity duration-700 ease-in-out hover:text-white">
-            Unbiased Services to Unlock Your Career Potential
-          </h2>
+        <h2 className="unbiasedTitle text-4xl text-start font-extrabold text-white-3 font-jost mb-8 transition-opacity duration-700 ease-in-out hover:text-white">
+          Unbiased Services to {" "}
+          <span class="bg-gradient-to-r from-purple-700 to-purple-500 hover:bg-gradient-to-r hover:from-purple-500 hover:to-purple-300 bg-clip-text text-transparent text-black">Unlock</span>
+          {" "}Your Career Potential
+        </h2>
 
-          {/* Steps */}
-          <div className="relative" ref={careerPotentialRef}>
-            {[
-              {
-                number: 1,
-                title: "AI-Powered Job Matching",
-                desc: "Find your perfect career fit with our advanced matching algorithms.",
-              },
-              {
-                number: 2,
-                title: "Comprehensive Skill Assessments",
-                desc: "Identify your strengths and areas for growth.",
-              },
-              {
-                number: 3,
-                title: "Expert Mentorship",
-                desc: "Gain insights from industry leaders and accelerate your career.",
-              },
-            ].map((step, index) => (
-              <div
-                key={index}
-                className="container flex items-start group transition-all duration-700 ease-in-out"
-              >
-                {/* left side, progress line. */}
-                <motion.div 
-                  className="flex flex-col items-center mr-4"
-                >
-                  <div className="w-8 h-8 bg-white text-black font-jost rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-purple-500 group-hover:text-white group-hover:shadow-lg cursor-pointer group-hover:scale-125">
-                    {step.number}
-                  </div>
-                  {index < 2 && (
-                    <div 
-                      className={`w-px h-16 bg-white mt-1 transition-all duration-300 group-hover:bg-purple-400 relative mask-reveal ${
-                      (isInView) ? 'animate-reveal' : ''}`}
-                      style={{ animationDelay: `${(index + 1) * 2}s` }}
-                    ></div>
-                  )}
-                </motion.div>
-                {/* right side, text. */}
-                <div className="transition-all duration-500 group-hover:text-purple-300">
-                  <h3 className="text-xl font-jost transition-colors duration-300">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm opacity-80 mt-1 transition-opacity duration-300 group-hover:opacity-100">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
+        <div className="flex flex-col sm:flex-row space-around items-center">
+
+          {/* Left Image */}
+          <div
+            className={`h-max w-full md:w-1/2 transform transition-all duration-1000 ease-in-out ${
+              visible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
+            }`}
+          >
+            <img
+              src={unbiasedGif}
+              alt="Career Services"
+              className="mx-auto w-full sm:w-2/4 h-4/6 object-contain transition-transform duration-500 ease-in-out hover:scale-105"
+            />
           </div>
 
-          {/* CTA Button */}
-          <button className="mt-10 px-6 py-3 rounded-lg bg-white text-black font-jost font-bold transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-400 hover:to-purple-700 hover:text-white shadow-md hover:shadow-xl">
-            Get Started Now →
-          </button>
+          {/* Right Content */}
+          <div
+            className={`h-max w-full md:w-1/2 pt-9 sm:pt-0 transform transition-all duration-1000 ease-in-out ${
+              visible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+            }`}
+          >
+
+            {/* Steps */}
+            <div className="h-max relative" ref={careerPotentialRef}>
+              {[
+                {
+                  number: 1,
+                  title: "AI-Powered Job Matching",
+                  desc: "Find your perfect career fit with our advanced matching algorithms.",
+                },
+                {
+                  number: 2,
+                  title: "Comprehensive Skill Assessments",
+                  desc: "Identify your strengths and areas for growth.",
+                },
+                {
+                  number: 3,
+                  title: "Expert Mentorship",
+                  desc: "Gain insights from industry leaders and accelerate your career.",
+                },
+              ].map((step, index) => (
+                <div
+                  key={index}
+                  className="container flex items-start group transition-all duration-700 ease-in-out"
+                >
+                  {/* left side, progress line. */}
+                  <motion.div 
+                    className="flex flex-col items-center mr-4"
+                  >
+                    <div className="w-8 h-8 p-4 font-bold bg-white text-black font-jost rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-purple-500 group-hover:text-white group-hover:shadow-lg cursor-pointer group-hover:scale-125">
+                      {step.number}
+                    </div>
+                    {index < 2 && (
+                      // Line
+                      <div 
+                        className={`w-0.5 h-16 sm:h-24 bg-white mt-1 transition-all duration-300 group-hover:bg-purple-400 relative mask-reveal ${
+                        (isInView) ? 'animate-reveal' : ''}`}
+                        style={{ animationDelay: `${(index + 1) * 2}s` }}
+                      ></div>
+                    )}
+                  </motion.div>
+                  {/* right side, text. */}
+                  <div className="transition-all duration-500 group-hover:text-purple-300">
+                    <h3 className="text-2xl font-bold transition-colors duration-300">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm opacity-80 mt-1 transition-opacity duration-300 group-hover:opacity-100">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
         </div>
+
+        {/* CTA Button */}
+            <button className="mt-10 px-6 py-3 rounded-lg bg-white text-black font-jost font-bold transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-400 hover:to-purple-700 hover:text-white shadow-md hover:shadow-xl">
+              Get Started Now →
+            </button>
+
       </div>
 
       <>
         {sections.map((sec, idx) => (
-          <section key={idx} className="w-full bg-white">
-            <div
-              className={`flex flex-col ${
-                sec.reverse ? "md:flex-row-reverse" : "md:flex-row"
-              } items-center justify-between py-16 px-6 md:px-20 gap-32 max-w-7xl mx-auto`}
-            >
-              {/* Image */}
-              <motion.div
-                className="flex-1"
-                initial={sectionVariants[idx].image.initial}
-                whileInView={sectionVariants[idx].image.animate}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                viewport={{ once: true }}
+          <>
+            <section key={idx} className="w-full bg-white">
+              <div
+                className={`flex flex-col ${
+                  sec.reverse ? "md:flex-row-reverse" : "md:flex-row"
+                } items-center justify-between py-16 px-6 md:px-20 gap-32 max-w-7xl mx-auto`}
               >
-                <img
-                  src={sec.gif}
-                  alt={sec.title}
-                  className="w-full h-auto object-contain"
-                />
-              </motion.div>
+                {/* Image */}
+                <motion.div
+                  className="flex-1"
+                  initial={sectionVariants[idx].image.initial}
+                  whileInView={sectionVariants[idx].image.animate}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <img
+                    src={sec.gif}
+                    alt={sec.title}
+                    className="w-full h-auto object-contain"
+                  />
+                </motion.div>
 
-              {/* Text Content */}
-              <motion.div
-                className="flex-1"
-                initial={sectionVariants[idx].text.initial}
-                whileInView={sectionVariants[idx].text.animate}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-3xl md:text-4xl font-jost text-[#2a0052] mb-6">
-                  {sec.title}
-                </h2>
-                <ul className="space-y-4 text-gray-700">
-                  {sec.points.map((point, pIdx) => (
-                    <li key={pIdx} className="flex items-start gap-2">
-                      <span className="text-xl text-green-600">✓</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button className="mt-8 px-6 py-3 bg-black text-white rounded-lg font-jost">
-                  Discover More
-                </button>
-              </motion.div>
-            </div>
-          </section>
+                {/* Text Content */}
+                <motion.div
+                  className="flex-1"
+                  initial={sectionVariants[idx].text.initial}
+                  whileInView={sectionVariants[idx].text.animate}
+                  transition={{ duration: 0.7, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold md:text-4xl font-jost text-[#2a0052] mb-6">
+                    {sec.title}
+                  </h2>
+                  <ul className="space-y-4 text-gray-900">
+                    {sec.points.map((point, pIdx) => (
+                      <li key={pIdx} className="flex items-start gap-2">
+                        <span className="text-xl text-green-600"></span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button className="mt-8 px-6 py-3 bg-black text-white rounded-lg font-jost">
+                    Discover More
+                  </button>
+                </motion.div>
+              </div>
+            </section>
+            {(idx == 0) && (
+              <ScrollingText
+                texts={['Unlock Your Potential', 'Sign Up Now']} 
+                velocity={100} 
+                className="custom-scroll-text"
+              />
+            )}
+          </>
+          
         ))}
       </>
 

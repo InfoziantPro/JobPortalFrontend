@@ -49,25 +49,7 @@ const SearchBar = () => {
             className="bg-transparent focus:outline-none text-white placeholder-white/60 w-full text-sm"
           />
         </div>
-
-        {/* <div className="flex-1 flex items-center gap-3 border-b border-white/20 pb-2 sm:pb-0 sm:border-b-0 sm:border-r sm:pr-4">
-          <ListFilter className="text-white w-5 h-5" />
-          <select
-            value={form.category}
-            onChange={handleChange('category')}
-            className="bg-transparent focus:outline-none text-white placeholder-white/60 w-full"
-          >
-            <option value="" disabled>
-              Choose Category
-            </option>
-            {categories.map((c) => (
-              <option key={c} value={c} className="text-black">
-                {c}
-              </option>
-            ))}
-          </select>
-        </div> */}
-
+        
         <div className="relative min-w-[160px] w-full max-w-[180px] flex align-middle">
             <div
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -94,7 +76,7 @@ const SearchBar = () => {
 
             {(dropdownOpen) && (
                 <motion.div 
-                    className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg"
+                    className="absolute z-10 mt-2 w-48 bg-white rounded-xl shadow-lg overflow-hidden"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 40 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -128,7 +110,7 @@ const SearchBar = () => {
 
         <button
           type="submit"
-          className="flex items-center justify-center gap-2 bg-white text-black font-medium px-4 py-2 rounded-xl sm:rounded-full shadow-md hover:bg-gray-200 text-s transition hover:bg-gradient-to-r hover:from-purple-500 hover:to-purple-400 hover rounded-xl sm:rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="flex items-center justify-center gap-2 bg-white text-black font-medium px-4 py-2 shadow-md hover:bg-gray-200 text-s transition hover:bg-gradient-to-r hover:from-purple-500 hover:to-purple-400 hover rounded-xl sm:rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           <Search className="w-5 h-5" />
           Search
