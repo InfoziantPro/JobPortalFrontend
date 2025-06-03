@@ -13,7 +13,22 @@ const JobList = ({ user }) => {
     location: '',
     jobType: '',
     isActive: true,
+
+    emailAddress: '',
+    username: '',
+    specialisms: [],
+    offeredSalary: '',
+    careerLevel: '',
+    experience: '',
+    gender: '',
+    industry: '',
+    qualification: '',
+    applicationDeadline: '',
+    country: '',
+    city: '',
+    address: '',
   });
+
 
   const role = user?.role?.toLowerCase(); 
   const token = localStorage.getItem('token');
@@ -40,14 +55,32 @@ const JobList = ({ user }) => {
   const openEdit = (job) => {
     setSelectedJob(job);
     setEditForm({
-      title: job.title,
-      description: job.description,
-      company: job.company,
-      location: job.location,
-      jobType: job.jobType,
-      isActive: job.isActive,
+      title: job.title || '',
+      description: job.description || '',
+      company: job.company || '',
+      location: job.location || '',
+      jobType: job.jobType || '',
+      isActive: job.isActive ?? true,
+
+      // Additional fields
+      emailAddress: job.emailAddress || '',
+      username: job.username || '',
+      specialisms: job.specialisms || [],
+      offeredSalary: job.offeredSalary || '',
+      careerLevel: job.careerLevel || '',
+      experience: job.experience || '',
+      gender: job.gender || '',
+      industry: job.industry || '',
+      qualification: job.qualification || '',
+      applicationDeadline: job.applicationDeadline
+        ? new Date(job.applicationDeadline).toISOString().split('T')[0]
+        : '',
+      country: job.country || '',
+      city: job.city || '',
+      address: job.address || '',
     });
   };
+
 
   const closeEdit = () => setSelectedJob(null);
 
@@ -204,6 +237,131 @@ const JobList = ({ user }) => {
               />
               Active
             </label>
+
+            <label className="block mb-2 font-semibold">Email Address</label>
+            <input
+              type="email"
+              name="emailAddress"
+              value={editForm.emailAddress}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={editForm.username}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Specialisms (comma-separated)</label>
+            <input
+              type="text"
+              name="specialisms"
+              value={editForm.specialisms.join(', ')}
+              onChange={(e) =>
+                setEditForm({ ...editForm, specialisms: e.target.value.split(',').map(s => s.trim()) })
+              }
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Offered Salary</label>
+            <input
+              type="text"
+              name="offeredSalary"
+              value={editForm.offeredSalary}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Career Level</label>
+            <input
+              type="text"
+              name="careerLevel"
+              value={editForm.careerLevel}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Experience</label>
+            <input
+              type="text"
+              name="experience"
+              value={editForm.experience}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Gender</label>
+            <select
+              name="gender"
+              value={editForm.gender}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+              <option value="Any">Any</option>
+            </select>
+
+            <label className="block mb-2 font-semibold">Industry</label>
+            <input
+              type="text"
+              name="industry"
+              value={editForm.industry}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Qualification</label>
+            <input
+              type="text"
+              name="qualification"
+              value={editForm.qualification}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Application Deadline</label>
+            <input
+              type="date"
+              name="applicationDeadline"
+              value={editForm.applicationDeadline}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Country</label>
+            <input
+              type="text"
+              name="country"
+              value={editForm.country}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">City</label>
+            <input
+              type="text"
+              name="city"
+              value={editForm.city}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <label className="block mb-2 font-semibold">Complete Address</label>
+            <textarea
+              name="address"
+              value={editForm.address}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mb-4"
+              rows={2}
+            />
+
 
             <div className="flex justify-end gap-3 mt-6">
               {role === 'candidate' ? (

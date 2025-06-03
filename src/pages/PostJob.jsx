@@ -1,147 +1,192 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import apiClient from '../api/apiClient';
 
 const PostJob = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [company, setCompany] = useState('');
-  const [location, setLocation] = useState('Remote');
-  const [salaryFrom, setSalaryFrom] = useState('');
-  const [salaryTo, setSalaryTo] = useState('');
-  const [jobType, setJobType] = useState('Full-time');
+  const [form, setForm] = useState({
+    title: '',
+    description: '',
+    company: '',
+    location: 'Remote',
+    salaryFrom: '',
+    salaryTo: '',
+    jobType: 'Full-time',
+    emailAddress: '',
+    username: '',
+    specialisms: '',
+    offeredSalary: '',
+    careerLevel: '',
+    experience: '',
+    gender: '',
+    industry: '',
+    qualification: '',
+    applicationDeadline: '',
+    country: '',
+    city: '',
+    address: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const token = localStorage.getItem('token');
-    if (!token) {
-      toast.error('You must be logged in to post a job');
-      return;
-    }
+    if (!token) return toast.error('You must be logged in to post a job');
 
     try {
       await apiClient.post(
         '/jobs/postjob',
         {
-          title,
-          description,
-          company,
-          location,
+          title: form.title,
+          description: form.description,
+          company: form.company,
+          location: form.location,
           salaryRange: {
-            from: salaryFrom ? Number(salaryFrom) : undefined,
-            to: salaryTo ? Number(salaryTo) : undefined,
+            from: form.salaryFrom ? Number(form.salaryFrom) : undefined,
+            to: form.salaryTo ? Number(form.salaryTo) : undefined,
           },
-          jobType,
+          jobType: form.jobType,
+          emailAddress: form.emailAddress,
+          username: form.username,
+          specialisms: form.specialisms.split(',').map((s) => s.trim()),
+          offeredSalary: form.offeredSalary,
+          careerLevel: form.careerLevel,
+          experience: form.experience,
+          gender: form.gender,
+          industry: form.industry,
+          qualification: form.qualification,
+          applicationDeadline: form.applicationDeadline,
+          country: form.country,
+          city: form.city,
+          address: form.address,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       toast.success('Job posted successfully!');
+
       // Clear form
-      setTitle('');
-      setDescription('');
-      setCompany('');
-      setLocation('Remote');
-      setSalaryFrom('');
-      setSalaryTo('');
-      setJobType('Full-time');
+      setForm({
+        title: '',
+        description: '',
+        company: '',
+        location: 'Remote',
+        salaryFrom: '',
+        salaryTo: '',
+        jobType: 'Full-time',
+        emailAddress: '',
+        username: '',
+        specialisms: '',
+        offeredSalary: '',
+        careerLevel: '',
+        experience: '',
+        gender: '',
+        industry: '',
+        qualification: '',
+        applicationDeadline: '',
+        country: '',
+        city: '',
+        address: '',
+      });
     } catch (error) {
       toast.error(error.response?.data?.error || 'Failed to post job');
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
-      <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-white p-8 rounded-lg shadow-md space-y-6">
-        <h2 className="text-3xl font-extrabold text-gray-800 text-center">Post a New Job</h2>
+  <div className="min-h-screen bg-gradient-to-br from-gray-100 to-white flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full max-w-3xl bg-white p-10 rounded-2xl shadow-xl space-y-6"
+    >
+      <h2 className="text-4xl font-bold text-gray-800 text-center">🚀 Post a New Job</h2>
+      <p className="text-center text-gray-500 text-sm mb-6">
+        Fill in the job details below to find the perfect candidate.
+      </p>
 
-        <input
-          type="text"
-          placeholder="Job Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
-        />
+      {/* Job Details */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-700">Job Details</h3>
+        <input name="title" value={form.title} onChange={handleChange} placeholder="Job Title" required className="input" />
+        <textarea name="description" value={form.description} onChange={handleChange} placeholder="Job Description" required className="input h-32 resize-none" />
+        <input name="specialisms" value={form.specialisms} onChange={handleChange} placeholder="Specialisms (comma separated)" className="input" />
+      </div>
 
-        <textarea
-          placeholder="Job Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 h-32 resize-none"
-        />
+      {/* Company Information */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-700">Company Information</h3>
+        <input name="company" value={form.company} onChange={handleChange} placeholder="Company Name" required className="input" />
+        <input name="emailAddress" value={form.emailAddress} onChange={handleChange} placeholder="Email Address" className="input" />
+        <input name="username" value={form.username} onChange={handleChange} placeholder="Username" className="input" />
+      </div>
 
-        <input
-          type="text"
-          placeholder="Company Name"
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
-          required
-          className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
-        />
-
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="flex-1">
-            <label className="block mb-1 text-sm font-medium text-gray-700">Location</label>
-            <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
-            >
-              <option value="Remote">Remote</option>
-              <option value="In-person">In-person</option>
-              <option value="Hybrid">Hybrid</option>
-            </select>
-          </div>
-
-          <div className="flex-1">
-            <label className="block mb-1 text-sm font-medium text-gray-700">Job Type</label>
-            <select
-              value={jobType}
-              onChange={(e) => setJobType(e.target.value)}
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
-            >
-              <option value="Full-time">Full-time</option>
-              <option value="Part-time">Part-time</option>
-              <option value="Contract">Contract</option>
-              <option value="Internship">Internship</option>
-            </select>
-          </div>
-        </div>
-
+      {/* Salary & Career */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-700">Salary & Experience</h3>
         <div className="flex gap-4">
-          <input
-            type="number"
-            placeholder="Salary From"
-            value={salaryFrom}
-            onChange={(e) => setSalaryFrom(e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
-          />
-          <input
-            type="number"
-            placeholder="Salary To"
-            value={salaryTo}
-            onChange={(e) => setSalaryTo(e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
-          />
+          <input name="salaryFrom" type="number" value={form.salaryFrom} onChange={handleChange} placeholder="Salary From" className="input w-1/2" />
+          <input name="salaryTo" type="number" value={form.salaryTo} onChange={handleChange} placeholder="Salary To" className="input w-1/2" />
         </div>
+        <input name="offeredSalary" value={form.offeredSalary} onChange={handleChange} placeholder="Offered Salary (e.g., 50k-60k)" className="input" />
+        <input name="careerLevel" value={form.careerLevel} onChange={handleChange} placeholder="Career Level" className="input" />
+        <input name="experience" value={form.experience} onChange={handleChange} placeholder="Experience Required" className="input" />
+      </div>
 
-        <button
-          type="submit"
-          className="w-full py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold rounded-lg hover:opacity-90 transition duration-300"
-        >
-          Post Job
-        </button>
-      </form>
-    </div>
-  );
+      {/* Requirements */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-700">Requirements</h3>
+        <select name="gender" value={form.gender} onChange={handleChange} className="input">
+          <option value="">Gender Preference</option>
+          <option value="Any">Any</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <input name="industry" value={form.industry} onChange={handleChange} placeholder="Industry" className="input" />
+        <input name="qualification" value={form.qualification} onChange={handleChange} placeholder="Qualification" className="input" />
+        <input name="applicationDeadline" type="date" value={form.applicationDeadline} onChange={handleChange} className="input" />
+      </div>
+
+      {/* Location */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-700">Job Location</h3>
+        <input name="country" value={form.country} onChange={handleChange} placeholder="Country" className="input" />
+        <input name="city" value={form.city} onChange={handleChange} placeholder="City" className="input" />
+        <input name="address" value={form.address} onChange={handleChange} placeholder="Complete Address" className="input" />
+        <select name="location" value={form.location} onChange={handleChange} className="input">
+          <option value="">Select Work Type</option>
+          <option value="Remote">Remote</option>
+          <option value="In-person">In-person</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+      </div>
+
+      {/* Job Type */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-700">Job Type</h3>
+        <select name="jobType" value={form.jobType} onChange={handleChange} className="input">
+          <option value="">Select Job Type</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+          <option value="Contract">Contract</option>
+          <option value="Internship">Internship</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        className="w-full py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition duration-300"
+      >
+        Post Job
+      </button>
+    </form>
+  </div>
+);
+
 };
 
 export default PostJob;
