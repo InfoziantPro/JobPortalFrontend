@@ -19,6 +19,7 @@ import EmployeeList from './pages/EmployeeList';
 import Companies from './pages/Companies';
 import AboutMe from './pages/AboutMe';
 import About from './pages/About';
+import AllJobs from './components/AllJobs';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -58,6 +59,7 @@ function App() {
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/aboutMe" element={<AboutMe />} />
           <Route path="/about" element={<About />} />
+          <Route path="/all-jobs" element={<AllJobs />} />
           
           <Route
             path="/jobs/all"

@@ -55,7 +55,7 @@ export default function Navbar({ user, onLogout }) {
       <div className="hidden md:flex space-x-6 text-gray-700 text-md font-normal">
         <Link to="/" className={`hover:text-indigo-800 ${isActive('/') ? 'font-bold text-indigo-800' : ''}`}>Home</Link>
         <Link to="/about" className={`hover:text-indigo-800 ${isActive('/about') ? 'font-bold text-indigo-800' : ''}`}>About</Link>
-        <Link to="/jobs/all" className={`hover:text-indigo-800 ${isActive('/jobs/all') ? 'font-bold text-indigo-800' : ''}`}>Jobs</Link>
+        <Link to="/all-jobs" className={`hover:text-indigo-800 ${isActive('/all-jobs') ? 'font-bold text-indigo-800' : ''}`}>Jobs</Link>
         <Link to="/companies" className={`hover:text-indigo-800 ${isActive('/companies') ? 'font-bold text-indigo-800' : ''}`}>Companies</Link>
         <Link to="/courses" className={`hover:text-indigo-800 ${isActive('/courses') ? 'font-bold text-indigo-800' : ''}`}>Courses</Link>
       </div>
