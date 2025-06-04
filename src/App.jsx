@@ -20,6 +20,7 @@ import Companies from './pages/Companies';
 import AboutMe from './pages/AboutMe';
 import About from './pages/About';
 import AllJobs from './components/AllJobs';
+import JobApplicationForm from './components/JobApplicationForm';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -114,6 +115,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="/apply/:jobId" element={<JobApplicationForm />} />
 
           <Route
             path="/approvals"
