@@ -96,12 +96,22 @@ const JobList = ({ user }) => {
 
 
   const handleChange = (e) => {
+    if (role === 'candidate') return; 
     const { name, value, type, checked } = e.target;
-    setEditForm((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
+
+    if (name === 'specialisms') {
+      setEditForm((prev) => ({
+        ...prev,
+        specialisms: value.split(',').map(s => s.trim()),
+      }));
+    } else {
+      setEditForm((prev) => ({
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value,
+      }));
+    }
   };
+
 
   const handleUpdate = async () => {
     try {
@@ -150,6 +160,7 @@ const JobList = ({ user }) => {
             </p>
             <p className="mt-2">{job.description.substring(0, 100)}...</p>
             <p className="text-sm mt-1">Type: {job.jobType}</p>
+            {/* <p className="text-sm mt-1">Salary Range: {job.salaryRange}</p> */}
             {job.postedBy && (
               <p className="text-xs text-gray-500 mt-2">
                 Posted by: <span className="font-medium">{job.postedBy.name}</span> ({job.postedBy.email})
@@ -173,6 +184,7 @@ const JobList = ({ user }) => {
               value={editForm.title}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Company</label>
@@ -182,6 +194,7 @@ const JobList = ({ user }) => {
               value={editForm.company}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Location</label>
@@ -190,6 +203,7 @@ const JobList = ({ user }) => {
               value={editForm.location}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              disabled={role === 'candidate'}
             >
               <option value="">Select Location</option>
               <option value="Remote">Remote</option>
@@ -203,6 +217,7 @@ const JobList = ({ user }) => {
               value={editForm.jobType}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              disabled={role === 'candidate'}
             >
               <option value="">Select Job Type</option>
               <option value="Full-time">Full-time</option>
@@ -218,6 +233,7 @@ const JobList = ({ user }) => {
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
               rows={5}
+              readOnly={role === 'candidate'}
             />
 
             <label className="inline-flex items-center mb-4">
@@ -227,6 +243,7 @@ const JobList = ({ user }) => {
                 checked={editForm.isActive}
                 onChange={handleChange}
                 className="mr-2"
+                readOnly={role === 'candidate'}
               />
               Active
             </label>
@@ -238,6 +255,7 @@ const JobList = ({ user }) => {
               value={editForm.emailAddress}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Username</label>
@@ -247,6 +265,7 @@ const JobList = ({ user }) => {
               value={editForm.username}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Specialisms (comma-separated)</label>
@@ -254,10 +273,13 @@ const JobList = ({ user }) => {
               type="text"
               name="specialisms"
               value={editForm.specialisms.join(', ')}
-              onChange={(e) =>
-                setEditForm({ ...editForm, specialisms: e.target.value.split(',').map(s => s.trim()) })
-              }
+              onChange={(e) => {
+                if (role === 'candidate') return;
+                setEditForm({ ...editForm, specialisms: e.target.value.split(',').map(s => s.trim()) });
+              }}
+
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Offered Salary</label>
@@ -267,6 +289,7 @@ const JobList = ({ user }) => {
               value={editForm.offeredSalary}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Career Level</label>
@@ -276,6 +299,7 @@ const JobList = ({ user }) => {
               value={editForm.careerLevel}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Experience</label>
@@ -285,6 +309,7 @@ const JobList = ({ user }) => {
               value={editForm.experience}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Gender</label>
@@ -293,6 +318,7 @@ const JobList = ({ user }) => {
               value={editForm.gender}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              disabled={role === 'candidate'}
             >
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
@@ -308,6 +334,7 @@ const JobList = ({ user }) => {
               value={editForm.industry}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Qualification</label>
@@ -317,6 +344,7 @@ const JobList = ({ user }) => {
               value={editForm.qualification}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Application Deadline</label>
@@ -326,6 +354,7 @@ const JobList = ({ user }) => {
               value={editForm.applicationDeadline}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Country</label>
@@ -335,6 +364,7 @@ const JobList = ({ user }) => {
               value={editForm.country}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">City</label>
@@ -344,6 +374,7 @@ const JobList = ({ user }) => {
               value={editForm.city}
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
+              readOnly={role === 'candidate'}
             />
 
             <label className="block mb-2 font-semibold">Complete Address</label>
@@ -353,6 +384,7 @@ const JobList = ({ user }) => {
               onChange={handleChange}
               className="w-full border p-2 rounded mb-4"
               rows={2}
+              readOnly={role === 'candidate'}
             />
 
 
