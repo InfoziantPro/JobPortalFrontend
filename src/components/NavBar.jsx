@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaUser, FaBars } from 'react-icons/fa';
+import { FaUser, FaBars, FaBell } from 'react-icons/fa';
 import logo from '/src/assets/logos/Logo.png';
 import apiClient from '../api/apiClient';
 
@@ -60,9 +60,9 @@ export default function Navbar({ user, onLogout }) {
         <Link to="/courses" className={`hover:text-indigo-800 ${isActive('/courses') ? 'font-bold text-indigo-800' : ''}`}>Courses</Link>
       </div>
 
-      {/* Right Side - User Icon & Hamburger */}
+      {/* Right Side Icons */}
       <div className="flex items-center space-x-4">
-        {/* Hamburger - Visible only on mobile */}
+        {/* Hamburger - Mobile Only */}
         <div className="md:hidden relative" ref={mainMenuRef}>
           <button
             onClick={() => setMainMenuOpen((prev) => !prev)}
@@ -72,7 +72,7 @@ export default function Navbar({ user, onLogout }) {
           </button>
           {mainMenuOpen && (
             <div className="absolute right-0 mt-2 bg-white shadow-md rounded w-44 z-10 border font-jost">
-              <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1 font-jost">
+              <div className="flex flex-col text-sm text-gray-700 p-2 space-y-1">
                 <Link to="/" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/') ? 'font-bold text-indigo-800' : ''}`}>Home</Link>
                 <Link to="/about" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/about') ? 'font-bold text-indigo-800' : ''}`}>About</Link>
                 <Link to="/all-jobs" className={`hover:bg-gray-100 px-2 py-1 rounded ${isActive('/all-jobs') ? 'font-bold text-indigo-800' : ''}`}>Jobs</Link>
@@ -82,6 +82,16 @@ export default function Navbar({ user, onLogout }) {
             </div>
           )}
         </div>
+
+        {/* Notification Icon */}
+        <button
+          className="text-gray-800 text-2xl mb-1 relative"
+          aria-label="Notifications"
+        >
+          <FaBell />
+          {/* Optional red dot badge */}
+          <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+        </button>
 
         {/* User Profile Icon */}
         <div className="relative" ref={userMenuRef}>
