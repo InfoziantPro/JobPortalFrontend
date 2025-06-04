@@ -22,6 +22,7 @@ import About from './pages/About';
 import AllJobs from './components/AllJobs';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 function App() {
   // user state to track logged in user info
