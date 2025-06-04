@@ -2,7 +2,8 @@ import axios from 'axios';
 import { getToken } from './tokenService';
 
 const apiClient = axios.create({
-  baseURL: 'https://edutech-api-dev.onrender.com/api', // Your backend URL here
+  // baseURL: 'http://localhost:5000/api', Your backend URL here
+  baseURL: 'https://jobportalbackend-production-87e4.up.railway.app/api',
   withCredentials: true, // to allow cookies to be sent
 });
 
