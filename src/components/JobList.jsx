@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import apiClient from '../api/apiClient';
+import { useNavigate } from 'react-router-dom';
+
 
 const JobList = ({ user }) => {
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -84,21 +87,11 @@ const JobList = ({ user }) => {
 
   const closeEdit = () => setSelectedJob(null);
 
-  const applyJob = async () => {
+  const applyJob = () => {
     if (!selectedJob?._id) return alert('No job selected.');
-
-    try {
-      const res = await apiClient.post(`/jobs/${selectedJob._id}/apply`, null, {
-        withCredentials: true,
-      });
-
-      alert(res.data.message || 'Applied successfully!');
-      closeEdit();
-    } catch (error) {
-      console.error('Apply Job Error:', error);
-      const errMsg = error?.response?.data?.error || 'Failed to apply for the job.';
-      alert(errMsg);
-    }
+    navigate(`/apply/${selectedJob._id}`, {
+      state: { job: selectedJob, user }
+    });
   };
 
 
