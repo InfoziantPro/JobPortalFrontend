@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FiEye, FiEyeOff } from 'react-icons/fi'; // Importing eye icons
+import { FiEye, FiEyeOff } from 'react-icons/fi'; 
+import apiClient from '../api/apiClient';
 
 const ChangePass = () => {
   const [oldPassword, setOldPassword] = useState('');
