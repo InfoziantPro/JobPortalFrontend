@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 import { toast } from 'react-toastify';
 import register from '../assets/Register.png';
 import { FiEye, FiEyeOff } from 'react-icons/fi'; // Eye icons for password visibility
@@ -17,7 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/register/${role}`, {
+      const response = await apiClient.post(`/register/${role}`, {
         name,
         email,
         password,
