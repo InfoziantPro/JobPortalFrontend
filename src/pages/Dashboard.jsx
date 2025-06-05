@@ -16,6 +16,7 @@ import About from './AboutMe';
 import Companies from '../pages/Companies';
 import AppliedJobs from './AppliedJobs';
 import Applicants from './Applicants';
+import ShortlistedCandidates from './ShortlistedCandidates';
 
 
 const Dashboard = ({ user, onLogout }) => {
@@ -60,7 +61,7 @@ const Dashboard = ({ user, onLogout }) => {
       { key: 'manage', label: 'Manage Employees', icon: <FiUsers />, content: <EmployeeList /> },
       { key: 'jobs', label: 'Manage Jobs', icon: <FiBriefcase />, content: <JobList user={user} /> },
       { key: 'applicants', label: 'All Applicants', icon: <FiUsers />, content: <Applicants /> },
-      { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: 'Shortlisted Resumes Component' },
+      { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: <ShortlistedCandidates /> },
       { key: 'view', label: 'View Profile', icon: <FiUser />, content: <About /> },
     ],
     employee: [
@@ -68,7 +69,7 @@ const Dashboard = ({ user, onLogout }) => {
       { key: 'post', label: 'Post a New Job', icon: <FiBriefcase />, content: <PostJob /> },
       { key: 'manage-jobs', label: 'Manage Jobs', icon: <FiBriefcase />,  content: <JobList user={user} /> },
       { key: 'applicants', label: 'All Applicants', icon: <FiUsers />, content: <Applicants /> },
-      { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: 'Shortlisted Component' },
+      { key: 'shortlisted', label: 'Shortlisted Resumes', icon: <FiHeart />, content: <ShortlistedCandidates /> },
       { key: 'view', label: 'View Profile', icon: <FiUser />,  content: <About /> },
     ]
   };
