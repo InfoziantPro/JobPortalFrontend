@@ -17,6 +17,7 @@ import Companies from '../pages/Companies';
 import AppliedJobs from './AppliedJobs';
 import Applicants from './Applicants';
 import ShortlistedCandidates from './ShortlistedCandidates';
+import ChangePass from './ChangePass';
 
 
 const Dashboard = ({ user, onLogout }) => {
@@ -32,7 +33,7 @@ const Dashboard = ({ user, onLogout }) => {
 
   const commonItems = [
     { key: 'dashboard', label: 'Dashboard', icon: <FiBriefcase />,  content: <About />  },
-    { key: 'password', label: 'Change Password', icon: <FiLock />, content: 'Change Password Component' },
+    { key: 'password', label: 'Change Password', icon: <FiLock />, content: <ChangePass user={user} /> },
   ];
 
   const roleSpecificMenu = {
