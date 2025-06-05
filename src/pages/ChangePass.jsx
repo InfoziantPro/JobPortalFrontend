@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import apiClient from '../api/apiClient'; // your axios instance or similar
+import { FiEye, FiEyeOff } from 'react-icons/fi'; // Importing eye icons
 
 const ChangePass = () => {
   const [oldPassword, setOldPassword] = useState('');
@@ -9,6 +9,10 @@ const ChangePass = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  const [isOldPasswordVisible, setIsOldPasswordVisible] = useState(false);
+  const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +27,7 @@ const ChangePass = () => {
     setLoading(true);
 
     try {
+      // Assuming `apiClient` and the API call are correctly set up
       const response = await apiClient.post('/reset-password', {
         oldPassword,
         newPassword,
@@ -53,40 +58,64 @@ const ChangePass = () => {
 
         <label className="block mb-2 font-medium">
           Old Password
-          <input
-            type="password"
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-            required
-            className="w-full mt-1 p-2 border rounded"
-            autoComplete="current-password"
-          />
+          <div className="relative">
+            <input
+              type={isOldPasswordVisible ? 'text' : 'password'}
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+              required
+              className="w-full mt-1 p-2 border rounded"
+              autoComplete="current-password"
+            />
+            <span
+              onClick={() => setIsOldPasswordVisible(!isOldPasswordVisible)}
+              className="absolute right-3 top-3 cursor-pointer"
+            >
+              {isOldPasswordVisible ? <FiEyeOff size={16} className="text-gray-600" /> : <FiEye size={16} className="text-gray-600" />}
+            </span>
+          </div>
         </label>
 
         <label className="block mb-2 font-medium">
           New Password
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-            minLength={6}
-            className="w-full mt-1 p-2 border rounded"
-            autoComplete="new-password"
-          />
+          <div className="relative">
+            <input
+              type={isNewPasswordVisible ? 'text' : 'password'}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+              minLength={6}
+              className="w-full mt-1 p-2 border rounded"
+              autoComplete="new-password"
+            />
+            <span
+              onClick={() => setIsNewPasswordVisible(!isNewPasswordVisible)}
+              className="absolute right-3 top-3 cursor-pointer"
+            >
+              {isNewPasswordVisible ? <FiEyeOff size={16}  className="text-gray-600"/> : <FiEye size={16} className="text-gray-600"/>}
+            </span>
+          </div>
         </label>
 
         <label className="block mb-4 font-medium">
           Confirm New Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            minLength={6}
-            className="w-full mt-1 p-2 border rounded"
-            autoComplete="new-password"
-          />
+          <div className="relative">
+            <input
+              type={isConfirmPasswordVisible ? 'text' : 'password'}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              minLength={6}
+              className="w-full mt-1 p-2 border rounded"
+              autoComplete="new-password"
+            />
+            <span
+              onClick={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)}
+              className="absolute right-3 top-3 cursor-pointer"
+            >
+              {isConfirmPasswordVisible ? <FiEyeOff size={16} className="text-gray-600" /> : <FiEye size={16} className="text-gray-600" />}
+            </span>
+          </div>
         </label>
 
         <button
