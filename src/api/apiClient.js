@@ -7,6 +7,7 @@ const apiClient = axios.create({
   withCredentials: true, // to allow cookies to be sent
 });
 
+
 // Automatically attach token to requests
 apiClient.interceptors.request.use((config) => {
   const token = getToken();
