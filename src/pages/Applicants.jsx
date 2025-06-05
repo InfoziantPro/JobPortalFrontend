@@ -8,28 +8,27 @@ const Applicants = () => {
   const [loadingJobs, setLoadingJobs] = useState(true);
   const [errorJobs, setErrorJobs] = useState(null);
 
-  // For detailed applicant modal:
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [loadingAppDetail, setLoadingAppDetail] = useState(false);
   const [errorAppDetail, setErrorAppDetail] = useState('');
+  const [shortlisting, setShortlisting] = useState(false);
+
+  const fetchAppliedJobs = async () => {
+    try {
+      setLoadingJobs(true);
+      const res = await apiClient.get('/jobs/get-applicants', { withCredentials: true });
+      setJobs(res.data.jobs || []);
+    } catch (err) {
+      setErrorJobs(err.response?.data?.error || 'Failed to load applied jobs.');
+    } finally {
+      setLoadingJobs(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchAppliedJobs = async () => {
-      try {
-        setLoadingJobs(true);
-        const res = await apiClient.get('/jobs/get-applicants', { withCredentials: true });
-        setJobs(res.data.jobs || []);
-      } catch (err) {
-        setErrorJobs(err.response?.data?.error || 'Failed to load applied jobs.');
-      } finally {
-        setLoadingJobs(false);
-      }
-    };
-
     fetchAppliedJobs();
   }, []);
 
-  // Open job applicants modal
   const handleJobClick = (job) => {
     setSelectedJob(job);
   };
@@ -38,7 +37,6 @@ const Applicants = () => {
     setSelectedJob(null);
   };
 
-  // Fetch detailed applicant info & open nested modal
   const openApplicantDetail = async (applicationID) => {
     setLoadingAppDetail(true);
     setErrorAppDetail('');
@@ -67,6 +65,30 @@ const Applicants = () => {
     setSelectedApplication(null);
     setErrorAppDetail('');
   };
+
+  const handleShortlist = async () => {
+    if (!selectedApplication?._id || !selectedApplication?.jobID?._id || !selectedApplication?.userID?._id) {
+      alert('Missing required applicant or job data.');
+      return;
+    }
+
+    setShortlisting(true);
+    try {
+      await apiClient.post('/jobs/shortlist', {
+        jobId: selectedApplication.jobID._id,
+        applicantId: selectedApplication.userID._id,
+      });
+
+      closeApplicantModal();
+      await fetchAppliedJobs(); // Refresh job list
+    } catch (err) {
+      console.error('Failed to update status:', err);
+      alert(err.response?.data?.error || 'Could not shortlist applicant.');
+    } finally {
+      setShortlisting(false);
+    }
+  };
+
 
   if (loadingJobs) return <div className="text-center p-8">Loading applied jobs...</div>;
   if (errorJobs) return <div className="text-red-600 text-center p-8">{errorJobs}</div>;
@@ -121,7 +143,7 @@ const Applicants = () => {
               <p className="text-gray-500">No applicants for this job yet.</p>
             ) : (
               <ul className="space-y-3 max-h-[60vh] overflow-auto">
-                {(selectedJob.applicants || []).map((applicant, idx) => {
+                {selectedJob.applicants.map((applicant, idx) => {
                   if (applicant.userID) {
                     return (
                       <li
@@ -134,24 +156,26 @@ const Applicants = () => {
                           <p><strong>Application ID:</strong> {applicant.applicationID}</p>
                         </div>
 
-                        <button
-                          onClick={() => {
-                            closeJobModal(); // Close the job modal first
-                            openApplicantDetail(applicant.applicationID); // Then open detail modal
-                          }}
-                          aria-label={`View details for ${applicant.userID.name}`}
-                          className="text-indigo-600 hover:text-indigo-800 p-2"
-                        >
-                          <Eye size={20} />
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-gray-500 border px-2 py-1 rounded">
+                            {applicant.status}
+                          </span>
+                          <button
+                            onClick={() => {
+                              closeJobModal();
+                              openApplicantDetail(applicant.applicationID);
+                            }}
+                            aria-label={`View details for ${applicant.userID.name}`}
+                            className="text-indigo-600 hover:text-indigo-800 p-2"
+                          >
+                            <Eye size={20} />
+                          </button>
+                        </div>
                       </li>
                     );
                   }
                   return (
-                    <li
-                      key={idx}
-                      className="p-3 border rounded text-sm text-gray-500 italic"
-                    >
+                    <li key={idx} className="p-3 border rounded text-sm text-gray-500 italic">
                       Anonymous Applicant (Buffer only)
                     </li>
                   );
@@ -186,6 +210,7 @@ const Applicants = () => {
                   <p><span className="font-semibold">Name:</span> {selectedApplication.userID?.name}</p>
                   <p><span className="font-semibold">Email:</span> {selectedApplication.userID?.email}</p>
                   <p><span className="font-semibold">Role:</span> {selectedApplication.userID?.role}</p>
+                  <p><span className="font-semibold">Status:</span> {selectedApplication.status}</p>
                 </div>
 
                 <div>
@@ -205,6 +230,18 @@ const Applicants = () => {
                     View Resume
                   </a>
                 </div>
+
+                {selectedApplication.status !== 'shortlisted' && (
+                  <div className="pt-4">
+                    <button
+                      onClick={handleShortlist}
+                      disabled={shortlisting}
+                      className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                    >
+                      {shortlisting ? 'Shortlisting...' : 'Shortlist Applicant'}
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
