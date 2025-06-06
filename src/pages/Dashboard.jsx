@@ -18,6 +18,7 @@ import AppliedJobs from './AppliedJobs';
 import Applicants from './Applicants';
 import ShortlistedCandidates from './ShortlistedCandidates';
 import ChangePass from './ChangePass';
+import EditProfile from './EditProfile';
 
 
 const Dashboard = ({ user, onLogout }) => {
@@ -38,7 +39,7 @@ const Dashboard = ({ user, onLogout }) => {
 
   const roleSpecificMenu = {
     candidate: [
-      { key: 'profile', label: 'My Profile', icon: <FiUser />, content: 'My Profile Component' },
+      { key: 'profile', label: 'My Profile', icon: <FiUser />, content: <EditProfile /> },
       { key: 'resume', label: 'My Resume', icon: <FiFileText />, content: 'Resume Component' },
       { key: 'applied', label: 'Applied Jobs', icon: <FiBriefcase />, content: <AppliedJobs /> },
       { key: 'alerts', label: 'Job Listing', icon: <FiBell />, content: <JobList user={user} /> },
@@ -48,7 +49,7 @@ const Dashboard = ({ user, onLogout }) => {
       { key: 'view', label: 'View Profile', icon: <FiUser />,  content: <About />  },
     ],
      superadmin: [
-      { key: 'profile', label: 'My Profile', icon: <FiUser />, content: 'My Profile Component' },
+      { key: 'profile', label: 'My Profile', icon: <FiUser />, content: <EditProfile /> },
       { key: 'add', label: 'Approve Companies', icon: <FiUsers />, content: <ApproveRequests /> },
       { key: 'manage', label: 'Manage Companies', icon: <FiUsers />, content: <Companies /> },
       { key: 'Manage Courses', label: 'Manage Jobs', icon: <FiBriefcase />, content: 'Courses Component' },
@@ -56,7 +57,7 @@ const Dashboard = ({ user, onLogout }) => {
       { key: 'view', label: 'View Profile', icon: <FiUser />,  content: <About />  },
     ],
     admin: [
-      { key: 'profile', label: 'My Profile', icon: <FiUser />, content: 'My Profile Component' },
+      { key: 'profile', label: 'My Profile', icon: <FiUser />, content: <EditProfile /> },
       { key: 'add', label: 'Add Employees', icon: <FiUsers />, content: <CreateEmployee /> },
       { key: 'manage', label: 'Manage Employees', icon: <FiUsers />, content: <EmployeeList /> },
       { key: 'jobs', label: 'Manage Jobs', icon: <FiBriefcase />, content: <JobList user={user} /> },
@@ -65,7 +66,7 @@ const Dashboard = ({ user, onLogout }) => {
       { key: 'view', label: 'View Profile', icon: <FiUser />, content: <About /> },
     ],
     employee: [
-      { key: 'profile', label: 'My Profile', icon: <FiUser />, content: 'My Profile Component' },
+      { key: 'profile', label: 'My Profile', icon: <FiUser />, content: <EditProfile /> },
       { key: 'post', label: 'Post a New Job', icon: <FiBriefcase />, content: <PostJob /> },
       { key: 'manage-jobs', label: 'Manage Jobs', icon: <FiBriefcase />,  content: <JobList user={user} /> },
       { key: 'applicants', label: 'All Applicants', icon: <FiUsers />, content: <Applicants /> },
