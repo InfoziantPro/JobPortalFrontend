@@ -4,11 +4,13 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import signUp from '../assets/SignUpPage.png';
 import apiClient from '../api/apiClient'; 
+import { FiEye, FiEyeOff } from 'react-icons/fi';  // Import eye icons
 
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [resendLinkVisible, setResendLinkVisible] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);  // State to toggle password visibility
   const navigate = useNavigate();
   const [verificationLink, setVerificationLink] = useState(null);
 
@@ -61,7 +63,7 @@ const Login = ({ setUser }) => {
   return (
     <div className="min-h-screen flex">
       {/* Left Image Side */}
-      <div className="hidden md:flex w-1/2  items-center justify-center ">
+      <div className="hidden md:flex w-1/2 items-center justify-center">
         <img
           src={signUp}
           alt="login visual"
@@ -88,14 +90,26 @@ const Login = ({ setUser }) => {
 
           <div>
             <label className="block mb-1 text-sm font-jost text-gray-700">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              className="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
-              required
-            />
+            <div className="relative">
+              <input
+                type={isPasswordVisible ? 'text' : 'password'}  // Toggle between text and password input type
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                className="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
+                required
+              />
+              <span
+                onClick={() => setIsPasswordVisible(!isPasswordVisible)}  // Toggle visibility on icon click
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+              >
+                {isPasswordVisible ? (
+                  <FiEyeOff size={16} className="text-gray-600" />  // Eye icon to hide password
+                ) : (
+                  <FiEye size={16} className="text-gray-600" />  // Eye icon to show password
+                )}
+              </span>
+            </div>
           </div>
 
           <div className="flex justify-between items-center text-sm">
@@ -136,7 +150,7 @@ const Login = ({ setUser }) => {
 
           <p className="text-sm text-center text-gray-500">
             Don’t have an account?{' '}
-            <a href="/signup" className="text-violet-600 font-jost hover:underline">Signup</a>
+            <a href="/register" className="text-violet-600 font-jost hover:underline">Signup</a>
           </p>
 
           <div className="flex items-center justify-between my-4">

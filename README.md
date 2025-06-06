@@ -18,7 +18,7 @@ A modern job portal web application built with **React**, **Vite**, and **Tailwi
 - **Frontend:** React, Vite, Tailwind CSS, Framer Motion, Swiper
 - **State Management:** React Context API
 - **HTTP Client:** Axios ([`src/api/apiClient.js`](src/api/apiClient.js))
-- **Backend:** Node.js/Express (API endpoints expected at `http://localhost:5000/api`)
+- **Backend:** Hosted at [`https://jobportalbackend-production-87e4.up.railway.app/api`](https://jobportalbackend-production-87e4.up.railway.app/api)
 - **Other:** React Router, React Toastify
 
 ## Getting Started
@@ -44,7 +44,10 @@ A modern job portal web application built with **React**, **Vite**, and **Tailwi
    ```
 
 3. **Configure environment:**
-   - By default, API requests are sent to `http://localhost:5000/api`. Change the `baseURL` in [`src/api/apiClient.js`](src/api/apiClient.js) if needed.
+   - API requests are sent to the hosted backend at  
+     `https://jobportalbackend-production-87e4.up.railway.app/api`  
+     (see [`src/api/apiClient.js`](src/api/apiClient.js)).  
+     Update this URL if your backend changes.
 
 4. **Start the development server:**
    ```sh
@@ -85,7 +88,7 @@ EDUTECH/
 
 ## Customization
 
-- **API URL:** Change the `baseURL` in [`src/api/apiClient.js`](src/api/apiClient.js) to point to your backend.
+- **API URL:** Change the `baseURL` in [`src/api/apiClient.js`](src/api/apiClient.js) if your backend URL changes.
 - **Branding:** Update images in [`src/assets/`](src/assets/) and logo in [`src/assets/logos/`](src/assets/logos/).
 
 ## License
