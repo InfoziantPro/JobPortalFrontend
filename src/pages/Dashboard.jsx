@@ -19,6 +19,7 @@ import Applicants from './Applicants';
 import ShortlistedCandidates from './ShortlistedCandidates';
 import ChangePass from './ChangePass';
 import EditProfile from './EditProfile';
+import ShortlistedJobs from './ShortlistedJobs';
 
 
 const Dashboard = ({ user, onLogout }) => {
@@ -44,7 +45,7 @@ const Dashboard = ({ user, onLogout }) => {
       { key: 'applied', label: 'Applied Jobs', icon: <FiBriefcase />, content: <AppliedJobs /> },
       { key: 'alerts', label: 'Job Listing', icon: <FiBell />, content: <JobList user={user} /> },
       { key: 'messages', label: 'Messages', icon: <FiMessageCircle />, content: 'Messages Component' },
-      { key: 'shortlisted', label: 'Shortlisted Jobs', icon: <FiHeart />, content: 'Shortlisted Jobs Component' },
+      { key: 'shortlisted', label: 'Shortlisted Jobs', icon: <FiHeart />, content: <ShortlistedJobs /> },
       { key: 'cv', label: 'CV Manager', icon: <FiFileText />, content: 'CV Manager Component' },
       { key: 'view', label: 'View Profile', icon: <FiUser />,  content: <About />  },
     ],
