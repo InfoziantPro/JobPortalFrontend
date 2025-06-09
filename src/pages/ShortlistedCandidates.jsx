@@ -37,6 +37,11 @@ const ShortlistedCandidates = () => {
   };
 
   const openApplicantDetail = async (applicationID) => {
+    if (!selectedJob?.jobId) {
+      setErrorAppDetail('Job ID not found for this application.');
+      return;
+    }
+
     setLoadingAppDetail(true);
     setErrorAppDetail('');
     setSelectedApplication(null);
@@ -44,6 +49,7 @@ const ShortlistedCandidates = () => {
     try {
       const res = await apiClient.post('/jobs/get-detail', {
         IDs: [applicationID],
+        jobID: selectedJob.jobId, // <-- Pass jobID here to fix invalid jobID error
         type: 'jobApplication',
       });
       const data = res?.data?.jobApplications?.[0];
@@ -54,7 +60,7 @@ const ShortlistedCandidates = () => {
       }
     } catch (err) {
       console.error('Error fetching application detail:', err);
-      setErrorAppDetail('Failed to load application details.');
+      setErrorAppDetail(err.response?.data?.error || 'Failed to load application details.');
     } finally {
       setLoadingAppDetail(false);
     }
